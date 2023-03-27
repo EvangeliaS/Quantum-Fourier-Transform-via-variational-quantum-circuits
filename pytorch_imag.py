@@ -63,8 +63,9 @@ print(QF)
 #find conjugate transpose of QF3
 B = torch.conj(torch.transpose(QF, 1,0))
 
-#print(B)
+print(B)
 
-#find kronecker product of QF3 and B
-C = torch.kron(QF, B)
-#print(C)
+#vv3
+#find kronecker product of ss1,ss4 and ss4({1,4,4})
+C = torch.kron(ss1, ss4)
+C = torch.kron(C, ss4)
