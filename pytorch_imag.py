@@ -58,14 +58,62 @@ QF10 = torch.tensor(QF10)
 #print(QF10)
 
 #make tensor with all the above tensors in it
-QF = torch.stack([QF3, QF4, QF5, QF6, QF7, QF8, QF9, QF10], 0)
-print(QF)
+QF = torch.cat((QF3, QF4, QF5, QF6, QF7, QF8, QF9, QF10), 0)
+#print(QF.size())
 #find conjugate transpose of QF3
-B = torch.conj(torch.transpose(QF, 1,0))
+B = torch.conj(torch.transpose(QF, 0,1))
 
-print(B)
+#print(B)
 
-#vv3
-#find kronecker product of ss1,ss4 and ss4({1,4,4})
-C = torch.kron(ss1, ss4)
-C = torch.kron(C, ss4)
+
+#find kronecker products
+c1 = torch.kron(ss1, ss4)
+c1 = torch.kron(c1, ss4)
+
+c2 = torch.kron(ss4, ss2)
+c2 = torch.kron(c2, ss4)
+
+c3 = torch.kron(ss4, ss3)
+c3 = torch.kron(c3, ss4)
+
+c4 = torch.kron(ss4, ss1)
+c4 = torch.kron(c4, ss4)
+
+c5 = torch.kron(ss4, ss4)
+c5 = torch.kron(c5, ss3)
+
+c6 = torch.kron(ss4, ss3)
+c6 = torch.kron(c6, ss3)
+
+c7 = torch.kron(ss4, ss1)
+c7 = torch.kron(c7, ss3)
+
+c8 = torch.kron(ss1, ss1)
+c8 = torch.kron(c8, ss4)
+
+c9 = torch.kron(ss1, ss2)
+c9 = torch.kron(c9, ss4)
+
+c10 = torch.kron(ss3, ss4)
+c10 = torch.kron(c10, ss2)
+
+c11 = torch.kron(ss1, ss4)
+c11 = torch.kron(c11, ss3)
+
+#print(c1.size())
+
+vv3 = torch.stack((c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11))
+#print(vv3)
+
+print(vv3.size())
+
+#set G matrix composed of a matrix for each of the vv3 matrices, multiplied by the j complex number , to the exponent power
+G = torch.zeros(11, 8, 8, dtype=torch.complex64)
+
+for i in range(G.size(dim = 0)):
+    for j in range(G.size(dim = 1)):
+        for k in range(G.size(dim = 2)):
+            G[i][j][k] = torch.exp(1j*vv3[i][j][k])
+
+print(G)
+
