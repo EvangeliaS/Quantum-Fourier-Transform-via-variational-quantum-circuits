@@ -103,11 +103,11 @@ c11 = torch.kron(c11, ss3)
 #print(c1.size())
 
 vv3 = torch.stack((c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11))
-#print(vv3)
+print(vv3)
 
 print(vv3.size())
 
-#set G matrix composed of a matrix for each of the vv3 matrices, multiplied by the j complex number , to the exponent power
+#set G matrix composed of a matrix for each of the vv3 matrices, multiplied by the i complex number , to the exponent power
 G = torch.zeros(11, 8, 8, dtype=torch.complex64)
 
 for i in range(G.size(dim = 0)):
@@ -115,5 +115,25 @@ for i in range(G.size(dim = 0)):
         for k in range(G.size(dim = 2)):
             G[i][j][k] = torch.exp(1j*vv3[i][j][k])
 
-print(G)
+#check if G is unitary
+g_conj_transpose = torch.conj(torch.transpose(G[0], 0,1))
 
+unit = g_conj_transpose@G[0]
+print(G[0])
+print(g_conj_transpose)
+print(unit)
+
+
+
+# def Gx(x):
+#     return x*G
+
+# x = torch.rand(1, dtype=torch.float32)
+# print("X is: \n\n", x)
+# GX = Gx(x)
+# print("G is: \n\n", G[0])
+# print(GX[0])
+# #conjugate transpose of Gx(x)
+# g_conj_transpose = torch.conj(torch.transpose(GX[0], 0,1))
+# print(g_conj_transpose)
+# unit = torch.matmul(g_conj_transpose, GX[0])
