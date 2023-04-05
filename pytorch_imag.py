@@ -104,8 +104,8 @@ c11 = torch.kron(c11, ss3)
 
 vv3 = torch.stack((c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11))
 
-# print("vv3\n")
-# print(vv3)
+print("vv3\n")
+print(vv3)
 
 # print(vv3.size())
 
@@ -113,53 +113,60 @@ vv3 = torch.stack((c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11))
 G = torch.zeros(11, 8, 8, dtype=torch.complex64)
 
 for i in range(G.size(dim = 0)):
-    for j in range(G.size(dim = 1)):
-        for k in range(G.size(dim = 2)):
-            G[i][j][k] = torch.exp(1j*vv3[i][j][k])
-
-print(G[0])
-
-#check if G is equal to its transpose
-g_transpose = torch.transpose(G[0], 0,1)
-if torch.equal(G[0], g_transpose):
-    print("yes")
+    G[i]= torch.linalg.matrix_exp(1j*vv3[i])
 
 #find conjugate transpose of G
-g_conj_transpose = torch.conj(torch.transpose(G[0], 0,1))
+g_conj_transpose = torch.conj(torch.transpose(G[8], 0,1))
 print(g_conj_transpose)
 
-#find unitary matrix
-
-unit = g_conj_transpose@G[0]
+unit = g_conj_transpose@G[8]
 print(unit)
 
-# unit = G[0]@g_conj_transpose
-# print(unit)
+import scipy.linalg
 
-# #compute the inverse of G
-# G_inverse = torch.linalg.inv(G[0])
-# print(G_inverse)
+def Gx(x):
+    Gx = torch.zeros(11, 8, 8, dtype=torch.complex64)
+    for i in range(Gx.size(dim = 0)):
+        Gx[i] = torch.tensor(scipy.linalg.fractional_matrix_power(G[i], x)) #G to the power of x
+    return Gx
 
-# new = G_inverse@G[0]
-# print(new)
-
-
-# print(G[0])
-# print(g_conj_transpose)
-
-
-
-
-# def Gx(x):
-#or maybe e^x*G
-#     return x*G
 
 # x = torch.rand(1, dtype=torch.float32)
 # print("X is: \n\n", x)
+
+Gx = Gx(0.0)
+
+print("G0 is: \n\n", Gx)
+
+
+
+# print("g0 is: \n\n", G)
+
+
+#l = torch.linalg.matrix_exp(1j*torch.eye(2))
+
+#l = scipy.linalg.fractional_matrix_power(l, 0)
+
+
+
+# print("l is: \n\n", l)
+
+# print("l is: \n\n", l)
+
 # GX = Gx(x)
 # print("G is: \n\n", G[0])
-# print(GX[0])
-# #conjugate transpose of Gx(x)
-# g_conj_transpose = torch.conj(torch.transpose(GX[0], 0,1))
-# print(g_conj_transpose)
-# unit = torch.matmul(g_conj_transpose, GX[0])
+
+
+
+# def function(M, x):
+#     M = scipy.linalg.fractional_matrix_power(M, x)
+#     return M
+
+
+
+# x = torch.rand(1, dtype=torch.float32)
+# print("X is: \n\n", x)
+# l = torch.linalg.matrix_exp(1j*torch.eye(2))
+# function(l,x)
+# print("l is: \n\n", l)
+
