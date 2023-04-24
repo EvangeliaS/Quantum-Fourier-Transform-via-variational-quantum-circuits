@@ -1,5 +1,7 @@
 import torch
 import numpy as np
+import scipy.linalg
+import sys
 
 ss1 = [[0,1],[1,0]]
 ss1 = torch.tensor(ss1)
@@ -59,12 +61,11 @@ QF10 = torch.tensor(QF10)
 
 #make tensor with all the above tensors in it
 QF = torch.cat((QF3, QF4, QF5, QF6, QF7, QF8, QF9, QF10), 0)
-print("QF")
-print(QF)
+# print("QF")
+# print(QF)
+
 #find conjugate transpose of QF3
 B = torch.conj(torch.transpose(QF, 0,1))
-
-#print(B)
 
 #find kronecker products
 c1 = torch.kron(ss1, ss4)
@@ -100,29 +101,26 @@ c10 = torch.kron(c10, ss2)
 c11 = torch.kron(ss1, ss4)
 c11 = torch.kron(c11, ss3)
 
-#print(c1.size())
-
 vv3 = torch.stack((c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11))
 
-print("vv3\n")
-print(vv3)
+# print("vv3\n")
+# print(vv3)
 
-# print(vv3.size())
 
-#set G matrix composed of a matrix for each of the vv3 matrices, multiplied by the i complex number , to the exponent power
+#Gi_, j_, k_, x_ := MatrixExp[I x KroneckerProduct[Assi, ssj, ssk]]
 G = torch.zeros(11, 8, 8, dtype=torch.complex64)
-
 for i in range(G.size(dim = 0)):
     G[i]= torch.linalg.matrix_exp(1j*vv3[i])
 
-#find conjugate transpose of G
-g_conj_transpose = torch.conj(torch.transpose(G[8], 0,1))
-print(g_conj_transpose)
 
-unit = g_conj_transpose@G[8]
-print(unit)
-
-import scipy.linalg
+def check_if_unitary(G):
+    for i in range(G.size(dim = 0)):
+        if(torch.allclose(torch.eye(8, dtype = torch.complex64), G[i]@torch.conj(torch.transpose(G[i], 0,1)))):
+            print("G is unitary")
+        else:
+            #end the program
+            print("G is not unitary")
+            sys.exit()
 
 def Gx(x):
     Gx = torch.zeros(11, 8, 8, dtype=torch.complex64)
@@ -131,42 +129,11 @@ def Gx(x):
     return Gx
 
 
-# x = torch.rand(1, dtype=torch.float32)
-# print("X is: \n\n", x)
-
-Gx = Gx(0.0)
-
-print("G0 is: \n\n", Gx)
-
-
-
-# print("g0 is: \n\n", G)
-
-
-#l = torch.linalg.matrix_exp(1j*torch.eye(2))
-
-#l = scipy.linalg.fractional_matrix_power(l, 0)
-
-
-
-# print("l is: \n\n", l)
-
-# print("l is: \n\n", l)
-
-# GX = Gx(x)
-# print("G is: \n\n", G[0])
-
-
-
-# def function(M, x):
-#     M = scipy.linalg.fractional_matrix_power(M, x)
-#     return M
-
-
-
-# x = torch.rand(1, dtype=torch.float32)
-# print("X is: \n\n", x)
-# l = torch.linalg.matrix_exp(1j*torch.eye(2))
-# function(l,x)
-# print("l is: \n\n", l)
-
+#for multiple real x values test the results of Gx(x)
+x = torch.rand(10, dtype=torch.float32)
+for i in range(x.size(dim = 0)):
+    print("xi is: \n\n", x[i].item())
+    Gx_i = Gx((x[i].item()))
+    print("Gx(x) is: \n\n", Gx_i)
+    check_if_unitary(Gx_i)
+print("X is: \n\n", x)
