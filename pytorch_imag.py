@@ -138,6 +138,3 @@ for i in range(x.size(dim = 0)):
     for j in range(Gx_i.size(dim = 0)):
         #print("Gx(x) is unitary: \n\n", torch.allclose(torch.eye(8, dtype = torch.complex64), Gx_i[j]@torch.conj(torch.transpose(Gx_i[j], 0,1))))
         print(Gx_i[j]@torch.conj(torch.transpose(Gx_i[j] ,0,1)))
-print("X is: \n\n", x)
-
-#test
