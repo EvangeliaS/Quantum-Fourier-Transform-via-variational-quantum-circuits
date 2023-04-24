@@ -128,12 +128,14 @@ def Gx(x):
         Gx[i] = torch.tensor(scipy.linalg.fractional_matrix_power(G[i], x)) #G to the power of x
     return Gx
 
-
 #for multiple real x values test the results of Gx(x)
 x = torch.rand(10, dtype=torch.float32)
 for i in range(x.size(dim = 0)):
     print("xi is: \n\n", x[i].item())
     Gx_i = Gx((x[i].item()))
-    print("Gx(x) is: \n\n", Gx_i)
-    check_if_unitary(Gx_i)
+    #print("Gx(x) is: \n\n", Gx_i)
+    #check_if_unitary(Gx_i)
+    for j in range(Gx_i.size(dim = 0)):
+        #print("Gx(x) is unitary: \n\n", torch.allclose(torch.eye(8, dtype = torch.complex64), Gx_i[j]@torch.conj(torch.transpose(Gx_i[j], 0,1))))
+        print(Gx_i[j]@torch.conj(torch.transpose(Gx_i[j] ,0,1)))
 print("X is: \n\n", x)
