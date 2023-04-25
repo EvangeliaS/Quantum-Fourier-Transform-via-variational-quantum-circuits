@@ -134,7 +134,23 @@ for i in range(x.size(dim = 0)):
     print("xi is: \n\n", x[i].item())
     Gx_i = Gx((x[i].item()))
     #print("Gx(x) is: \n\n", Gx_i)
-    #check_if_unitary(Gx_i)
     for j in range(Gx_i.size(dim = 0)):
         #print("Gx(x) is unitary: \n\n", torch.allclose(torch.eye(8, dtype = torch.complex64), Gx_i[j]@torch.conj(torch.transpose(Gx_i[j], 0,1))))
         print(Gx_i[j]@torch.conj(torch.transpose(Gx_i[j] ,0,1)))
+
+
+#create a loop that generates circuits with different x values and combination of Gx(x) gates 
+#and test the results of the circuits
+
+#generate random x values
+x = torch.rand(10, dtype=torch.float32)
+#generate random circuits: kronecker product of Gx(x)(combination of i < 5 and k >=5)
+#and test the results of the circuits
+for i in range(x.size(dim = 0)):
+    Gx_i = Gx((x[i].item()))
+    for j in range(5, Gx_i.size(dim = 0)):
+        if j < 5:
+            for k in range(Gx_i.size(dim = 0)):
+                print(Gx_i[j]@Gx_i[k])
+        else:
+            continue
