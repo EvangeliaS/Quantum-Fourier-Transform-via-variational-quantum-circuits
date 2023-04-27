@@ -101,6 +101,7 @@ c10 = torch.kron(c10, ss2)
 c11 = torch.kron(ss1, ss4)
 c11 = torch.kron(c11, ss3)
 
+#c1 - c5 are single qubit gates, c6 - c11 are two qubit gates
 vv3 = torch.stack((c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11))
 
 # print("vv3\n")
@@ -128,29 +129,47 @@ def Gx(x):
         Gx[i] = torch.tensor(scipy.linalg.fractional_matrix_power(G[i], x)) #G to the power of x
     return Gx
 
-#for multiple real x values test the results of Gx(x)
-x = torch.rand(10, dtype=torch.float32)
+#x 10 random values between 0 and 2pi
+x = torch.rand(2, dtype=torch.float32)*2*np.pi
+print("x is: \n\n", x)
+
+#for multiple real x values test the results of Gx(x) and save them in Gx tensor in dim = 0 
+Gx_m = torch.zeros(11, 8, 8, dtype=torch.complex64)
 for i in range(x.size(dim = 0)):
     print("xi is: \n\n", x[i].item())
     Gx_i = Gx((x[i].item()))
-    #print("Gx(x) is: \n\n", Gx_i)
-    for j in range(Gx_i.size(dim = 0)):
+    print("Gx_i is: \n\n", Gx_i)
+    #Gx_m = torch.cat((Gx_m, Gx_i), 0) #append Gx_i to Gx
+    #for j in range(Gx_i.size(dim = 0)):
         #print("Gx(x) is unitary: \n\n", torch.allclose(torch.eye(8, dtype = torch.complex64), Gx_i[j]@torch.conj(torch.transpose(Gx_i[j], 0,1))))
-        print(Gx_i[j]@torch.conj(torch.transpose(Gx_i[j] ,0,1)))
+        #print(Gx_i[j]@torch.conj(torch.transpose(Gx_i[j] ,0,1)))
+# print("Gx(x) is: \n\n", Gx_m[0], Gx_m[1])
 
+#save the results of G_i
 
 #create a loop that generates circuits with different x values and combination of Gx(x) gates 
 #and test the results of the circuits
 
-#generate random x values
-x = torch.rand(10, dtype=torch.float32)
-#generate random circuits: kronecker product of Gx(x)(combination of i < 5 and k >=5)
-#and test the results of the circuits
-for i in range(x.size(dim = 0)):
-    Gx_i = Gx((x[i].item()))
-    for j in range(5, Gx_i.size(dim = 0)):
-        if j < 5:
-            for k in range(Gx_i.size(dim = 0)):
-                print(Gx_i[j]@Gx_i[k])
-        else:
-            continue
+#generate random x values between 0 and 2pi
+
+# x = torch.rand(10, dtype=torch.float32)
+# #generate random circuits: matrix product of Gx(x)(combination of i < 5 and k >=5)
+# #and test the results of the circuits
+# for i in range(x.size(dim = 0)):
+#     Gx_i = Gx((x[i].item()))
+#     for j in range(5, Gx_i.size(dim = 0)):
+#             for k in range(Gx_i.size(dim = 0)):
+#                 if k < 5:
+
+#not single qubit gates after another
+
+#starting with 2-qubit gates(i>5 in G matrix)  + 
+# 2 single qubit gates(i<5 in G matrix) afte every 2-qubit gate
+
+
+#να μην εχουν το 4 στην ιδια θεση(2qubits)
+
+# for vv3 in range(Gx_i.size(dim = 0)):
+#     for 2quit_gate in range(Gx_i)
+
+
