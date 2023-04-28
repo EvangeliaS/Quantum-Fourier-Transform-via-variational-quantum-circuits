@@ -61,8 +61,6 @@ QF10 = torch.tensor(QF10)
 
 #make tensor with all the above tensors in it
 QF = torch.cat((QF3, QF4, QF5, QF6, QF7, QF8, QF9, QF10), 0)
-# print("QF")
-# print(QF)
 
 #find conjugate transpose of QF3
 B = torch.conj(torch.transpose(QF, 0,1))
@@ -189,49 +187,20 @@ for i in range(0, len(Gm)-1, 18):
     G17 = Gm[i+16][0] #1-4-4
     G18 = Gm[i+17][4] #4-4-3
 
-#print("Gm len is: \n\n", len(Gm))
-# i = 0
-# while i in range(len(Gm)-1):
-#     print("i is: \n\n", i)
-#     G1 = Gm[i][5]  #get the first 2-qubit gate, 4-3-3
-#     i+=1
-#     G2 = Gm[i][1]   #get the second single qubit gate, 4-2-4
-#     i+=1
-#     G3 = Gm[i][4] #get the last single qubit gate 4-4-3
-#     i+=1
-#     G4 = Gm[i][7] #1-1-4
-#     i+=1
-#     G5 = Gm[i][0] #1-4-4
-#     i+=1 
-#     G6 = Gm[i][2]#4-3-4
-#     i+=1
-#     G7 = Gm[i][9] #3-4-2
-#     i+=1
-#     G8 = Gm[i][4]#4-4-3
-#     i+=1
-#     G9 = Gm[i][0]#1-4-4
-#     i+=1
-#     G10 = Gm[i][6]  #4-1-3
-#     i+=1
-#     G11 = Gm[i][2]    #4-3-4
-#     i+=1
-#     G12 = Gm[i][4] #4-4-3
-#     i+=1
-#     G13 = Gm[i][8] #1-2-4
-#     i+=1
-#     G14 = Gm[i][0] #1-4-4
-#     i+=1
-#     G15 = Gm[i][3]   #4-1-4
-#     i+=1
-#     G16 = Gm[i][10] #1-4-3
-#     i+=1
-#     G17 = Gm[i][0] #1-4-4
-#     i+=1
-#     G18 = Gm[i][4] #4-4-3
-
 #multiply the 18 G matrices to get the final G matrix
 G_final = G1@G2@G3@G4@G5@G6@G7@G8@G9@G10@G11@G12@G13@G14@G15@G16@G17@G18
 
+#blocks per 3 and permute them to get the final G matrix
+
 print("G_final is: \n\n", G_final)
 
+#cost function
+def cost_function(G_final):
+    cost = torch.zeros(8, 8, dtype=torch.complex64)
+    cost = 1 - 1/64*(torch.abs(torch.trace(G_final@B)))**2
+    return cost
+
+print("cost", cost_function(G_final))
+
+#optimization: function that takes as input the x tensor and returns the cost function
 
