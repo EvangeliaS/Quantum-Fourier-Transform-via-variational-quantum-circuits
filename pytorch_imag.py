@@ -202,5 +202,9 @@ def cost_function(G_final):
 
 print("cost", cost_function(G_final))
 
-#optimization: function that takes as input the x tensor and returns the cost function
+#create an optimizer of pytorch to find the minimum cost of G_final using the cost function
+optimizer = torch.optim.Adam([x, G_final], lr=0.001)
+print("optimizer", optimizer)
 
+
+############################################################################################################
