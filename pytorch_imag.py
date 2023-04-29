@@ -40,16 +40,6 @@ G_final = G1@G2@G3@G4@G5@G6@G7@G8@G9@G10@G11@G12@G13@G14@G15@G16@G17@G18
 
 print("G_final is: \n\n", G_final)
 
+initial_cost = functions.cost_function(G_final)
+
 #______________________________________________________________________________
-
-#define x tensor: 18 random values between 0 and 2pi
-x = torch.rand(18, dtype=torch.float32)*2*np.pi
-
-#define G tensor
-G_optim = torch.zeros(8, 8, dtype=torch.complex64)
-
-# #cost function
-def cost_function(G_final):
-    cost = torch.zeros(8, 8, dtype=torch.complex64)
-    cost = 1 - 1/64*(torch.abs(torch.trace(G_final@B)))**2
-    return cost
