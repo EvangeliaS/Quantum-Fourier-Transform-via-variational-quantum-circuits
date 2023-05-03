@@ -124,8 +124,5 @@ def Gx(x):
     return Gx
 
 
-#cost function
-def cost_function(G_final):
-    cost = torch.zeros(8, 8, dtype=torch.complex64, requires_grad=True)
-    cost = 1 - 1/64*(torch.abs(torch.trace(G_final@B)))**2
-    return cost
+
+

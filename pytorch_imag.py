@@ -47,7 +47,7 @@ print("Initial cost: \n\n", initial_cost)
 #_________________________ADAM optimizer________________________
 #define G tensor
 G_final = torch.eye(8,8 , dtype=torch.complex64, requires_grad=True)
-optimizer = optim.Adam([G_final], lr=0.001)
+optimizer = optim.Adam([G_final], lr=0.01)
 
 # optimize the cost function
 for i in range(100):
