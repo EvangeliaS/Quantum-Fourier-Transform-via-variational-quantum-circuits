@@ -64,6 +64,7 @@ QF = torch.cat((QF3, QF4, QF5, QF6, QF7, QF8, QF9, QF10), 0)
 
 #find conjugate transpose of QF3
 B = torch.conj(torch.transpose(QF, 0,1))
+B.requires_grad = True
 
 #find kronecker products
 c1 = torch.kron(ss1, ss4)
@@ -125,6 +126,6 @@ def Gx(x):
 
 #cost function
 def cost_function(G_final):
-    cost = torch.zeros(8, 8, dtype=torch.complex64)
+    cost = torch.zeros(8, 8, dtype=torch.complex64, requires_grad=True)
     cost = 1 - 1/64*(torch.abs(torch.trace(G_final@B)))**2
     return cost
