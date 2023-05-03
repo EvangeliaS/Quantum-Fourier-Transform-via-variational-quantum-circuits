@@ -9,14 +9,15 @@ def cost_function(G_final):
     cost = 1 - 1/64*((torch.abs(torch.trace(G_final@functions.B)))**2)
     return cost
 
-
 def create_Gm(x):
     # Compute Gm using the current value of x
     Gm = []
     for j in range(x.size(dim=0)):
-        functions.Gx_i = torch.zeros(11, 8, 8, dtype=torch.complex64)
+        #functions.Gx_i = torch.zeros(11, 8, 8, dtype=torch.complex64)
         functions.Gx_i = functions.Gx((x[j].item()))
         Gm.append(functions.Gx_i)
+
+    print("Gm is: \n\n", Gm[0][5].shape)
 
     # Compute the final G matrix using the current value of Gm
     G1 = Gm[0][5].clone().detach()
@@ -38,8 +39,11 @@ def create_Gm(x):
     G17 = Gm[16][0].clone().detach()
     G18 = Gm[17][4].clone().detach()
 
-    G_final = G1 @ G2 @ G3 @ G4 @ G5 @ G6 @ G7 @ G8 @ G9 @ G10 @ G11 @ G12 @ G13 @ G14 @ G15 @ G16 @ G17 @ G18
-
+    #G_final = G1 @ G2 #@ G3 @ G4 @ G5 @ G6 @ G7 @ G8 @ G9 @ G10 @ G11 @ G12 @ G13 @ G14 @ G15 @ G16 @ G17 @ G18
+    #sum of all G matrices
+    G_final = G1 + G2 + G3 + G4 + G5 + G6 + G7 + G8 + G9 + G10 + G11 + G12 + G13 + G14 + G15 + G16 + G17 + G18
+    
+    print("G_final is: \n\n", G_final)
     return G_final
 
 # Initialize x as a trainable parameter
@@ -50,6 +54,7 @@ print("x_shape", x.shape)
 
 # Initialize the optimizer with a learning rate of 0.01
 optimizer = optim.Adam([x], lr=0.01)
+print("optimizer is: \n\n", optimizer)
 
 # Define the scheduler
 scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
@@ -58,21 +63,25 @@ scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
 for i in range(100):
     print("x1 is: \n\n", x)
 
+    optimizer.zero_grad()
+
     # Compute the cost function using the current value of G_final
-    #print("G_final is: \n\n", create_Gm(x))   
-    cost = cost_function(create_Gm(x))
-    print(cost)
+    G_final = create_Gm(x)
+    cost = cost_function(G_final)
+    # print("cc: ", cost)
 
     cost.backward()
-    print("x grad is: \n\n", x.grad)
 
     # update parameters via
     optimizer.step()
+    #print the updated parameters
+    # print("optimizer is: \n\n", optimizer.param_groups[0]['params'])
 
     # Print current cost every 10 iterations
     if i % 10 == 0:
         print(f"Iteration {i}: Cost {cost.item()}")
-        
+    if i==2:
+        break
     # # Update learning rate every 20 iterations using StepLR scheduler
     # if i % 10 == 0:
     #     scheduler.step()

@@ -102,6 +102,7 @@ c11 = torch.kron(c11, ss3)
 
 #c1 - c5 are single qubit gates, c6 - c11 are two qubit gates
 vv3 = torch.stack((c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11))
+print("vv3: ", vv3)
 
 #Gi_, j_, k_, x_ := MatrixExp[I x KroneckerProduct[Assi, ssj, ssk]]
 G = torch.zeros(11, 8, 8, dtype=torch.complex64)
