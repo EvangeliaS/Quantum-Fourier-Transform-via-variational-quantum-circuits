@@ -46,7 +46,7 @@ def create_Gm(x):
 x = torch.nn.Parameter(torch.rand(18, dtype=torch.float32, requires_grad=True)*2*np.pi)
 
 print("x is: \n\n", x)
-print([x])
+print("x_shape", x.shape)
 
 # Initialize the optimizer with a learning rate of 0.01
 optimizer = optim.Adam([x], lr=0.01)
@@ -63,7 +63,6 @@ for i in range(100):
     cost = cost_function(create_Gm(x))
     print(cost)
 
-    optimizer.zero_grad()
     cost.backward()
     print("x grad is: \n\n", x.grad)
 
