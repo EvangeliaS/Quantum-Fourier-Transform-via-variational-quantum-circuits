@@ -124,6 +124,10 @@ def Gx(x):
         Gx[i] = torch.tensor(scipy.linalg.fractional_matrix_power(G[i], x)) #G to the power of x
     return Gx
 
+# define your cost function
+def cost_function(G_final):
+    cost = 1 - 1/64*((torch.abs(torch.trace(G_final@functions.B)))**2)
+    return cost
 
 
 
