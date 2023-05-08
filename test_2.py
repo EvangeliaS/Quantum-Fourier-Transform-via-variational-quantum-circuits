@@ -148,7 +148,7 @@ def generate_matrix(x_var):
     #     Gm.append(Gx_i)
 
     # multiply the 18 G matrices to get the final G matrix
-    G_final = torch.eye(8, dtype=torch.complex64)
+    #G_final = torch.eye(8, dtype=torch.complex64)
     for i in range(0, len(Gm), 18):
         G1 = Gm[i][5]   #get the first 2-qubit gate(of the first x-modified Gx_i(i==0)), 4-3-3
         G2 = Gm[i+1][1] #get the second single qubit gate, 4-2-4
@@ -168,17 +168,20 @@ def generate_matrix(x_var):
         G16 = Gm[i+15][10]#1-4-3
         G17 = Gm[i+16][0] #1-4-4
         G18 = Gm[i+17][4] #4-4-3
+
+        G_final = G1@G2@G3@G4@G5@G6@G7@G8@G9@G10@G11@G12@G13@G14@G15@G16@G17@G18
     return G_final
 
-# define your cost function
-def cost_function(G_final):
-    cost = 1 - 1/64*((torch.abs(torch.trace(G_final@B)))**2)
-    print("cost in function is: ", cost)
-    return cost
 
 # define a function that generates a random value of x between 0 and 2pi
 def generate_x():
     return torch.rand(18, dtype=torch.float32, requires_grad=True)* 2 * np.pi
+
+# define your cost function
+def cost_function(G_final):
+    print(G_final@B)
+    cost = 1 - 1/64*((torch.abs(torch.trace(G_final@B)))**2)
+    return cost
 
 # define a function that generates the matrix with the optimal value of x
 def generate_optimal_matrix():
@@ -207,12 +210,19 @@ def generate_optimal_matrix():
     return optimal_matrix
 
 # generate the optimal matrix
-#optimal_matrix = generate_optimal_matrix()
+optimal_matrix = generate_optimal_matrix()
 
-for i in range(5):  # try 100 different random values of x
-    x_var = torch.rand(18, dtype=torch.float32, requires_grad=True)* 2 * np.pi
 
-    print("x_var: ", x_var)
-    G = generate_matrix(x_var)
-    cost = cost_function(G)
-    print("cost: ", cost)
+#test to check if the cost function is working on different values of x
+
+# for i in range(5):  # try 100 different random values of x
+#     x_var = torch.rand(18, dtype=torch.float32, requires_grad=True)* 2 * np.pi
+
+#     print("x_var: ", x_var)
+#     Gm = []
+
+#     G_final = generate_matrix(x_var)
+
+#     print("G_final: ", G_final.shape)
+
+#     print("cost is ", cost_function(G_final).item())
