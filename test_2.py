@@ -126,11 +126,6 @@ def Gx(x):
         Gx[i] = torch.tensor(scipy.linalg.fractional_matrix_power(G[i], x)) #G to the power of x
     return Gx
 
-# define your cost function
-def cost_function(G_final):
-    cost = 1 - 1/64*((torch.abs(torch.trace(G_final@B)))**2)
-    return cost
-
 
 # # define the cost function
 # def cost_function(G_final, target):
@@ -142,11 +137,18 @@ def generate_matrix(x_var):
     Gm = []
     # loop over the x values to generate the corresponding G matrices
     for i in range(x_var.size(dim=0)):
-        Gx_i = torch.zeros(11, 8, 8, dtype=torch.complex64, requires_grad=True)
+        Gx_i = torch.zeros(11, 8, 8, dtype=torch.complex64)
         Gx_i = Gx(x_var[i].item())
         Gm.append(Gx_i)
+
+    #instead of 18 parameters, we have 1 parameter
+    # for i in range(18):
+    #     Gx_i = torch.zeros(11, 8, 8, dtype=torch.complex64, requires_grad=True)
+    #     Gx_i = Gx(x_var[0].item())
+    #     Gm.append(Gx_i)
+
     # multiply the 18 G matrices to get the final G matrix
-    G_final = torch.eye(8, dtype=torch.complex64, requires_grad=True)
+    G_final = torch.eye(8, dtype=torch.complex64)
     for i in range(0, len(Gm), 18):
         G1 = Gm[i][5]   #get the first 2-qubit gate(of the first x-modified Gx_i(i==0)), 4-3-3
         G2 = Gm[i+1][1] #get the second single qubit gate, 4-2-4
@@ -168,9 +170,15 @@ def generate_matrix(x_var):
         G18 = Gm[i+17][4] #4-4-3
     return G_final
 
+# define your cost function
+def cost_function(G_final):
+    cost = 1 - 1/64*((torch.abs(torch.trace(G_final@B)))**2)
+    print("cost in function is: ", cost)
+    return cost
+
 # define a function that generates a random value of x between 0 and 2pi
 def generate_x():
-    return torch.rand(18, dtype=torch.float32, requires_grad=True) * 2 * np.pi
+    return torch.rand(18, dtype=torch.float32, requires_grad=True)* 2 * np.pi
 
 # define a function that generates the matrix with the optimal value of x
 def generate_optimal_matrix():
@@ -179,21 +187,32 @@ def generate_optimal_matrix():
     for i in range(5):  # try 100 different random values of x
         x_var = generate_x()
         G = generate_matrix(x_var.detach())
+        model = G
         #x_var = torch.tensor(x.clone(), dtype=torch.float, requires_grad=True)        
-        optimizer = optim.Adam([x_var.detach()], lr=0.1, betas=(0.9, 0.999), eps=1e-08, weight_decay=0, amsgrad=False)
-        for j in range(1000):  # run the optimizer for 100 iterations
+        optimizer = optim.Adam([x_var.detach()], lr=0.01)
+        for j in range(10):  # run the optimizer for 100 iterations
             G = generate_matrix(x_var)
             cost = cost_function(G)
-            optimizer.zero_grad()
+            #optimizer.zero_grad()
+            for param in x_var:
+                param.grad = None
             cost.backward()
             optimizer.step()
             print("Epoch: ", j, "Loss:", cost.item())  # print the progress
             #print the x values using .item()
-            print("x: ", x_var[0].item(), x_var[1].item(), x_var[2].item(), x_var[3].item(), x_var[4].item(), x_var[5].item(), x_var[6].item(), x_var[7].item(), x_var[8].item(), x_var[9].item(), x_var[10].item(), x_var[11].item(), x_var[12].item(), x_var[13].item(), x_var[14].item(), x_var[15].item(), x_var[16].item(), x_var[17].item())
+            print("x: ", x_var[0].item())
         if cost.item() < optimal_cost:
             optimal_cost = cost.item()
             optimal_matrix = G.detach().numpy()
     return optimal_matrix
 
 # generate the optimal matrix
-optimal_matrix = generate_optimal_matrix()
+#optimal_matrix = generate_optimal_matrix()
+
+for i in range(5):  # try 100 different random values of x
+    x_var = torch.rand(18, dtype=torch.float32, requires_grad=True)* 2 * np.pi
+
+    print("x_var: ", x_var)
+    G = generate_matrix(x_var)
+    cost = cost_function(G)
+    print("cost: ", cost)
