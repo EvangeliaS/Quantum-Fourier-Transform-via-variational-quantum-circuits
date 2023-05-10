@@ -212,7 +212,6 @@ def generate_optimal_matrix():
 # generate the optimal matrix
 #optimal_matrix = generate_optimal_matrix()
 
-
 def trace(A):
     return torch.sum(torch.diagonal(A))
 
@@ -265,8 +264,10 @@ for i in range(num_epochs):
     loss = cost_function(G_final)
     
     # compute gradients and update parameters
+    
     optimizer.zero_grad()
     loss.backward()
+    print("grad: ", model.x.grad)
     optimizer.step()
 
     # print loss every 10 epochs
