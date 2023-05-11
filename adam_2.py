@@ -22,6 +22,9 @@ loss_fn = nn.MSELoss()
 # Run training
 niter = 1000
 for _ in range(0, niter):
+	#print grad of parameters
+	print("grad",list(model.parameters())[0].grad)
+	print("grad",list(model.parameters())[1].grad)
 	optimizer.zero_grad()
 	predictions = model(x)
 	loss = loss_fn(predictions, t)
@@ -32,3 +35,9 @@ print("-" * 10)
 print("learned a = {}".format(list(model.parameters())[0].data[0, 0]))
 print("learned b = {}".format(list(model.parameters())[1].data[0]))
 print("loss = {}".format(loss.item()))
+
+#create the plot
+import matplotlib.pyplot as plt
+plt.plot(x.numpy(), t.numpy(), 'o')
+plt.plot(x.numpy(), predictions.detach().numpy(), 'b')
+plt.show()

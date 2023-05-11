@@ -51,23 +51,27 @@ optimizer = optim.Adam([G_final], lr=0.01)
 
 # optimize the cost function
 for i in range(100):
+    
     optimizer.zero_grad()
     cost = functions.cost_function(G_final)
     cost.backward()
+    if cost.item() < 0.0:
+        break
     optimizer.step()
+    print("grad" , G_final.grad)
     if i % 10 == 0:
         print(f"Iteration {i}: Cost {cost.item()}")
-
-#perform learning rate scheduling
-scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=0.0001, gamma=0.1)
-for i in range(100):
-    optimizer.zero_grad()
-    cost = functions.cost_function(G_final)
-    cost.backward()
-    optimizer.step()
-    scheduler.step()
-    if i % 10 == 0:
-        print(f"Iteration {i}: Cost {cost.item()}")
+    
+# #perform learning rate scheduling
+# scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=0.0001, gamma=0.1)
+# for i in range(100):
+#     optimizer.zero_grad()
+#     cost = functions.cost_function(G_final)
+#     cost.backward()
+#     optimizer.step()
+#     scheduler.step()
+#     if i % 10 == 0:
+#         print(f"Iteration {i}: Cost {cost.item()}")
 
 # print the optimized G_final
 print("G_final after optimization: \n\n", G_final)
