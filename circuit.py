@@ -18,27 +18,23 @@ def generate_matrix(x_var):
         Gx_i = functions.Gx(x_var[i].item())
         Gm.append(Gx_i)
     
-    gates = torch.zeros(11, 8, 8, dtype=torch.complex64)
+    gates = []
     #generate random gates for the 2-qubit gates and switch them with the corresponding single qubit gates in the Gm list randomly
-    for i in range(len(Gm)):
-        for j in range(5, Gm[i].size(dim = 0)): #loop over the 2-qubit gates
-            for k in range(Gm[i].size(dim = 0)):    #loop over the single qubit gates
-                if k < 5:   #if the gate is single qubit
-                    num_gates = 0
-                    while(num_gates < 6):
-                        gates[i][j][k] = torch.rand(2, 2, dtype=torch.complex64)   #generate a random gate
-                        num_gates += 1
+    num_gates = 0  #number of gates in the gate list
 
-    #G_final is the matrix multiplication of the gates
+    while(num_gates < 6):
+        for i, j, k, i in torch.randint(0, len(Gm), (1,)), j in torch.randint(5, Gm[i].size(dim = 0), (1,)), k in torch.randint(0,5, (1,)): #loop over the different G matrices with different x values
+            gates.append(Gm[i][j][k])
+            num_gates+=1
+    
     for i in range(len(gates)):
         G_final*=gates[i]
-
-        #G_final = G1@G2@G3@G4@G5@G6@G7@G8@G9@G10@G11@G12@G13@G14@G15@G16@G17@G18
 
     return G_final
 
 x_var = torch.rand(18, dtype=torch.float32)
 print(generate_matrix(x_var))
+
 
 #generate random x values between 0 and 2pi
 

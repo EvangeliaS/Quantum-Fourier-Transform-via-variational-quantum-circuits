@@ -172,160 +172,31 @@ def generate_x():
     return torch.rand(18, dtype=torch.float32, requires_grad=True)*100* 2 * np.pi
 
 
-# define a function that generates the matrix with the optimal value of x
-def generate_optimal_matrix():
-    optimal_matrix = None
-    optimal_cost = np.inf
-    for i in range(5):  # try 100 different random values of x
-        x_var = generate_x()
-        G = generate_matrix(x_var.detach())
-        model = G
-        #x_var = torch.tensor(x.clone(), dtype=torch.float, requires_grad=True)        
-        optimizer = optim.Adam([x_var.detach()], lr=0.01)
-        for j in range(10):  # run the optimizer for 100 iterations
-            G = generate_matrix(x_var)
-            cost = cost_function(G)
-            #optimizer.zero_grad()
-            for param in x_var:
-                param.grad = None
-            cost.backward()
-            optimizer.step()
-            print("Epoch: ", j, "Loss:", cost.item())  # print the progress
-            #print the x values using .item()
-            print("x: ", x_var[0].item())
-        if cost.item() < optimal_cost:
-            optimal_cost = cost.item()
-            optimal_matrix = G.detach().numpy()
-    return optimal_matrix
-
-# generate the optimal matrix
-#optimal_matrix = generate_optimal_matrix()
-
+def Gx(x):
+    Gx = torch.zeros(11, 8, 8, dtype=torch.complex64)
+    for i in range(Gx.size(dim = 0)):
+        Gx[i] = torch.tensor(scipy.linalg.fractional_matrix_power(G[i], x)) #G to the power of x
+    return Gx
 
 # define your cost function
-def cost_function(G_final):
-    #print(G_final@B)
-    cost = 1 - 1/64*((torch.abs(torch.trace(G_final@B)))**2)
-    return cost
+def cost_function(x):
+    costs = []
+    for i in range(x.size(dim=0)):
+        costs.append( 1 - 1/64*((torch.abs(torch.trace((torch.tensor(scipy.linalg.fractional_matrix_power(G[i], x)))@B)))**2))
+    print("costs")
+    return costs
 
+#compute the partial derivatives of cost_function for every x value
+def compute_gradients(x):
+    gradients = []
+    for i in range(18):
+        print(torch.autograd.grad(cost_function(x), x[i], create_graph=True, allow_unused=True)[0])
+    return gradients
+
+# define the learning rate
+lr = 0.1
 x = generate_x()
-G = generate_matrix(x)
-print(G)
+def f(x):
+    return torch.tensor(scipy.linalg.fractional_matrix_power(G[0][0], x))
 
-# #call Gx function multiple times to get the G matrices for each x value
-# x_var = torch.rand(18, dtype=torch.float32, requires_grad=True)* 2 * np.pi
-# x = torch.tensor(x_var.clone(), dtype=torch.float, requires_grad=True)
-# Gx_i = Gx(x_var[0].item())
-# Gx_i.requires_grad = True
-# print("x: ", x_var[0].item())
-# print(Gx_i[0])
-# print(cost_function(Gx_i[0]))
-
-
-# optimizer = torch.optim.Adam([x], lr=0.1)
-
-
-# # training loop
-# num_epochs = 100
-# for i in range(num_epochs):
-#     optimizer.zero_grad()
-#     #optimizer.forward()
-#     G_final = Gx_i
-#     loss = cost_function(G_final)
-#     loss.backward(retain_graph=True)
-#     optimizer.step()
-
-#     # print loss every 10 epochs
-#     if i % 10 == 0:
-#         #print learnable parameters
-#         print("x: ", x_var[0].item())
-#         print(f"Epoch {i}: loss={loss.item():.4f}")
-
-
-
-
-
-
-# # def trace(A):
-# #     return torch.sum(torch.diagonal(A))
-
-# #define the model
-# class MyModel(torch.nn.Module):
-#     def __init__(self):
-#         super(MyModel, self).__init__()
-#         self.x = torch.nn.Parameter(torch.rand(18, dtype=torch.float32, requires_grad=True)* 2 * np.pi)
-
-#     def forward(self):
-#         #A = generate_matrix(self.x)
-#         Gm = []
-#         # loop over the x values to generate the corresponding G matrices
-#         for i in range(self.x.size(dim=0)):
-#             Gx_i = torch.zeros(11, 8, 8, dtype=torch.complex64)
-#             Gx_i = Gx(self.x[i].item())
-#             Gm.append(Gx_i)
-
-#         for i in range(0, len(Gm), 18):
-#             G1 = Gm[i][5]   #get the first 2-qubit gate(of the first x-modified Gx_i(i==0)), 4-3-3
-#             G2 = Gm[i+1][1] #get the second single qubit gate, 4-2-4
-#             G3 = Gm[i+2][4] #get the last single qubit gate 4-4-3
-#             G4 = Gm[i+3][7] #1-1-4
-#             G5 = Gm[i+4][0] #1-4-4
-#             G6 = Gm[i+5][2] #4-3-4
-#             G7 = Gm[i+6][9] #3-4-2
-#             G8 = Gm[i+7][4] #4-4-3
-#             G9 = Gm[i+8][0] #1-4-4
-#             G10 = Gm[i+9][6] #4-1-3
-#             G11 = Gm[i+10][2] #4-3-4
-#             G12 = Gm[i+11][4] #4-4-3
-#             G13 = Gm[i+12][8] #1-2-4
-#             G14 = Gm[i+13][0] #1-4-4
-#             G15 = Gm[i+14][3] #4-1-4
-#             G16 = Gm[i+15][10]#1-4-3
-#             G17 = Gm[i+16][0] #1-4-4
-#             G18 = Gm[i+17][4] #4-4-3
-
-#             G_final = G1@G2@G3@G4@G5@G6@G7@G8@G9@G10@G11@G12@G13@G14@G15@G16@G17@G18
-
-#         return G_final
- 
-# # # initialize model and optimizer
-
-# # model = MyModel()
-# # # # define the cost function
-# # # def cost_function(x, target):
-# # #     mse = torch.mean(torch.abs(generate_matrix(x) - target) ** 2)
-# # #     return mse
-
-
-# #themis
-# class QNN(nn.Module):
-    
-#     def __init__(self, num_layers, num_features):
-#         super(QNN, self).__init__()
-
-#         # Create a 3x3 matrix with dtype cfloat
-#         self.Lx = torch.tensor([[0.0000, 0.7071, 0.0000],
-#                             [0.7071, 0.0000, 0.7071],
-#                             [0.0000, 0.7071, 0.0000]], dtype=torch.cfloat)
-
-#         # Create another 3x3 matrix with dtype cfloat
-#         self.Lz = torch.tensor([[1., 0., 0.],
-#                             [0., 0., 0.],
-#                             [0., 0., 1.]], dtype=torch.cfloat)
-
-#         # Create a 3x3 matrix with dtype cdouble
-#         self.Lz2 = torch.tensor([[1., 0., 0.],
-#                             [0., 0., 0.],
-#                             [0., 0., -1.]], dtype=torch.cfloat)
-
-#         for i in range(self.num_layers*(int(self.num_features/4))):
-            
-#             # Weights for encoding
-#             self.weights.append(nn.Parameter(torch.randn(4, dtype=torch.float)))
-
-#             # Weight for the bias term
-#             self.bias.append(nn.Parameter(torch.randn(1, dtype=torch.float)))
-
-
-# model = QNN(num_layers=LAYERS, num_features=X_train.shape[1])
-# optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
+print(torch.autograd.grad(f(x), x[i], create_graph=True, allow_unused=True)[0])
