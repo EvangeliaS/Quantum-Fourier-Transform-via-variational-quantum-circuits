@@ -120,11 +120,22 @@ def check_if_unitary(G):
             print("G is not unitary")
             sys.exit()
 
+# def Gx(x):
+#     Gx = torch.zeros(11, 8, 8, dtype=torch.complex64)
+#     for i in range(Gx.size(dim = 0)):
+#         Gx[i] = torch.tensor(scipy.linalg.fractional_matrix_power(G[i], x)) #G to the power of x
+#     return Gx
+
+#same as Gx but the single qubit gates are not raised to the power of x(not parametrized)
 def Gx(x):
     Gx = torch.zeros(11, 8, 8, dtype=torch.complex64)
     for i in range(Gx.size(dim = 0)):
-        Gx[i] = torch.tensor(scipy.linalg.fractional_matrix_power(G[i], x)) #G to the power of x
+        if i < 5:
+            Gx[i] = G[i]
+        else:
+            Gx[i] = torch.tensor(scipy.linalg.fractional_matrix_power(G[i], x)) #G to the power of x
     return Gx
+
 
 # define a function that generates a random matrix with a given value of x
 def generate_matrix(x_var):
@@ -169,7 +180,7 @@ def generate_matrix(x_var):
 
 # define a function that generates a random value of x between 0 and 2pi
 def generate_x():
-    return torch.rand(18, dtype=torch.float32, requires_grad=True)*100* 2 * np.pi
+    return torch.rand(18, dtype=torch.float32, requires_grad=True)* 2 * np.pi
 
 
 # define a function that generates the matrix with the optimal value of x
@@ -211,36 +222,6 @@ def cost_function(G_final):
 x = generate_x()
 G = generate_matrix(x)
 print(G)
-
-# #call Gx function multiple times to get the G matrices for each x value
-# x_var = torch.rand(18, dtype=torch.float32, requires_grad=True)* 2 * np.pi
-# x = torch.tensor(x_var.clone(), dtype=torch.float, requires_grad=True)
-# Gx_i = Gx(x_var[0].item())
-# Gx_i.requires_grad = True
-# print("x: ", x_var[0].item())
-# print(Gx_i[0])
-# print(cost_function(Gx_i[0]))
-
-
-# optimizer = torch.optim.Adam([x], lr=0.1)
-
-
-# # training loop
-# num_epochs = 100
-# for i in range(num_epochs):
-#     optimizer.zero_grad()
-#     #optimizer.forward()
-#     G_final = Gx_i
-#     loss = cost_function(G_final)
-#     loss.backward(retain_graph=True)
-#     optimizer.step()
-
-#     # print loss every 10 epochs
-#     if i % 10 == 0:
-#         #print learnable parameters
-#         print("x: ", x_var[0].item())
-#         print(f"Epoch {i}: loss={loss.item():.4f}")
-
 
 
 
