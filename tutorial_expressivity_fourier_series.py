@@ -511,7 +511,7 @@ def S(x):
     """Data-encoding circuit block."""
     for w in range(r):
         qml.RX(scaling * x, wires=w)
-        qml.RY(scaling * x, wires=w)
+        #qml.RY(scaling * x, wires=w)
 
 def W(theta):
     """Trainable circuit block."""
