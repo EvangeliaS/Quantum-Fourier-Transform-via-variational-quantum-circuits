@@ -156,62 +156,6 @@ def Gx(x):
         Gx[i] = torch.tensor(scipy.linalg.fractional_matrix_power(G[i], x)) #G to the power of x
     return Gx
 
-
-def matrix_exponential_gradient(A):
-# In summary, this code computes the gradient of the matrix exponential 
-# of the input matrix A by numerically approximating the derivative using finite differences. 
-# It perturbs each element of A separately, computes the corresponding matrix exponential, 
-# and calculates the difference with the original matrix exponential. 
-# This difference is then divided by the perturbation value to obtain an approximation of the derivative.
-
-    # Get the size of the input matrix
-    N = A.size(0)
-
-    # Create an identity matrix of shape (N, N) on the same device as A
-    eye = torch.eye(N, device=A.device)
-
-    # Compute the matrix exponential of A
-    exp_A = torch.matrix_exp(A)
-
-    # Initialize the gradient matrix with zeros
-    gradient = torch.zeros_like(A)
-
-    # Iterate over each element of the gradient matrix
-    for i in range(N):
-        for j in range(N):
-            # Perturb the (i, j) element of A by a small value
-            Aj = A.clone()
-            Aj[i, j] += 1e-8
-
-            # Compute the matrix exponential of the perturbed matrix Aj
-            exp_Aj = torch.matrix_exp(Aj)
-
-            # Compute the (i, j) element of the gradient
-            gradient[i, j] = torch.sum((exp_Aj - exp_A) / 1e-8)
-
-    # Return the computed gradient matrix
-    return gradient
-
-# Example usage
-#x 10 random values between 0 and 2pi
-# x_var = torch.rand(18, dtype=torch.float32)*2*np.pi
-# print("x is: \n\n", x_var)
-# Gm = []
-
-# # loop over the x values to generate the corresponding G matrices
-# for i in range(x_var.size(dim=0)):
-#     Gx_i = torch.zeros(11, 8, 8, dtype=torch.complex64)
-#     Gx_i = Gx(x_var[i].item())
-#     Gm.append(Gx_i)
-
-# print(len(Gm))
-# print(Gm[0].size())
-# for i in range(len(Gm)-1):
-#     for j in range(Gm[i].size(dim = 0)):
-#         print(Gm[i][j])
-#         gradient = matrix_exponential_gradient(Gm[i][j])
-#         print("grad = ", gradient)
-
 #find conjugate transpose of QF3
 B = torch.conj(torch.transpose(QF, 0,1))
 B.requires_grad = True
@@ -222,41 +166,94 @@ def cost_function(x_var):
     cost = 1 - 1/64 * ((torch.abs(torch.trace(G_final @ B)))**2)
     return cost
 
-#create a function that changes the first value of the G_final matrix 
-#and then calculates the cost function
 
-
-def cost_function_1(x_var, gamma, delta):
-    print("x initial is: \n\n", x_var)
-    G_final = generate_matrix(x_var)
-    cost = 1 - 1/64 * ((torch.abs(torch.trace(G_final @ B)))**2)
-    print("cost initial = ", cost)
+#the function performs gradient descent of cost to find the optimal x values
+#x_var is the initial x values, gamma is the learning rate, delta is the perturbation value
+def optimize_parameters(x_var, gamma, delta):   
+    print("x initial is: \n\n", x_var)         
+    print("cost initial = ", cost_function(x_var))
     x_new = x_var.clone()
 
     for i in range(len(x_var)):
-        #create a copy of the x_var tensor
-        x_var_sum = x_var.clone()
-        #change the first value of the x_var with a random value between 0 and 2pi
+        x_var_sum = x_var.clone() #create a copy of the x_var tensor
         x_var_sum[i] = x_var[i] + delta
-        print("x sum is: \n\n", x_var_sum)
-        G_final_sum = generate_matrix(x_var_sum)
-        cost_sum = 1 - 1/64 * ((torch.abs(torch.trace(G_final_sum @ B)))**2)
-        print("cost sum = ", cost_sum)
+        #print("x sum is: \n\n", x_var_sum)
+        cost_sum = cost_function(x_var_sum)
+        #print("cost sum = ", cost_sum)
 
         x_var_diff = x_var.clone()
         x_var_diff[i] = x_var[i] - delta
-        print("x diff is: \n\n", x_var_diff)
-        G_final_diff = generate_matrix(x_var_diff)
-        cost_diff = 1 - 1/64 * ((torch.abs(torch.trace(G_final_diff @ B)))**2)
-        print("cost diff = ", cost_diff)
-
+        #print("x diff is: \n\n", x_var_diff)
+        cost_diff = cost_function(x_var_diff)
+        #print("cost diff = ", cost_diff)
         x_new[i] = x_var[i] - gamma * ((cost_sum - cost_diff) / (2* delta))
-        ##print("x new is: \n\n", x_new)
-    return x_new
+
+    #print("x new is: \n\n", x_new)
+    return x_new, cost_function(x_new)
 
 
+#create a function that calls the optimize_parameters function until the cost stops changing more than a certain value(epsilon)
+def gradient_descent_cost_optimizer(x_var, gamma, delta, epsilon):
+    iterations = 0
+    x_init, cost_init = optimize_parameters(x_var, gamma, delta) #get the initial cost after the first optimization
+    x_old = x_init.clone()
+    cost_old = cost_init.clone()
+    while True:
+        x_new, cost_new = optimize_parameters(x_old, gamma, delta)
+        print("new cost = ", cost_new)
+        if torch.abs(cost_new - cost_old) < epsilon:
+            break
+        else:
+            x_old = x_new.clone()
+            cost_old = cost_new.clone()
+            iterations += 1
+    return x_new, cost_new, iterations
+
+
+##############################################################################################################
+#test the functions
 x_var = torch.rand(18, dtype=torch.float32)*2*np.pi
 
-print(cost_function_1(x_var, 0.5, 0.05))
+print("    X INITIAL is: \n\n", x_var)         
+print("    COST INITIAL is = ", cost_function(x_var))
+x, cost , iters = gradient_descent_cost_optimizer(x_var, 0.5, 0.05, 0.001)
+print("iterations = ", iters)
 
-#define a 
+
+##############################################################################################################
+#optimized code
+
+# import torch.nn.functional as F
+
+# def generate_matrix(x_var):
+#     x_var = x_var.unsqueeze(1).unsqueeze(2)
+#     Gx_tensor = torch.tensor(scipy.linalg.fractional_matrix_power(G, x_var)).to(torch.complex64)
+#     G_final = torch.prod(Gx_tensor, dim=0)
+#     return G_final
+
+# def cost_function(x_var):
+#     G_final = generate_matrix(x_var)
+#     cost = 1 - 1/64 * ((torch.abs(torch.trace(G_final @ B)))**2)
+#     return cost
+
+# def optimize_parameters(x_var, gamma, delta):
+#     x_var_sum = x_var + delta
+#     x_var_diff = x_var - delta
+#     cost_sum = cost_function(x_var_sum)
+#     cost_diff = cost_function(x_var_diff)
+#     x_new = x_var - gamma * ((cost_sum - cost_diff) / (2 * delta))
+#     return x_new, cost_function(x_new)
+
+# def gradient_descent_cost_optimizer(x_var, gamma, delta, epsilon):
+#     iterations = 0
+#     x_init, cost_init = optimize_parameters(x_var, gamma, delta)
+#     x_old = x_init.clone()
+#     while True:
+#         x_new, cost_new = optimize_parameters(x_old, gamma, delta)
+#         print("new cost = ", cost_new)
+#         if torch.abs(cost_new - cost_init) < epsilon:
+#             break
+#         else:
+#             x_old = x_new.clone()
+#             iterations += 1
+#     return x_new, cost_new, iterations

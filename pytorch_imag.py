@@ -83,3 +83,61 @@ print("Difference between initial and final cost: \n\n", initial_cost - function
 #Note: the best result is about 0.2 reduction. We need to find a way to improve this result.
 #very improved results using the learning rate scheduling
 #______________________________________________________________________________
+
+
+
+def matrix_exponential_gradient(A):
+# In summary, this code computes the gradient of the matrix exponential 
+# of the input matrix A by numerically approximating the derivative using finite differences. 
+# It perturbs each element of A separately, computes the corresponding matrix exponential, 
+# and calculates the difference with the original matrix exponential. 
+# This difference is then divided by the perturbation value to obtain an approximation of the derivative.
+
+    # Get the size of the input matrix
+    N = A.size(0)
+
+    # Create an identity matrix of shape (N, N) on the same device as A
+    eye = torch.eye(N, device=A.device)
+
+    # Compute the matrix exponential of A
+    exp_A = torch.matrix_exp(A)
+
+    # Initialize the gradient matrix with zeros
+    gradient = torch.zeros_like(A)
+
+    # Iterate over each element of the gradient matrix
+    for i in range(N):
+        for j in range(N):
+            # Perturb the (i, j) element of A by a small value
+            Aj = A.clone()
+            Aj[i, j] += 1e-8
+
+            # Compute the matrix exponential of the perturbed matrix Aj
+            exp_Aj = torch.matrix_exp(Aj)
+
+            # Compute the (i, j) element of the gradient
+            gradient[i, j] = torch.sum((exp_Aj - exp_A) / 1e-8)
+
+    # Return the computed gradient matrix
+    return gradient
+
+# Example usage
+#x 10 random values between 0 and 2pi
+# x_var = torch.rand(18, dtype=torch.float32)*2*np.pi
+# print("x is: \n\n", x_var)
+# Gm = []
+
+# # loop over the x values to generate the corresponding G matrices
+# for i in range(x_var.size(dim=0)):
+#     Gx_i = torch.zeros(11, 8, 8, dtype=torch.complex64)
+#     Gx_i = Gx(x_var[i].item())
+#     Gm.append(Gx_i)
+
+# print(len(Gm))
+# print(Gm[0].size())
+# for i in range(len(Gm)-1):
+#     for j in range(Gm[i].size(dim = 0)):
+#         print(Gm[i][j])
+#         gradient = matrix_exponential_gradient(Gm[i][j])
+#         print("grad = ", gradient)
+
