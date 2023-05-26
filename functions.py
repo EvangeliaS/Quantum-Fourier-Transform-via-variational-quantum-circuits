@@ -167,7 +167,7 @@ def cost_function(x_var):
     return cost
 
 def learning_rate_scheduler(learning_rate, step_size):
-    return learning_rate + step_size
+    return learning_rate - step_size
 
 #the function performs gradient descent of cost to find the optimal x values
 #x_var is the initial x values, gamma is the learning rate, delta is the perturbation value
@@ -208,6 +208,7 @@ def gradient_descent_cost_optimizer(x_var, gamma, delta, epsilon, threshold, ste
         else:
             if(torch.abs(cost_new - cost_old) < threshold and iterations%10 == 0):
                 gamma = learning_rate_scheduler(gamma, step_size)
+                print("ITERATION = ", iterations, "    LEARNING RATE = ", gamma, "\n")
             x_old = x_new.clone()
             cost_old = cost_new.clone()
             iterations += 1
@@ -216,12 +217,17 @@ def gradient_descent_cost_optimizer(x_var, gamma, delta, epsilon, threshold, ste
 
 ##############################################################################################################
 #test the functions
-x_var = torch.rand(18, dtype=torch.float32)*2*np.pi
 
-print("    X INITIAL is: \n\n", x_var)         
-print("    COST INITIAL is = ", cost_function(x_var))
-x, cost , iters = gradient_descent_cost_optimizer(x_var, 0.5, 0.05, 0.001, 0.01, 0.01)
-print("iterations = ", iters)
+for i in range(3):
+    x_var = torch.rand(18, dtype=torch.float32)*2*np.pi
+    print("    X INITIAL is: \n\n", x_var)         
+    print("    COST INITIAL is = ", cost_function(x_var))
+    x, cost , iters = gradient_descent_cost_optimizer(x_var, 0.5, 0.05, 0.001, 0.01, 0.01)
+    print("    X INITIAL is: \n\n", x_var) 
+    print("cost initial = ", cost_function(x_var))
+    print("    X FINAL is: \n\n", x)
+    print("iterations = ", iters, "FINAL COST: ", cost, "\n\n")
+    
 
 
 ##############################################################################################################
