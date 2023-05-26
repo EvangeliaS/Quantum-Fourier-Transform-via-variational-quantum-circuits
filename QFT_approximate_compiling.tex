@@ -1,0 +1,114 @@
+\documentclass[pra,onecolumn,superscriptaddress]{revtex4}%
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{xcolor}
+\usepackage{bm}
+\usepackage{subfigure}
+\usepackage{amsfonts}
+\usepackage{appendix}
+\usepackage{xcolor}%
+\setcounter{MaxMatrixCols}{30}
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\def\e{\varepsilon}
+
+\renewcommand{\Im}{{\rm Im}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\begin{document}
+\preprint{APS/123-QED}
+\title{ Quantum Fourier Transform with a variational circuit }
+\author{...Katerina..}
+\affiliation{Department of Informatics and Telecommunications, National and Kapodistrian
+University of Athens, Panepistimiopolis, Ilisia, 15784, Greece}
+
+
+\begin{abstract}
+ The aim of this project is to achieve quantum compiling for QFT unitary operation
+employing a subset of physical interactions between qubits and a circuit
+of low-depth. 
+
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+QFT is an essential operation in quantum computing. To be realized for $n$ qubits this requires 
+$\approx n^2$ gates that is an excellent record --taking into account that a general unitary operation
+is described by $4^n$ real parameters. On the other hand, this includes controlled-phase gates $R_n$
+each of which if to be decomposed into gates from a universal set, requires with the best known
+method up today $\approx 20$ gates and an ancillary qubit. 
+
+In the NIST era the idea of employing fault-tolerant quantum computation has been set aside
+since deep-depth circuits are out of discussion. In this work we investigate the question
+of realizing the QFT operation with a variational circuit of relatively low depth. Instead of
+working with universal set of gates we employ Hamiltonians which can be in principle physically realizable.
+ The initial procedure that we follow for a $3$-qubit is a standard one:
+\begin{itemize}
+	\item We build an ansantz on the structure of the circuit based on the algebraic properties of QFT.
+	\item We define a cost function that measures the distance from the target operation i.e. QFT.
+	\item We optimize the parameters in the circuit with a stochastic gradient descent so that the cost is minimized. 
+\end{itemize}
+At second stage, we minimize as possible the depth of the circuit and we update the cost function to an experimentally accessible one.
+Naturally in order to arrive to useful results we try to generalize working with $4$ and $5$ qubit circuits.
+  
+\section{QFT on $3$-qubits} 
+
+
+In order to build an ansatz we first take the unitary matrix (in the computational basis), $\hat{U}_{QFT}$,
+and we decompose it onto the $64$ generators of $SU(8)$ algebra, i.e. $\hat{g}_{ijk}=\hat{\sigma}_{i} \otimes \hat{\sigma}_{j} \otimes \hat{\sigma}_{k}$,
+as 
+\begin{equation}
+O_{ijk}=Tr\left(\hat{U}_{QFT} \hat{g}_{ijk} \right).
+\end{equation}
+The $\hat{\sigma}_{i}$ with $i=1,2,3$ are the Pauli matrices for a single qubit while $\hat{\sigma}_{4}=\hat{1}$.
+
+We find out (see mathematica file) that only $20$ generators give non-zero overlap $O_{ijk}$.
+
+We commute these $20$ generators and we find out that these together with first, second,.. order commutations form
+a closed subgroup of $32$ elements. Then we search for a minimum set of single-qubit and two-qubit operators able to generate the whole
+subgroup. We identify $11$ of them ($5$ single qubit and $6$ two-qubit Hamiltonians) but possibly this result could be improved.
+
+We build a parametrized circuit with these $N=11$ operators, e.g. $\hat{U}_{ijk}\left(\phi\right)=\left(-I \phi \hat{g}_{ijk}\right)$ and we search to optimize the $11$ angles $\vec{\phi}=\left\{\phi_1,\ldots, \phi_{11}\right\}$ so that the cost function is as low as possible:
+\begin{equation}
+C\left(\hat{U}_c\left(\vec{\phi}\right), \hat{U}_{QFT}\right)=1-\frac{1}{64}\left|Tr\left(\hat{U}_c\left(\vec{\phi}\right)\hat{U}_{QFT}^{\dagger} \right)\right|^2
+\end{equation}
+where $\hat{U}_c\left(\vec{\phi}\right)$ represents the unitary of the variational circuit.
+
+The results of some preliminary tests:
+\begin{itemize}
+	\item $N=11$, minimum $C=0.6$
+	\item $N=22$, minimum $C=0.038$
+	\item $N=29$, minimum $C=0.00005$.
+\end{itemize}
+From these we conclude that for a good approximation the depth cannot be as low as desired.
+On the other hand when I replace the two-qubit operations with random ones (from the set of $64$ generators) the 
+results much deteriorate which exhibits the fact that the ansatz is strong. For instance I get for $N=29$, minimum $C=0.074$.
+
+Much left to be done and to be investigated but at first look there is some promise, having double two-qubit operations
+than the initial circuit but the flexibility to work with physical operations than rigid CNOT gates.
+The essence of the method will be in the scaling.
+
+
+\begin{thebibliography}{99}                                                                                               %
+
+
+
+
+\end{thebibliography}
+
+
+
+\end{document}

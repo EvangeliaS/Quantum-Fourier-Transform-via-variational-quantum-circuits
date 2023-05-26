@@ -206,7 +206,7 @@ def gradient_descent_cost_optimizer(x_var, gamma, delta, epsilon, threshold, ste
         if torch.abs(cost_new - cost_old) < epsilon:
             break
         else:
-            if(torch.abs(cost_new - cost_old) < threshold and iterations%10 == 0):
+            if(torch.abs(cost_new - cost_old) < threshold and iterations%10 == 0  and iterations != 0):
                 gamma = learning_rate_scheduler(gamma, step_size)
                 print("ITERATION = ", iterations, "    LEARNING RATE = ", gamma, "\n")
             x_old = x_new.clone()
@@ -217,53 +217,25 @@ def gradient_descent_cost_optimizer(x_var, gamma, delta, epsilon, threshold, ste
 
 ##############################################################################################################
 #test the functions
+import matplotlib.pyplot as plt
+import numpy as np
+import time
 
 for i in range(3):
+    #count time for each iteration
+    start = time.time()
     x_var = torch.rand(18, dtype=torch.float32)*2*np.pi
-    print("    X INITIAL is: \n\n", x_var)         
-    print("    COST INITIAL is = ", cost_function(x_var))
-    x, cost , iters = gradient_descent_cost_optimizer(x_var, 0.5, 0.05, 0.001, 0.01, 0.01)
+    x, cost , iters = gradient_descent_cost_optimizer(x_var, 0.5, 0.05, 0.0001, 0.01, 0.1)
     print("    X INITIAL is: \n\n", x_var) 
     print("cost initial = ", cost_function(x_var))
     print("    X FINAL is: \n\n", x)
     print("iterations = ", iters, "FINAL COST: ", cost, "\n\n")
-    
+    end = time.time()
+    print("time taken = ", end - start, "\n\n")
 
-
-##############################################################################################################
-#optimized code
-
-# import torch.nn.functional as F
-
-# def generate_matrix(x_var):
-#     x_var = x_var.unsqueeze(1).unsqueeze(2)
-#     Gx_tensor = torch.tensor(scipy.linalg.fractional_matrix_power(G, x_var)).to(torch.complex64)
-#     G_final = torch.prod(Gx_tensor, dim=0)
-#     return G_final
-
-# def cost_function(x_var):
-#     G_final = generate_matrix(x_var)
-#     cost = 1 - 1/64 * ((torch.abs(torch.trace(G_final @ B)))**2)
-#     return cost
-
-# def optimize_parameters(x_var, gamma, delta):
-#     x_var_sum = x_var + delta
-#     x_var_diff = x_var - delta
-#     cost_sum = cost_function(x_var_sum)
-#     cost_diff = cost_function(x_var_diff)
-#     x_new = x_var - gamma * ((cost_sum - cost_diff) / (2 * delta))
-#     return x_new, cost_function(x_new)
-
-# def gradient_descent_cost_optimizer(x_var, gamma, delta, epsilon):
-#     iterations = 0
-#     x_init, cost_init = optimize_parameters(x_var, gamma, delta)
-#     x_old = x_init.clone()
-#     while True:
-#         x_new, cost_new = optimize_parameters(x_old, gamma, delta)
-#         print("new cost = ", cost_new)
-#         if torch.abs(cost_new - cost_init) < epsilon:
-#             break
-#         else:
-#             x_old = x_new.clone()
-#             iterations += 1
-#     return x_new, cost_new, iterations
+   # Plot each x_var value against the cost
+    x_var_detached = x_var.detach().numpy()
+    plt.plot(x_var_detached, cost.detach().numpy(), 'o')
+    plt.xlabel('x_var')
+    plt.ylabel('cost')
+    plt.show()
