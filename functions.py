@@ -150,6 +150,51 @@ def generate_matrix(x_var):
         G_final = G1@G2@G3@G4@G5@G6@G7@G8@G9@G10@G11@G12@G13@G14@G15@G16@G17@G18
     return G_final
 
+def create_circuit(x_var, parameters_num):
+    Gm = []
+    # loop over the x values to generate the corresponding G matrices
+    for i in range(x_var.size(dim=0)):
+        Gx_i = torch.zeros(11, 8, 8, dtype=torch.complex64)
+        Gx_i = Gx(x_var[i].item())
+        Gm.append(Gx_i)
+
+    # multiply the 18 G matrices to get the final G matrix/circuit
+    i = 0
+
+    G1 = Gm[i][5]   #get the first 2-qubit gate(of the first x-modified Gx_i(i==0)), 4-3-3
+    G2 = Gm[i+1][1] #get the second single qubit gate, 4-2-4
+    G3 = Gm[i+2][4] #get the last single qubit gate 4-4-3
+    G4 = Gm[i+3][7] #1-1-4
+    G5 = Gm[i+4][0] #1-4-4
+    G6 = Gm[i+5][2] #4-3-4
+    G7 = Gm[i+6][9] #3-4-2
+    G8 = Gm[i+7][4] #4-4-3
+    G9 = Gm[i+8][0] #1-4-4
+    G10 = Gm[i+9][6] #4-1-3
+    G11 = Gm[i+10][2] #4-3-4
+    G12 = Gm[i+11][4] #4-4-3
+    G13 = Gm[i+12][8] #1-2-4
+    G14 = Gm[i+13][0] #1-4-4
+    G15 = Gm[i+14][3] #4-1-4
+    G16 = Gm[i+15][10]#1-4-3
+    G17 = Gm[i+16][0] #1-4-4
+    G18 = Gm[i+17][4] #4-4-3
+
+    G_final = G1@G2@G3@G4@G5@G6@G7@G8@G9@G10@G11@G12@G13@G14@G15@G16@G17@G18
+
+    #Initial gate indices
+    gate_indices = [5, 1, 4, 7, 0, 2, 9, 4, 0, 6, 2, 4, 8, 0, 3, 10, 0, 4]  # Example gate indices
+    # Additional gates
+    G_additional = torch.eye(8, dtype=torch.complex64)  # identity matrix
+
+    # Multiply additional gates based on the number of parameters
+    for i in range(parameters_num - 18):
+        gate_idx = gate_indices[i % 18]  # Cycle through the gate_indices list
+        G_additional = G_additional @ Gm[i+18][gate_idx]
+        G_final = G_final @ G_additional # Multiply G_final with G_additional
+
+    return G_final
+
 def Gx(x):
     Gx = torch.zeros(11, 8, 8, dtype=torch.complex64)
     for i in range(Gx.size(dim = 0)):
@@ -162,12 +207,12 @@ B.requires_grad = True
 
 # Define your cost function
 def cost_function(x_var):
-    G_final = generate_matrix(x_var)
+    G_final = create_circuit(x_var, len(x_var))
     cost = 1 - 1/64 * ((torch.abs(torch.trace(G_final @ B)))**2)
     return cost
 
-def learning_rate_scheduler(learning_rate, step_size):
-    return learning_rate - step_size
+def learning_rate_step_scheduler(learning_rate, step_size):
+    return learning_rate * step_size
 
 #the function performs gradient descent of cost to find the optimal x values
 #x_var is the initial x values, gamma is the learning rate, delta is the perturbation value
@@ -195,47 +240,105 @@ def optimize_parameters(x_var, gamma, delta):
 
 
 #create a function that calls the optimize_parameters function until the cost stops changing more than a certain value(epsilon)
-def gradient_descent_cost_optimizer(x_var, gamma, delta, epsilon, threshold, step_size):
+def gradient_descent_cost_optimizer(x_var, learning_rate, delta, epsilon, threshold, step_size):
     iterations = 0
-    x_init, cost_init = optimize_parameters(x_var, gamma, delta) #get the initial cost after the first optimization
+    x_init, cost_init = optimize_parameters(x_var, learning_rate, delta) #get the initial cost after the first optimization
     x_old = x_init.clone()
     cost_old = cost_init.clone()
     while True:
-        x_new, cost_new = optimize_parameters(x_old, gamma, delta)
+        x_new, cost_new = optimize_parameters(x_old, learning_rate, delta)
         print("new cost = ", cost_new)
         if torch.abs(cost_new - cost_old) < epsilon:
             break
         else:
-            if(torch.abs(cost_new - cost_old) < threshold and iterations%10 == 0  and iterations != 0):
-                gamma = learning_rate_scheduler(gamma, step_size)
-                print("ITERATION = ", iterations, "    LEARNING RATE = ", gamma, "\n")
+            if(torch.abs(cost_new - cost_old) < threshold and iterations%20 == 0  and iterations != 0):
+                learning_rate = learning_rate_step_scheduler(learning_rate, step_size)
+                print("ITERATION = ", iterations, "    LEARNING RATE = ", learning_rate, "\n")
             x_old = x_new.clone()
             cost_old = cost_new.clone()
             iterations += 1
     return x_new, cost_new, iterations
 
+# Perform optimization on a single data point -> this will be used in the stochastic gradient descent
+def optimize_stochastic_parameters(x_var, learning_rate, delta, data_point):  # Perform optimization on a single data point
+    x_var_sum = x_var.clone()
+    x_var_sum[data_point] = x_var[data_point] + delta
+    cost_sum = cost_function(x_var_sum)
+
+    x_var_diff = x_var.clone()
+    x_var_diff[data_point] = x_var[data_point] - delta
+    cost_diff = cost_function(x_var_diff)
+
+    x_new = x_var.clone()
+    x_new[data_point] = x_var[data_point] - learning_rate* ((cost_sum - cost_diff) / (2 * delta))
+
+    return x_new, cost_function(x_new)
+
+
+def stochastic_gradient_descent(x_var, learning_rate, delta, epsilon, threshold, step_size, scheduler, num_epochs):
+    iterations = 0
+    num_data_points = len(x_var)
+    x_init, cost_init = optimize_stochastic_parameters(x_var, learning_rate, delta, np.random.randint(num_data_points)) # Get the initial cost after the first optimization
+    x_old = x_init.clone()
+    cost_old = cost_init.clone()
+
+    while True:
+        # Randomly select a data point
+        data_point = np.random.randint(num_data_points)
+        x_new, cost_new = optimize_stochastic_parameters(x_old, learning_rate, delta, data_point)
+        print("x new =", x_new)
+        print("new cost =", cost_new)
+
+        print("cost difference = ", torch.abs(cost_new - cost_old))
+        if torch.abs(cost_new - cost_old) < epsilon and iterations > num_epochs:
+            break
+        else:
+            if torch.abs(cost_new - cost_old) < threshold and iterations % 10 == 0 and iterations != 0:
+                print("Scheduler called", scheduler)
+                learning_rate = scheduler(learning_rate, step_size)
+                print("ITERATION =", iterations, " LEARNING RATE =", learning_rate, "\n")
+
+            x_old = x_new.clone()
+            cost_old = cost_new.clone()
+            iterations += 1
+
+    return x_new, cost_new, iterations
 
 ##############################################################################################################
+
 #test the functions
 import matplotlib.pyplot as plt
 import numpy as np
 import time
 
-for i in range(3):
-    #count time for each iteration
-    start = time.time()
-    x_var = torch.rand(18, dtype=torch.float32)*2*np.pi
-    x, cost , iters = gradient_descent_cost_optimizer(x_var, 0.5, 0.05, 0.0001, 0.01, 0.1)
-    print("    X INITIAL is: \n\n", x_var) 
-    print("cost initial = ", cost_function(x_var))
-    print("    X FINAL is: \n\n", x)
-    print("iterations = ", iters, "FINAL COST: ", cost, "\n\n")
-    end = time.time()
-    print("time taken = ", end - start, "\n\n")
+start = time.time()
+x_var = torch.rand(22, dtype=torch.float32)*2*np.pi
+print("    X INITIAL is: \n\n", x_var) 
+print("cost initial = ", cost_function(x_var))
 
-   # Plot each x_var value against the cost
-    x_var_detached = x_var.detach().numpy()
-    plt.plot(x_var_detached, cost.detach().numpy(), 'o')
-    plt.xlabel('x_var')
-    plt.ylabel('cost')
-    plt.show()
+#x, cost , iters = stochastic_gradient_descent(x_var, 0.5, 0.05, 1e-7, 0.001, 0.1, exponential_decay_scheduler, 50 )
+x, cost, iters = stochastic_gradient_descent(x_var, 0.2, 0.05, 1e-7, 0.0001, 0.1, learning_rate_step_scheduler, 100)
+print("    X FINAL is: \n\n", x)
+print("iterations = ", iters, "FINAL COST: ", cost, "\n\n")
+end = time.time()
+print("time taken = ", end - start, "\n\n")
+
+
+# for i in range(3):
+#     #count time for each iteration
+#     start = time.time()
+#     x_var = torch.rand(18, dtype=torch.float32)*2*np.pi
+#     x, cost , iters = stochastic_gradient_descent(x_var, 0.5, 0.05, 0.0000001, 0.01, 0.1)
+#     print("    X INITIAL is: \n\n", x_var) 
+#     print("cost initial = ", cost_function(x_var))
+#     print("    X FINAL is: \n\n", x)
+#     print("iterations = ", iters, "FINAL COST: ", cost, "\n\n")
+#     end = time.time()
+#     print("time taken = ", end - start, "\n\n")
+
+# #    # Plot each x_var value against the cost
+# #     x_var_detached = x_var.detach().numpy()
+# #     plt.plot(x_var_detached, cost.detach().numpy(), 'o')
+# #     plt.xlabel('x_var')
+# #     plt.ylabel('cost')
+# #     plt.show()

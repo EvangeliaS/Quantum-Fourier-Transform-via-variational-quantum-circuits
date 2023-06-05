@@ -1,0 +1,557 @@
+    X INITIAL is: 
+
+ tensor([1.9630, 0.8303, 4.0624, 1.2300, 5.5520, 3.7139, 6.1787, 6.0910, 4.5710,
+        0.8039, 4.7188, 5.7155, 4.3729, 0.5271, 2.0546, 2.9213, 2.2913, 6.0037,
+        4.2046, 0.1937, 3.3109, 2.4703])
+cost initial =  tensor(0.9788, grad_fn=<RsubBackward1>)
+x new = tensor([1.9630, 0.8303, 4.0624, 1.2300, 5.5506, 3.7139, 6.1787, 6.0896, 4.5710,
+        0.8039, 4.7188, 5.7155, 4.3729, 0.5271, 2.0546, 2.9213, 2.2913, 6.0037,
+        4.2046, 0.1937, 3.3109, 2.4703], grad_fn=<CopySlices>)
+new cost = tensor(0.9788, grad_fn=<RsubBackward1>)
+cost difference =  tensor(9.8348e-06, grad_fn=<AbsBackward0>)
+x new = tensor([1.9630, 0.8303, 4.0624, 1.2300, 5.5506, 3.7139, 6.1787, 6.0896, 4.5710,
+        0.8039, 4.7202, 5.7155, 4.3729, 0.5271, 2.0546, 2.9213, 2.2913, 6.0037,
+        4.2046, 0.1937, 3.3109, 2.4703], grad_fn=<CopySlices>)
+new cost = tensor(0.9788, grad_fn=<RsubBackward1>)
+cost difference =  tensor(9.8348e-06, grad_fn=<AbsBackward0>)
+x new = tensor([1.9630, 0.8303, 4.0624, 1.2300, 5.5506, 3.7139, 6.1787, 6.0896, 4.5710,
+        0.8039, 4.7202, 5.7155, 4.3914, 0.5271, 2.0546, 2.9213, 2.2913, 6.0037,
+        4.2046, 0.1937, 3.3109, 2.4703], grad_fn=<CopySlices>)
+new cost = tensor(0.9770, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0.0017, grad_fn=<AbsBackward0>)
+x new = tensor([1.9630, 0.8303, 4.0624, 1.2300, 5.5506, 3.7139, 6.1787, 6.0896, 4.5710,
+        0.8039, 4.7202, 5.7155, 4.3914, 0.5271, 2.0546, 2.9253, 2.2913, 6.0037,
+        4.2046, 0.1937, 3.3109, 2.4703], grad_fn=<CopySlices>)
+new cost = tensor(0.9770, grad_fn=<RsubBackward1>)
+cost difference =  tensor(7.6592e-05, grad_fn=<AbsBackward0>)
+x new = tensor([1.9630, 0.8303, 4.0624, 1.2300, 5.5506, 3.7139, 6.1787, 6.0896, 4.5710,
+        0.8039, 4.7202, 5.7155, 4.3914, 0.5271, 2.0546, 2.9253, 2.2913, 6.0037,
+        4.2046, 0.1937, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9763, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0.0006, grad_fn=<AbsBackward0>)
+x new = tensor([1.9630, 0.8303, 4.0624, 1.2300, 5.5506, 3.7139, 6.1787, 6.0896, 4.5703,
+        0.8039, 4.7202, 5.7155, 4.3914, 0.5271, 2.0546, 2.9253, 2.2913, 6.0037,
+        4.2046, 0.1937, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9763, grad_fn=<RsubBackward1>)
+cost difference =  tensor(2.2650e-06, grad_fn=<AbsBackward0>)
+x new = tensor([1.9630, 0.8303, 4.0624, 1.2274, 5.5506, 3.7139, 6.1787, 6.0896, 4.5703,
+        0.8039, 4.7202, 5.7155, 4.3914, 0.5271, 2.0546, 2.9253, 2.2913, 6.0037,
+        4.2046, 0.1937, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9763, grad_fn=<RsubBackward1>)
+cost difference =  tensor(3.2485e-05, grad_fn=<AbsBackward0>)
+x new = tensor([1.9630, 0.8303, 4.0624, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.8039, 4.7202, 5.7155, 4.3914, 0.5271, 2.0546, 2.9253, 2.2913, 6.0037,
+        4.2046, 0.1937, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9754, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0.0009, grad_fn=<AbsBackward0>)
+x new = tensor([1.9630, 0.8303, 4.0624, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.8039, 4.7202, 5.7155, 4.3914, 0.5271, 2.0546, 2.9253, 2.2913, 6.0037,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9754, grad_fn=<RsubBackward1>)
+cost difference =  tensor(2.9445e-05, grad_fn=<AbsBackward0>)
+x new = tensor([1.9630, 0.8303, 4.0624, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7202, 5.7155, 4.3914, 0.5271, 2.0546, 2.9253, 2.2913, 6.0037,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9748, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0.0006, grad_fn=<AbsBackward0>)
+x new = tensor([1.9630, 0.8303, 4.0615, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7202, 5.7155, 4.3914, 0.5271, 2.0546, 2.9253, 2.2913, 6.0037,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9748, grad_fn=<RsubBackward1>)
+cost difference =  tensor(4.3511e-06, grad_fn=<AbsBackward0>)
+Scheduler called <function learning_rate_step_scheduler at 0x7f7620253b80>
+ITERATION = 10  LEARNING RATE = 0.020000000000000004 
+
+x new = tensor([1.9630, 0.8303, 4.0615, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7155, 4.3914, 0.5271, 2.0546, 2.9253, 2.2913, 6.0037,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9748, grad_fn=<RsubBackward1>)
+cost difference =  tensor(1.2517e-06, grad_fn=<AbsBackward0>)
+x new = tensor([1.9630, 0.8303, 4.0615, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3914, 0.5271, 2.0546, 2.9253, 2.2913, 6.0037,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9748, grad_fn=<RsubBackward1>)
+cost difference =  tensor(1.6689e-06, grad_fn=<AbsBackward0>)
+x new = tensor([1.9630, 0.8310, 4.0615, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3914, 0.5271, 2.0546, 2.9253, 2.2913, 6.0037,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9747, grad_fn=<RsubBackward1>)
+cost difference =  tensor(2.4021e-05, grad_fn=<AbsBackward0>)
+x new = tensor([1.9630, 0.8310, 4.0615, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3934, 0.5271, 2.0546, 2.9253, 2.2913, 6.0037,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9745, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0.0002, grad_fn=<AbsBackward0>)
+x new = tensor([1.9630, 0.8310, 4.0615, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3954, 0.5271, 2.0546, 2.9253, 2.2913, 6.0037,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9743, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0.0002, grad_fn=<AbsBackward0>)
+x new = tensor([1.9630, 0.8310, 4.0615, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3974, 0.5271, 2.0546, 2.9253, 2.2913, 6.0037,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0.0002, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8310, 4.0615, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3974, 0.5271, 2.0546, 2.9253, 2.2913, 6.0037,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(9.0599e-06, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8310, 4.0614, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3974, 0.5271, 2.0546, 2.9253, 2.2913, 6.0037,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(4.7684e-07, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8310, 4.0614, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3974, 0.5271, 2.0546, 2.9256, 2.2913, 6.0037,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(6.4373e-06, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8310, 4.0614, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3974, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(1.7285e-06, grad_fn=<AbsBackward0>)
+Scheduler called <function learning_rate_step_scheduler at 0x7f7620253b80>
+ITERATION = 20  LEARNING RATE = 0.0020000000000000005 
+
+x new = tensor([1.9626, 0.8310, 4.0614, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3974, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8311, 4.0614, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3974, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(2.5630e-06, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3974, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(2.5034e-06, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3974, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(5.9605e-08, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3974, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3974, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(5.9605e-08, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7139, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3974, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(5.9605e-08, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3974, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(1.8060e-05, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3974, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(1.1921e-07, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(2.0623e-05, grad_fn=<AbsBackward0>)
+Scheduler called <function learning_rate_step_scheduler at 0x7f7620253b80>
+ITERATION = 30  LEARNING RATE = 0.00020000000000000006 
+
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(5.9605e-08, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1913, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(6.5565e-07, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(5.9605e-08, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(5.9605e-08, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(2.3842e-07, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(5.9605e-08, grad_fn=<AbsBackward0>)
+Scheduler called <function learning_rate_step_scheduler at 0x7f7620253b80>
+ITERATION = 40  LEARNING RATE = 2.000000000000001e-05 
+
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2046, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(1.1921e-06, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(1.1921e-07, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+Scheduler called <function learning_rate_step_scheduler at 0x7f7620253b80>
+ITERATION = 50  LEARNING RATE = 2.0000000000000008e-06 
+
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(5.9605e-08, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(5.9605e-08, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(5.9605e-08, grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+Scheduler called <function learning_rate_step_scheduler at 0x7f7620253b80>
+ITERATION = 60  LEARNING RATE = 2.000000000000001e-07 
+
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+Scheduler called <function learning_rate_step_scheduler at 0x7f7620253b80>
+ITERATION = 70  LEARNING RATE = 2.000000000000001e-08 
+
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+Scheduler called <function learning_rate_step_scheduler at 0x7f7620253b80>
+ITERATION = 80  LEARNING RATE = 2.000000000000001e-09 
+
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+Scheduler called <function learning_rate_step_scheduler at 0x7f7620253b80>
+ITERATION = 90  LEARNING RATE = 2.000000000000001e-10 
+
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+Scheduler called <function learning_rate_step_scheduler at 0x7f7620253b80>
+ITERATION = 100  LEARNING RATE = 2.0000000000000012e-11 
+
+x new = tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+new cost = tensor(0.9741, grad_fn=<RsubBackward1>)
+cost difference =  tensor(0., grad_fn=<AbsBackward0>)
+    X FINAL is: 
+
+ tensor([1.9626, 0.8312, 4.0614, 1.2274, 5.5506, 3.7141, 6.1918, 6.0896, 4.5703,
+        0.7927, 4.7204, 5.7153, 4.3976, 0.5271, 2.0546, 2.9256, 2.2913, 6.0035,
+        4.2045, 0.1912, 3.3109, 2.4815], grad_fn=<CopySlices>)
+iterations =  101 FINAL COST:  tensor(0.9741, grad_fn=<RsubBackward1>) 
+
+
+time taken =  423.4508783817291 
+
+
