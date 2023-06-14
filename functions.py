@@ -281,19 +281,22 @@ def stochastic_gradient_descent(x_var, learning_rate, delta, epsilon, threshold,
     x_init, cost_init = optimize_stochastic_parameters(x_var, learning_rate, delta, np.random.randint(num_data_points)) # Get the initial cost after the first optimization
     x_old = x_init.clone()
     cost_old = cost_init.clone()
-
+    cost_difference = torch.abs(cost_old - cost_init)
     while True:
+        print("ITERATION =", iterations)
         # Randomly select a data point
         data_point = np.random.randint(num_data_points)
         x_new, cost_new = optimize_stochastic_parameters(x_old, learning_rate, delta, data_point)
         print("x new =", x_new)
         print("new cost =", cost_new)
 
-        print("cost difference = ", torch.abs(cost_new - cost_old))
-        if torch.abs(cost_new - cost_old) < epsilon and iterations > num_epochs:
+        if torch.abs(cost_new - cost_old) != cost_difference:
+            cost_difference = torch.abs(cost_new - cost_old)
+            print("cost difference = ", cost_difference)
+        if cost_difference < epsilon or iterations > num_epochs:
             break
         else:
-            if torch.abs(cost_new - cost_old) < threshold and iterations % 10 == 0 and iterations != 0:
+            if cost_difference < threshold and iterations != 0:
                 print("Scheduler called", scheduler)
                 learning_rate = scheduler(learning_rate, step_size)
                 print("ITERATION =", iterations, " LEARNING RATE =", learning_rate, "\n")
@@ -302,7 +305,42 @@ def stochastic_gradient_descent(x_var, learning_rate, delta, epsilon, threshold,
             cost_old = cost_new.clone()
             iterations += 1
 
+
     return x_new, cost_new, iterations
+
+def stochastic_gradient_descent(x_var, learning_rate, delta, epsilon, threshold, step_size, scheduler, num_epochs):
+    iterations = 0
+    num_data_points = len(x_var)
+    x_init, cost_init = optimize_stochastic_parameters(x_var, learning_rate, delta, np.random.randint(num_data_points))
+    x_old = x_init.clone()
+    cost_old = cost_init.clone()
+    cost_difference = torch.abs(cost_old - cost_init)
+    cost_history = [cost_init]  # List to store the cost at each iteration
+
+    while True:
+        print("ITERATION =", iterations)
+        data_point = np.random.randint(num_data_points)
+        x_new, cost_new = optimize_stochastic_parameters(x_old, learning_rate, delta, data_point)
+        print("x new =", x_new)
+        print("new cost =", cost_new)
+
+        if torch.abs(cost_new - cost_old) != cost_difference:
+            cost_difference = torch.abs(cost_new - cost_old)
+            print("cost difference =", cost_difference)
+        if cost_difference < epsilon or iterations > num_epochs:
+            break
+        else:
+            if cost_difference < threshold and iterations != 0:
+                print("Scheduler called", scheduler)
+                learning_rate = scheduler(learning_rate, step_size)
+                print("ITERATION =", iterations, " LEARNING RATE =", learning_rate, "\n")
+
+            x_old = x_new.clone()
+            cost_old = cost_new.clone()
+            iterations += 1
+            cost_history.append(cost_new)  # Add the current cost to the history
+
+    return x_new, cost_new, iterations, cost_history
 
 ##############################################################################################################
 
@@ -311,34 +349,79 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 
-start = time.time()
-x_var = torch.rand(22, dtype=torch.float32)*2*np.pi
-print("    X INITIAL is: \n\n", x_var) 
-print("cost initial = ", cost_function(x_var))
+num_parameters = [18]
+# ,22, 26, 30, 34, 38, 40, 44
 
-#x, cost , iters = stochastic_gradient_descent(x_var, 0.5, 0.05, 1e-7, 0.001, 0.1, exponential_decay_scheduler, 50 )
-x, cost, iters = stochastic_gradient_descent(x_var, 0.2, 0.05, 1e-7, 0.0001, 0.1, learning_rate_step_scheduler, 100)
-print("    X FINAL is: \n\n", x)
-print("iterations = ", iters, "FINAL COST: ", cost, "\n\n")
-end = time.time()
-print("time taken = ", end - start, "\n\n")
+for i in range(len(num_parameters)):
+    # Create an empty list to store the results
+    results_stochastic = []
+    results_non_stochastic = []
 
+    # Count time for each iteration
+    start = time.time()
+    x_var = torch.rand(num_parameters[i], dtype=torch.float32) * 2 * np.pi
+    x, cost, iters , cost_history = stochastic_gradient_descent(x_var, 0.5, 0.05, 0.0000001, 0.0001, 0.1, learning_rate_step_scheduler, 200)
+    results_stochastic.append((x_var, cost_function(x_var), x, iters, cost))
+    end = time.time()
+    print("Parameters are: \n" , num_parameters[i], " X INITIAL is:\n", x_var)
+    print("cost initial =", cost_function(x_var))
+    print("    X FINAL is:\n\n", x)
+    print("iterations =", iters, "FINAL COST:", cost)
+    print("time taken =", end - start, "\n\n")
 
-# for i in range(3):
-#     #count time for each iteration
+    # Plot the cost history
+    plt.plot(range(iters + 1), cost_history, 'o')
+    plt.xlabel('Iteration')
+    plt.ylabel('Cost')
+    plt.title('Progressive Change of Cost')
+
+    # Save the figure as a PNG file
+    plt.savefig('cost_progression.png')
+
+    # Show the plot
+    plt.show()
+
+    # # Plot each x_var value against the cost
+    # x_var_detached = x_var.detach().numpy()
+    # x_var_detached = x_var_detached.flatten()  # Flatten x_var_detached to have shape (18,)
+    # cost_detached = cost.detach().numpy().flatten()  # Flatten cost to have shape (18,)
+    # plt.plot(x_var_detached, cost_detached, 'o')
+
+    # plt.plot(x_var_detached, cost.detach().numpy(), 'o')
+    # plt.xlabel('x_var')
+    # plt.ylabel('Cost stochastic gradient descent')
+    # plt.savefig(f'plot_{num_parameters[i]}.png')  # Save the plot as a PNG file
+    # plt.show()
+
+    # Write the results to a text file
+    with open('results.txt', 'w') as file:
+        file.write("Number of Parameters\tInitial Values\tIterations\tInitial Cost\tFinal Cost\n")
+        for j, (x_var, initial_cost, x, iterations, final_cost, history) in enumerate(results_stochastic):
+            file.write(f"{num_parameters[i]}\t{x_var}\t{iterations}\t{initial_cost}\t{final_cost}\n")
+
+#     # Count time for each iteration
 #     start = time.time()
-#     x_var = torch.rand(18, dtype=torch.float32)*2*np.pi
-#     x, cost , iters = stochastic_gradient_descent(x_var, 0.5, 0.05, 0.0000001, 0.01, 0.1)
-#     print("    X INITIAL is: \n\n", x_var) 
-#     print("cost initial = ", cost_function(x_var))
-#     print("    X FINAL is: \n\n", x)
-#     print("iterations = ", iters, "FINAL COST: ", cost, "\n\n")
+#     x_var = torch.rand(18, dtype=torch.float32) * 2 * np.pi
+#     x, cost, iters = gradient_descent_cost_optimizer(x_var, 0.5, 0.05, 0.0000001, 0.01, 0.1)
+#     results_stochastic.append((x_var, cost_function(x_var), x, iters, cost))
 #     end = time.time()
-#     print("time taken = ", end - start, "\n\n")
+#     print("Iteration", i+1)
+#     print("    X INITIAL is:\n\n", x_var)
+#     print("cost initial =", cost_function(x_var))
+#     print("    X FINAL is:\n\n", x)
+#     print("iterations =", iters, "FINAL COST:", cost)
+#     print("time taken =", end - start, "\n\n")
 
-# #    # Plot each x_var value against the cost
-# #     x_var_detached = x_var.detach().numpy()
-# #     plt.plot(x_var_detached, cost.detach().numpy(), 'o')
-# #     plt.xlabel('x_var')
-# #     plt.ylabel('cost')
-# #     plt.show()
+#     # Plot each x_var value against the cost
+#     x_var_detached = x_var.detach().numpy()
+#     plt.plot(x_var_detached, cost.detach().numpy(), 'o')
+#     plt.xlabel('x_var')
+#     plt.ylabel('Cost gradient descent')
+#     plt.savefig(f'plot_{i+1}.png')  # Save the plot as a PNG file
+#     plt.show()
+
+
+# # Write the results to a text file
+# file.write("Number of Parameters\tInitial Values\tIterations\tInitial Cost\tFinal Cost\n")
+# for i, (x_var, initial_cost, x, iterations, final_cost) in enumerate(results_non_stochastic):
+#     file.write(f"{i+1}\t{x_var}\t{iterations}\t{initial_cost}\t{final_cost}\n")
