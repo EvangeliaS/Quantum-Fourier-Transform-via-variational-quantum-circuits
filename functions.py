@@ -240,24 +240,32 @@ def optimize_parameters(x_var, gamma, delta):
 
 
 #create a function that calls the optimize_parameters function until the cost stops changing more than a certain value(epsilon)
-def gradient_descent_cost_optimizer(x_var, learning_rate, delta, epsilon, threshold, step_size):
+def gradient_descent_cost_optimizer(x_var, learning_rate, delta, epsilon, threshold, step_size, epochs):
     iterations = 0
     x_init, cost_init = optimize_parameters(x_var, learning_rate, delta) #get the initial cost after the first optimization
     x_old = x_init.clone()
     cost_old = cost_init.clone()
+    #cost_difference = torch.abs(cost_old - cost_init)
+    cost_history = [cost_init]  # List to store the cost at each iteration
+
     while True:
+        print("ITERATION = \n", iterations)
         x_new, cost_new = optimize_parameters(x_old, learning_rate, delta)
         print("new cost = ", cost_new)
+        # if cost_difference != torch.abs(cost_new - cost_old):
+        #     cost_difference = torch.abs(cost_new - cost_old)
         if torch.abs(cost_new - cost_old) < epsilon:
             break
         else:
-            if(torch.abs(cost_new - cost_old) < threshold and iterations%20 == 0  and iterations != 0):
+            if(torch.abs(cost_new - cost_old) < threshold and iterations != 0):
                 learning_rate = learning_rate_step_scheduler(learning_rate, step_size)
                 print("ITERATION = ", iterations, "    LEARNING RATE = ", learning_rate, "\n")
             x_old = x_new.clone()
             cost_old = cost_new.clone()
             iterations += 1
-    return x_new, cost_new, iterations
+            cost_history.append(cost_new)  # Add the current cost to the history
+
+    return x_new, cost_new, iterations, cost_history
 
 # Perform optimization on a single data point -> this will be used in the stochastic gradient descent
 def optimize_stochastic_parameters(x_var, learning_rate, delta, data_point):  # Perform optimization on a single data point
@@ -318,68 +326,92 @@ import time
 
 import pandas as pd
 
-num_parameters = [18, 22 , 26, 26, 30, 30, 34, 34, 38, 38, 40,  40, 44, 44]
-iterations = [200, 300, 400, 500, 600, 700, 800, 900, 1000]
+num_parameters = [26]# , 26, 28, 30, 34, 36]#, 38, 40,  42, 44, 46]
+iterations = [300, 320, 400, 500, 550, 580, 600]#, 700, 800, 850, 900, 950]
+#add 50 to each of the above
+iterations = [i + 50 for i in iterations]
 
 # Create an empty list to store the results
 results = []
+for algorithm in [gradient_descent_cost_optimizer]:
+    for i, j in zip(num_parameters, iterations):
 
-for i, j in zip(num_parameters, iterations):
+        # Create an empty list to store the results
+        results_algorithm = []
 
-    # Create an empty list to store the results
-    results_stochastic = []
-    results_non_stochastic = []
+        # Count time for each iteration
+        start = time.time()
+        x_var = torch.rand(i, dtype=torch.float32) * 2 * np.pi
+        print("Algorithm is: ", algorithm.__name__, "\n")
+        print("Number of parameters is: ", i, "\n")
+        print("x initial is: \n", x_var, "\n")
 
-    # Count time for each iteration
-    start = time.time()
-    x_var = torch.rand(i, dtype=torch.float32) * 2 * np.pi
-    x, cost, iters, cost_history = stochastic_gradient_descent(x_var, 0.5, 0.05, 0.000000001, 0.000001, 0.1, learning_rate_step_scheduler,j)
-    results_stochastic.append((x_var, cost_function(x_var), x, iters, cost))
-    end = time.time()
-    print("Parameters are: \n" , i, " X INITIAL is:\n", x_var)
-    print("cost initial =", cost_function(x_var))
-    print("    X FINAL is:\n\n", x)
-    print("iterations =", iters, "FINAL COST:", cost)
-    print("time taken =", end - start, "\n\n")
+        if algorithm == stochastic_gradient_descent:
+            x, cost, iters, cost_history = stochastic_gradient_descent(x_var, 0.5, 0.05, 0.000000001, 0.000001, 0.1, learning_rate_step_scheduler,j)
+        else:
+            learning_rate = 0.05
+            delta = 0.005
+            epsilon = 0.00000001
+            threshold = 0.0001
+            step_size = 0.1
+            x, cost, iters, cost_history = gradient_descent_cost_optimizer(x_var, learning_rate, delta, epsilon, threshold, step_size, j)
 
-    cost_history_np = np.array([cost.detach().numpy() for cost in cost_history])
+        results_algorithm.append((x_var, cost_function(x_var), x, iters, cost))
+        end = time.time()
 
-    # Plot the cost progression
-    plt.figure()
-    plt.plot(cost_history_np)
-    plt.xlabel('Iteration')
-    plt.ylabel('Cost')
-    plt.title(f'Cost Progression for {i} Parameters')
+        print("Parameters are: \n" , i, " X INITIAL is:\n", x_var)
+        print("cost initial =", cost_function(x_var))
+        print("    X FINAL is:\n\n", x)
+        print("iterations =", iters, "FINAL COST:", cost)
+        print("time taken =", end - start, "\n\n")
+        print("learning_rate = ", learning_rate, "\n")
+        print("delta = ", delta, "\n")
+        print("epsilon = ", epsilon, "\n")
+        print("threshold = ", threshold, "\n")
+        print("step_size = ", step_size, "\n")
+        
 
-    plt.ylim(bottom=0)
 
-    # Show the plot without blocking program execution
-    plt.show(block=False)
+        cost_history_np = np.array([cost.detach().numpy() for cost in cost_history])
 
-    # Save the figure as a PNG file
-    plt.savefig(f'cost_progression_{i}.png')
+        # Plot the cost progression
+        plt.figure()
+        plt.plot(cost_history_np)
+        plt.xlabel('Iteration')
+        plt.ylabel('Cost')
+        plt.title(f'Cost Progression for: {i} Parameters, {algorithm.__name__}')
 
-    # Append the results to the list
-    for result in results_stochastic:
-        results.append({
-            'Number of Parameters': i,
-            'Initial Values': result[0].detach().numpy(),
-            'Final Values': result[2].detach().numpy(),
-            'Iterations': result[3],
-            'Initial Cost': result[1].item(),
-            'Final Cost': result[4].item()
-        })
+        #for bottom and top of y axis choose the min and max of cost history
+        plt.ylim(bottom=np.min(cost_history_np) + 0.001, top=np.max(cost_history_np) + 0.001)
 
-# Create a DataFrame from the results list
-df_results = pd.DataFrame(results)
+        # Show the plot without blocking program execution
+        plt.show(block=False)
 
-# Print the DataFrame in text file
+        # Save the figure as a PNG file
+        plt.savefig(f'cost_progression_{i}.png')
 
-print(df_results) > results.txt
+        # Append the results to the list
+        for result in results_algorithm:
+            results.append({
+                'Algorithm': algorithm.__name__,
+                'Number of Parameters': i,
+                'Initial Values': result[0].detach().numpy(),
+                'Final Values': result[2].detach().numpy(),
+                'Iterations': result[3],
+                'Initial Cost': result[1].item(),
+                'Final Cost': result[4].item()
+            })
 
-# Append the DataFrame to the results file
-with open('results.csv', 'a') as file:
-    df_results.to_csv(file, header=(file.tell() == 0), index=False)
+    # Create a DataFrame from the results list
+    df_results = pd.DataFrame(results)
 
-# Save the DataFrame as a text file
-df_results.to_csv('results.csv', sep='\t', index=False)
+    # Print the DataFrame in text file
+
+    print(df_results)
+
+    # Append the DataFrame to the results file
+    with open('results2.csv', 'a') as file:
+        df_results.to_csv(file, header=(file.tell() == 0), index=False)
+
+    # Save the DataFrame as a text file
+    df_results.to_csv('results2.csv', sep='\t', index=False)
