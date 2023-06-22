@@ -302,7 +302,7 @@ def stochastic_gradient_descent(x_var, learning_rate, delta, epsilon, threshold,
         if torch.abs(cost_new - cost_old) != cost_difference:
             cost_difference = torch.abs(cost_new - cost_old)
             print("cost difference =", cost_difference)
-        if cost_difference < epsilon or (iterations > num_epochs and cost_difference < threshold):
+        if iterations > num_epochs and cost_difference < epsilon:
             break
         else:
             if cost_difference < threshold and iterations != 0:
@@ -326,14 +326,14 @@ import time
 
 import pandas as pd
 
-num_parameters = [26]# , 26, 28, 30, 34, 36]#, 38, 40,  42, 44, 46]
-iterations = [300, 320, 400, 500, 550, 580, 600]#, 700, 800, 850, 900, 950]
+num_parameters = [26, 28, 30, 34, 36]#, 38, 40,  42, 44, 46]
+iterations = [700, 800, 850, 900, 950] #300, 320, 400, 500, 550, 580,
 #add 50 to each of the above
-iterations = [i + 50 for i in iterations]
+##iterations = [i + 50 for i in iterations]
 
 # Create an empty list to store the results
 results = []
-for algorithm in [gradient_descent_cost_optimizer]:
+for algorithm in [stochastic_gradient_descent]:
     for i, j in zip(num_parameters, iterations):
 
         # Create an empty list to store the results
@@ -347,10 +347,15 @@ for algorithm in [gradient_descent_cost_optimizer]:
         print("x initial is: \n", x_var, "\n")
 
         if algorithm == stochastic_gradient_descent:
-            x, cost, iters, cost_history = stochastic_gradient_descent(x_var, 0.5, 0.05, 0.000000001, 0.000001, 0.1, learning_rate_step_scheduler,j)
-        else:
             learning_rate = 0.05
-            delta = 0.005
+            delta = 0.0005
+            epsilon = 0.1
+            threshold = 0.00001
+            step_size = 0.1
+            x, cost, iters, cost_history = stochastic_gradient_descent(x_var, learning_rate, delta, epsilon, threshold, step_size, learning_rate_step_scheduler,j)
+        else:
+            learning_rate = 0.005
+            delta = 0.0005
             epsilon = 0.00000001
             threshold = 0.0001
             step_size = 0.1
@@ -382,7 +387,9 @@ for algorithm in [gradient_descent_cost_optimizer]:
         plt.title(f'Cost Progression for: {i} Parameters, {algorithm.__name__}')
 
         #for bottom and top of y axis choose the min and max of cost history
-        plt.ylim(bottom=np.min(cost_history_np) + 0.001, top=np.max(cost_history_np) + 0.001)
+        #plt.ylim(bottom=np.min(cost_history_np) + 0.001, top=np.max(cost_history_np) + 0.001)
+
+        plt.ylim(bottom=0.0, top=1)
 
         # Show the plot without blocking program execution
         plt.show(block=False)
@@ -410,8 +417,8 @@ for algorithm in [gradient_descent_cost_optimizer]:
     print(df_results)
 
     # Append the DataFrame to the results file
-    with open('results2.csv', 'a') as file:
+    with open('results30.csv', 'a') as file:
         df_results.to_csv(file, header=(file.tell() == 0), index=False)
 
     # Save the DataFrame as a text file
-    df_results.to_csv('results2.csv', sep='\t', index=False)
+    df_results.to_csv('results30.csv', sep='\t', index=False)
