@@ -1,0 +1,158 @@
+\documentclass[pra,onecolumn,superscriptaddress]{revtex4}%
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{xcolor}
+\usepackage{bm}
+\usepackage{subfigure}
+\usepackage{amsfonts}
+\usepackage{appendix}
+\usepackage{xcolor}%
+\setcounter{MaxMatrixCols}{30}
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\def\e{\varepsilon}
+
+\renewcommand{\Im}{{\rm Im}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\begin{document}
+\preprint{APS/123-QED}
+\title{ Quantum Fourier Transform with a variational circuit }
+\author{...Katerina...Eva}
+\affiliation{Department of Informatics and Telecommunications, National and Kapodistrian
+University of Athens, Panepistimiopolis, Ilisia, 15784, Greece}
+
+
+\begin{abstract}
+ The aim of this project is to achieve quantum compiling for QFT unitary operation
+employing a subset of physical interactions between qubits and a circuit
+of low-depth. 
+
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+
+
+
+\subsection{Quantum circuits}
+
+Quantum circuits are a fundamental concept in quantum computation, similar to classical circuits. They consist of a sequence of quantum gates, measurements, qubit initializations, and other actions that enable quantum computation. $/cite{wikipedia}$ It's important to note that quantum circuits differ from classical circuits as they operate on qubits, which can exist in superpositions of states. This allows for the exploration of multiple possibilities simultaneously, which is a key advantage of quantum computation. 
+
+\subsection{Qubit}
+
+The first thing we need to clarify, is what a qubit is. 
+A qubit, short for quantum bit, is the basic unit of information in quantum computing. It is the quantum version of a classical bit. While classical bits can only have two possible states (0 or 1), qubits can exist in a superposition of both states simultaneously. This means that a qubit can be in a linear combination of the 0 and 1 states. A qubit is a two-level quantum system, with the two basis qubit states usually represented as ∣0⟩ and ∣1⟩. A qubit can be in state ∣0⟩, ∣1⟩, or in a superposition of both states. The superposition property allows a quantum computer to be in multiple states at once, which leads to the exponential growth of possible states as the number of qubits increases.
+(https://www.quantum-inspire.com/kbase/what-is-a-qubit/)
+To understand the concept of a qubit, it's helpful to think about examples from the physical world. A simple analogy, is polarized light. Polarized light can be thought of as a qubit because it can be measured in two ways: vertically polarized or horizontally polarized. However, a single measurement can only give one of these two answers. In contrast, a qubit can be asked many different questions, but each question can only have one of two possible answers.
+(arstechnica.com)
+
+In practice, qubits are realized using various physical systems, such as the spin of an electron or the polarization of a photon. The spin of an electron is a common example of a qubit (en.wikipedia.org ). The two levels of the electron's spin can be taken as spin up and spin down, which correspond to the 0 and 1 states of a qubit. Similarly, the polarization of a single photon can be used to represent the 0 and 1 states of a qubit.
+
+It's important to note that qubits are not limited to two-level systems. Qudits and qutrits are terms used to describe quantum systems with more than two levels. A qudit is a unit of quantum information that can be realized in suitable d-level quantum systems, where d is an integer. 
+(en.wikipedia.org)
+
+The behavior of qubits is governed by the principles of quantum mechanics, such as superposition and entanglement. Superposition allows qubits to exist in multiple states simultaneously, while entanglement enables the correlation of qubits even when they are physically separated. These properties are fundamental to quantum computing and enable the potential for exponential speedup in certain computational tasks compared to classical computers.
+
+(???????)
+To implement qubits in quantum computers, various physical systems and technologies are used. One approach is to use superconducting transmon qubits, which are made from superconducting materials and isolated from external influences(techtarget.com). These qubits are usually operated at extremely low temperatures to minimize disturbances and errors. Other approaches include using trapped ions, photons, or topological qubits.
+
+\subsection{Quantum Gates}
+
+The building blocks of quantum circuits, are the quantum gates. They are operations performed on qubits, such as rotations, flips, and entanglements. Quantum gates can manipulate the quantum state of the qubits, enabling various computations and transformations. Examples include the controlled NOT gate (CNOT gate), Toffoli gate, and Fredkin gate. Quantum logic gates can be derived from classical logic gates, but the Hilbert-space structure of qubits allows for many quantum gates that are not induced by classical gates.
+
+Unlike classical logic gates, quantum gates are reversible. This means that the input state can be recovered from the output state by applying the same gate in reverse. Reversibility is a fundamental property of quantum gates and is a consequence of the unitary nature of quantum operations. Reversibility allows for the efficient simulation of classical computation using quantum circuits.
+
+Quantum gates are described as unitary operators, represented by unitary matrices relative to some basis.(?????) The action of a quantum gate on a qubit can be represented by a matrix multiplication of the gate's unitary matrix with the qubit's state vector. Hermitian gates, such as the Pauli gates, Hadamard gate, CNOT gate, SWAP gate, and Toffoli gate, are examples of gates that are both Hermitian and unitary.
+
+\subsection{Measurements}
+
+Measurement is another important aspect of quantum circuits. Measurements are used to extract information from qubits. They collapse the quantum state of a qubit to one of its basis states, and the measurement result is a classical value that can be used in classical computations. It's important to note that measurement in quantum mechanics is probabilistic, and the outcome of a measurement cannot be predicted with certainty.
+
+????? maybe put it later
+Quantum circuits can be used to synthesize or approximate any unitary transformation by combining the available primitive gates in a circuit. The Solovay-Kitaev theorem states that given a sufficient set of primitive gates, there exists an efficient approximation for any gate. However, for a large number of qubits, direct circuit synthesis becomes intractable.
+
+In summary, quantum circuits can be used to perform computations, simulate classical logic gates, and approximate any unitary transformation. Gates are reversible operations that manipulate the quantum state of qubits, and measurements are used to extract classical information from quantum states.
+
+\section{Quantum Fourier Transform(QFT)}
+
+QFT is an essential operation in quantum computing. To be realized for $n$ qubits this requires 
+$\approx n^2$ gates that is an excellent record --taking into account that a general unitary operation
+is described by $4^n$ real parameters. On the other hand, this includes controlled-phase gates $R_n$
+each of which if to be decomposed into gates from a universal set, requires with the best known
+method up today $\approx 20$ gates and an ancillary qubit. 
+
+In the NIST era the idea of employing fault-tolerant quantum computation has been set aside
+since deep-depth circuits are out of discussion. In this work we investigate the question
+of realizing the QFT operation with a variational circuit of relatively low depth. Instead of
+working with universal set of gates we employ Hamiltonians which can be in principle physically realizable.
+ The initial procedure that we follow for a $3$-qubit is a standard one:
+\begin{itemize}
+	\item We build an ansantz on the structure of the circuit based on the algebraic properties of QFT.
+	\item We define a cost function that measures the distance from the target operation i.e. QFT.
+	\item We optimize the parameters in the circuit with a stochastic gradient descent so that the cost is minimized. 
+\end{itemize}
+At second stage, we minimize as possible the depth of the circuit and we update the cost function to an experimentally accessible one.
+Naturally in order to arrive to useful results we try to generalize working with $4$ and $5$ qubit circuits.
+  
+\section{QFT on $3$-qubits} 
+
+
+In order to build an ansatz we first take the unitary matrix (in the computational basis), $\hat{U}_{QFT}$,
+and we decompose it onto the $64$ generators of $SU(8)$ algebra, i.e. $\hat{g}_{ijk}=\hat{\sigma}_{i} \otimes \hat{\sigma}_{j} \otimes \hat{\sigma}_{k}$,
+as 
+\begin{equation}
+O_{ijk}=Tr\left(\hat{U}_{QFT} \hat{g}_{ijk} \right).
+\end{equation}
+The $\hat{\sigma}_{i}$ with $i=1,2,3$ are the Pauli matrices for a single qubit while $\hat{\sigma}_{4}=\hat{1}$.
+
+We find out (see mathematica file) that only $20$ generators give non-zero overlap $O_{ijk}$.
+
+We commute these $20$ generators and we find out that these together with first, second,.. order commutations form
+a closed subgroup of $32$ elements. Then we search for a minimum set of single-qubit and two-qubit operators able to generate the whole
+subgroup. We identify $11$ of them ($5$ single qubit and $6$ two-qubit Hamiltonians) but possibly this result could be improved.
+
+We build a parametrized circuit with these $N=11$ operators, e.g. $\hat{U}_{ijk}\left(\phi\right)=\left(-I \phi \hat{g}_{ijk}\right)$ and we search to optimize the $11$ angles $\vec{\phi}=\left\{\phi_1,\ldots, \phi_{11}\right\}$ so that the cost function is as low as possible:
+\begin{equation}
+C\left(\hat{U}_c\left(\vec{\phi}\right), \hat{U}_{QFT}\right)=1-\frac{1}{64}\left|Tr\left(\hat{U}_c\left(\vec{\phi}\right)\hat{U}_{QFT}^{\dagger} \right)\right|^2
+\end{equation}
+where $\hat{U}_c\left(\vec{\phi}\right)$ represents the unitary of the variational circuit.
+
+The results of some preliminary tests:
+\begin{itemize}
+	\item $N=11$, minimum $C=0.6$
+	\item $N=22$, minimum $C=0.038$
+	\item $N=29$, minimum $C=0.00005$.
+\end{itemize}
+From these we conclude that for a good approximation the depth cannot be as low as desired.
+On the other hand when I replace the two-qubit operations with random ones (from the set of $64$ generators) the 
+results much deteriorate which exhibits the fact that the ansatz is strong. For instance I get for $N=29$, minimum $C=0.074$.
+
+Much left to be done and to be investigated but at first look there is some promise, having double two-qubit operations
+than the initial circuit but the flexibility to work with physical operations than rigid CNOT gates.
+The essence of the method will be in the scaling.
+
+
+\begin{thebibliography}{99}                                                                                               %
+
+
+
+
+\end{thebibliography}
+
+
+
+\end{document}
