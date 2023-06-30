@@ -354,10 +354,10 @@ for algorithm in [gradient_descent_cost_optimizer]:
             step_size = 0.1
             x, cost, iters, cost_history = stochastic_gradient_descent(x_var, learning_rate, delta, epsilon, threshold, step_size, learning_rate_step_scheduler,j)
         else:
-            learning_rate = 0.005
-            delta = 0.0005
-            epsilon = 0.00000001
-            threshold = 0.0001
+            learning_rate = 0.05
+            delta = 0.005
+            epsilon = 0.000001
+            threshold = 0.001
             step_size = 0.1
             x, cost, iters, cost_history = gradient_descent_cost_optimizer(x_var, learning_rate, delta, epsilon, threshold, step_size, j)
 
