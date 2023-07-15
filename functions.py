@@ -326,10 +326,14 @@ import time
 
 import pandas as pd
 
-num_parameters = [28]#, 38, 40,  42, 44, 46]
+num_parameters = [26]#, 38, 40,  42, 44, 46]
 iterations = [700, 800, 850, 900, 950] #300, 320, 400, 500, 550, 580,
 #add 50 to each of the above
 ##iterations = [i + 50 for i in iterations]
+
+
+counter = 1  # Initialize the counter
+
 
 # Create an empty list to store the results
 results = []
@@ -354,11 +358,11 @@ for algorithm in [gradient_descent_cost_optimizer]:
             step_size = 0.1
             x, cost, iters, cost_history = stochastic_gradient_descent(x_var, learning_rate, delta, epsilon, threshold, step_size, learning_rate_step_scheduler,j)
         else:
-            learning_rate = 0.05
-            delta = 0.005
-            epsilon = 0.000001
-            threshold = 0.001
-            step_size = 0.1
+            learning_rate =  0.05 
+            delta = 0.005 
+            epsilon =  1e-08 
+            threshold =  0.0001 
+            step_size =   0.1 
             x, cost, iters, cost_history = gradient_descent_cost_optimizer(x_var, learning_rate, delta, epsilon, threshold, step_size, j)
 
         results_algorithm.append((x_var, cost_function(x_var), x, iters, cost))
@@ -395,7 +399,12 @@ for algorithm in [gradient_descent_cost_optimizer]:
         plt.show(block=False)
 
         # Save the figure as a PNG file
-        plt.savefig(f'cost_progression_{i}.png')
+
+        filename = f'cost_progression_{i}_{algorithm.__name__}_{counter}.png'
+        plt.savefig(filename)
+
+        # Increment the counter
+        counter += 1
 
         # Append the results to the list
         for result in results_algorithm:
@@ -409,16 +418,25 @@ for algorithm in [gradient_descent_cost_optimizer]:
                 'Final Cost': result[4].item()
             })
 
-    # Create a DataFrame from the results list
-    df_results = pd.DataFrame(results)
 
-    # Print the DataFrame in text file
+    # Open the file in write mode
+    output = f'{i}_{algorithm.__name__}_{counter}.txt'
+    with open(output, 'a') as file:
+        # Iterate over the list and write each element to the file
+        for item in results_algorithm:
+            file.write(item + '\n')  # Add a newline character after each item
 
-    print(df_results)
 
-    # Append the DataFrame to the results file
-    with open('results30.csv', 'a') as file:
-        df_results.to_csv(file, header=(file.tell() == 0), index=False)
+    # # Create a DataFrame from the results list
+    # df_results = pd.DataFrame(results)
 
-    # Save the DataFrame as a text file
-    df_results.to_csv('results30.csv', sep='\t', index=False)
+    # # Print the DataFrame in text file
+
+    # print(df_results)
+
+    # # Append the DataFrame to the results file
+    # with open('results30.csv', 'a') as file:
+    #     df_results.to_csv(file, header=(file.tell() == 0), index=False)
+
+    # # Save the DataFrame as a text file
+    # df_results.to_csv('results30.csv', sep='\t', index=False)
