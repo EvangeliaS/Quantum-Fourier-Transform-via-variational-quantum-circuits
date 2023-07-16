@@ -326,7 +326,7 @@ import time
 
 import pandas as pd
 
-num_parameters = [26]#, 38, 40,  42, 44, 46]
+num_parameters = [28]#, 38, 40,  42, 44, 46]
 iterations = [700, 800, 850, 900, 950] #300, 320, 400, 500, 550, 580,
 #add 50 to each of the above
 ##iterations = [i + 50 for i in iterations]
@@ -424,7 +424,7 @@ for algorithm in [gradient_descent_cost_optimizer]:
     with open(output, 'a') as file:
         # Iterate over the list and write each element to the file
         for item in results_algorithm:
-            file.write(item + '\n')  # Add a newline character after each item
+            file.write(str(item) + '\n')  # Add a newline character after each item
 
 
     # # Create a DataFrame from the results list

@@ -144,7 +144,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Required Metadata %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+\usepackage{amsmath}
 \begin{document}
 
 \frontmatter
@@ -165,7 +165,7 @@ which is suitable for the current experimental status and which is still promisi
 These algorithms,  the so called variational quantum algortihms (VQAs) are hybrid requiring low-depth variational  quantum circuits (VQCs) but also a classical optimization loop. VQAs are addressing different problems, using different ansatzs, but their underlined structure
 is the same, resembling the one of a classical neural network where the weights/parameters are trained via a gradient descent method. 
 
-In this work, inspired from the work ``Quantum Assisted Quantum Compiling'' we aim to train of a VQC to simulate approximately 
+In this work, inspired from the work ''Quantum Assisted Quantum Compiling'' we aim to train of a VQC to simulate approximately 
 the effect of a circuit implementing Quantum Fourier Transform (QFT). We first build an ansatz in order to avoid to work with VQC of random structure and to  reduce the depth. Then we show that with this ansatz a relatively low-depth circuit is able to approximate the QFT on three qubits. This result if it is extensible to a higher number of qubits can be of importance, since QFT is the basic block for Shor's quantum algorithm which threatens security of RSA cryptographic scheme.
 We also study another important aspect for this method and of VQA algorithms in general, that is the appropriate choice
 of the classical optimization algorithm. We see that for the case under study a gradient descent method performs better
@@ -178,7 +178,6 @@ VQCs and VQAs is provided, while finally in chapters we present our results.
 
 \chapter{BACKGROUND AND RELATED WORK}
 
-
 \chapter{THE BASIC ELEMENTS OF QUANTUM CIRCUITS}
 
 Quantum circuits are a fundamental concept in quantum computation, similar to classical circuits. They consist of a sequence of quantum gates, measurements, qubit initializations, and other actions that enable quantum computation. \cite{niel}. It's important to note that quantum circuits differ from classical circuits as they operate on qubits, which can exist in superpositions of states. This allows for the exploration of multiple possibilities simultaneously, which is a key advantage of quantum computation. 
@@ -186,15 +185,33 @@ Quantum circuits are a fundamental concept in quantum computation, similar to cl
 \section{Qubit}
 
 The first thing we need to define, is the basic quantum computational unit, the qubit that is the the short for quantum bit. 
- While classical bits can only have two possible states (0 or 1), qubits can exist in a superposition of both states simultaneously. This means that a qubit can be in a linear combination of the 0 and 1 states. A qubit is a two-level quantum system, with the two basis qubit states usually represented as ∣0⟩ and ∣1⟩. A qubit can be in state ∣0⟩, ∣1⟩, or in a superposition of both states. The superposition property allows a quantum computer to be in multiple states at once, which leads to the exponential growth of possible states as the number of qubits increases.
-(https://www.quantum-inspire.com/kbase/what-is-a-qubit/)
-To understand the concept of a qubit, it's helpful to think about examples from the physical world. A simple analogy, is polarized light. Polarized light can be thought of as a qubit because it can be measured in two ways: vertically polarized or horizontally polarized. However, a single measurement can only give one of these two answers. In contrast, a qubit can be asked many different questions, but each question can only have one of two possible answers.
-(arstechnica.com)
+ While classical bits can only have two possible states (0 or 1), qubits can exist in a superposition of both states simultaneously. This means that a qubit can be in a linear combination of the 0 and 1 states. A qubit is a two-level quantum system, with the two basis qubit states usually represented as $\vert0\rangle$ and $\vert1\rangle$. A qubit can be in state $\vert0\rangle$, $\vert1\rangle$, or in a superposition of both states. The superposition property allows a quantum computer to be in multiple states at once, which leads to the exponential growth of possible states as the number of qubits increases.\cite{qubit}
+ 
+ \\Qubit states can also be represented as vectors
+ \begin{center}
+ \Large
+ $\vert0\rangle = 
+    \begin{bmatrix}
+    1 \\
+    0 \\
+    \end{bmatrix}$
+\end{center}
+\normalsize
+and \\
+\begin{center}
+\Large
+$\vert1\rangle = 
+\begin{bmatrix}
+0 \\
+1 \\
+\end{bmatrix}$
+\end{center}
+\normalsize
+To understand the concept of a qubit, it's helpful to think about examples from the physical world. A simple analogy, is polarized light. Polarized light can be thought of as a qubit because it can be measured in two ways: vertically polarized or horizontally polarized. However, a single measurement can only give one of these two answers. In contrast, a qubit can be asked many different questions, but each question can only have one of two possible answers\cite{polarized}.
 
-In practice, qubits are realized using various physical systems, such as the spin of an electron or the polarization of a photon. The spin of an electron is a common example of a qubit (en.wikipedia.org ). The two levels of the electron's spin can be taken as spin up and spin down, which correspond to the 0 and 1 states of a qubit. Similarly, the polarization of a single photon can be used to represent the 0 and 1 states of a qubit.
+In practice, qubits are realized using various physical systems, such as the spin of an electron or the polarization of a photon. The spin of an electron is a common example of a qubit. The two levels of the electron's spin can be taken as spin up and spin down, which correspond to the 0 and 1 states of a qubit \cite{electron}. Similarly, the polarization of a single photon can be used to represent the 0 and 1 states of a qubit.
 
-It's important to note that qubits are not limited to two-level systems. Qudits and qutrits are terms used to describe quantum systems with more than two levels. A qudit is a unit of quantum information that can be realized in suitable d-level quantum systems, where d is an integer. 
-(en.wikipedia.org)
+It's important to note that qubits are not limited to two-level systems. Qudits and qutrits are terms used to describe quantum systems with more than two levels. A qudit is a unit of quantum information that can be realized in suitable d-level quantum systems, where d is an integer \cite{qudit}.
 
 The behavior of qubits is governed by the principles of quantum mechanics, such as superposition and entanglement. Superposition allows qubits to exist in multiple states simultaneously, while entanglement enables the correlation of qubits even when they are physically separated. These properties are fundamental to quantum computing and enable the potential for exponential speedup in certain computational tasks compared to classical computers.
 
@@ -202,27 +219,191 @@ To implement qubits in quantum computers, various physical systems and technolog
 
 \section{Quantum Gates}
 
-The building blocks of quantum circuits, are the quantum gates. They are operations performed on qubits, such as rotations, flips, and entanglements. Quantum gates can manipulate the quantum state of the qubits, enabling various computations and transformations. Examples include the controlled NOT gate (CNOT gate), Toffoli gate, and Fredkin gate. Quantum logic gates can be derived from classical logic gates, but the Hilbert-space structure of qubits allows for many quantum gates that are not induced by classical gates.
+The building blocks of quantum circuits, are the quantum gates. They are operations performed on qubits, such as rotations, flips, and entanglements. Quantum gates can manipulate the quantum state of the qubits, enabling various computations and transformations. Quantum logic gates can be derived from classical logic gates, but the Hilbert-space structure of qubits allows for many quantum gates that are not induced by classical gates.
+
+Quantum gates are described as unitary operators, represented by unitary matrices relative to some basis. The action of a quantum gate on a qubit can be represented by a matrix multiplication of the gate's unitary matrix with the qubit's state vector. Hermitian gates, such as the Pauli gates, Hadamard gate, CNOT gate, SWAP gate, and Toffoli gate, are examples of gates that are both Hermitian and unitary.
+
+The representation of Pauli gates as matrices is the following.\cite{nielgates}
+\begin{itemize}
+    \item Pauli-X gate (NOT gate):
+    \begin{center}
+    \Large
+        $X = \sigma_x = \sigma_1 = $
+        \begin{bmatrix}
+            0 & 1 \\
+            1 & 0 \\
+        \end{bmatrix}
+    \end{center}
+    \normalsize
+    \item Pauli-Y gate:
+    \begin{center}
+    \Large
+        $Y = \sigma_y = \sigma_2 = $
+        \begin{bmatrix}
+            0 & -i \\
+            i & 0 \\
+        \end{bmatrix}
+    \end{center}
+    \normalsize
+    \item Pauli-Z gate:
+    \begin{center}
+    \Large
+        $Z = \sigma_z = \sigma_3 = $
+        \begin{bmatrix}
+            1 & 0 \\
+            0 & -1 \\
+        \end{bmatrix}
+    \end{center}
+    \normalsize
+    \item Pauli-I gate (identity gate):
+    \begin{center}
+    \Large
+        $I =  \sigma_4 = $
+        \begin{bmatrix}
+            1 & 0 \\
+            0 & 1 \\
+        \end{bmatrix}
+    \end{center}
+    \item Hadamard gate:
+    \begin{center}
+    \Large
+        $H = \frac{1}{\sqrt{2}}\begin{bmatrix}
+            1 & 1 \\
+            1 & -1 \\
+            \end{bmatrix}$
+    \end{center}
+    
+\end{itemize}
+We will be mentioning these gates very much as we move on in this project.
+Lets see an example of the X-gate matrix applied to a qubit in state $|0\rangle$:
+\Large
+\begin{center}
+$X|0\rangle = \begin{bmatrix}
+0 & 1 \\
+1 & 0 \\
+\end{bmatrix}
+\begin{bmatrix}
+1 \\
+0 \\
+\end{bmatrix} = 
+\begin{bmatrix}
+0 \\
+1 \\
+\end{bmatrix} = |1\rangle$
+
+\end{center}
+\normalsize
 
 Unlike classical logic gates, quantum gates are reversible. This means that the input state can be recovered from the output state by applying the same gate in reverse. Reversibility is a fundamental property of quantum gates and is a consequence of the unitary nature of quantum operations. Reversibility allows for the efficient simulation of classical computation using quantum circuits.
 
-Quantum gates are described as unitary operators, represented by unitary matrices relative to some basis. The action of a quantum gate on a qubit can be represented by a matrix multiplication of the gate's unitary matrix with the qubit's state vector. Hermitian gates, such as the Pauli gates, Hadamard gate, CNOT gate, SWAP gate, and Toffoli gate, are examples of gates that are both Hermitian and unitary.
+To prove it, we will apply the X-gate on the previous result.
+
+\Large
+\begin{center}
+$X|1\rangle = \begin{bmatrix}
+0 & 1 \\
+1 & 0 \\
+\end{bmatrix}
+\begin{bmatrix}
+0 \\
+1 \\
+\end{bmatrix} = 
+\begin{bmatrix}
+1 \\
+0 \\
+\end{bmatrix} = |0\rangle$
+
+\end{center}
+\normalsize
 
 \subsection{Single Qubit Gates and 2-Qubit Gates}
 
 In the field of quantum computing, single qubit gates and 2-qubit gates play a crucial role in manipulating and transforming the quantum states of qubits. These gates are used to perform operations on individual qubits and multiple qubits, respectively.
 
-Starting with single qubit gates, they act on individual qubits and can be used to change their state or perform specific operations. Some commonly used single qubit gates include the Pauli-X gate (bit-flip), Pauli-Y gate (bit and phase flip), Pauli-Z gate (phase flip), Hadamard gate (superposition), and the identity gate. Each of these gates is represented by a unitary matrix and operates on the state vector of a single qubit. Single qubit gates can be physically realized using techniques such as laser pulses or microwave pulses to manipulate the state of individual qubits.
+Starting with single qubit gates, they act on individual qubits and can be used to change their state or perform specific operations. Some commonly used single qubit gates, are the ones we mentioned before, the Pauli-X gate (bit-flip), Pauli-Y gate (bit and phase flip), Pauli-Z gate (phase flip), Hadamard gate (superposition), and the identity gate. Each of these gates is represented by a unitary matrix and operates on the state vector of a single qubit. We showed their application above. Single qubit gates can be physically realized using techniques such as laser pulses or microwave pulses to manipulate the state of individual qubits\cite{microwave}.
 
-Moving on to 2-qubit gates, they act on two qubits simultaneously and allow for interactions between them. The controlled-NOT (CNOT) gate is a commonly used 2-qubit gate. It performs a controlled operation where the second qubit (target qubit) is flipped if and only if the first qubit (control qubit) is in the state |1⟩. The CNOT gate is represented by a unitary matrix and operates on the state vector of two qubits. Another example of a 2-qubit gate is the Toffoli gate, which is a reversible gate that performs a NOT operation on the target qubit if both control qubits are in the state |1⟩. Similar to single qubit gates, 2-qubit gates can be physically implemented using techniques such as entanglement and controlled interactions between qubits.
+Moving on to 2-qubit gates, they act on two qubits simultaneously and allow for interactions between them. The controlled-NOT (CNOT) gate is a commonly used 2-qubit gate. It performs a controlled operation where the second qubit (target qubit) is flipped if and only if the first qubit (control qubit) is in the state $|1\rangle$.
+    \begin{center}
+    \Large
+    $CNOT = 
+        \begin{bmatrix}
+            1 & 0 & 0 & 0 \\
+            0 & 1 & 0 & 0 \\
+            0 & 0 & 0 & 1 \\
+            0 & 0 & 1 & 0 \\
+        \end{bmatrix}$
+    \end{center}
+\normalsize
 
-It is worth noting that not all 2-qubit gates can be expressed as the tensor product of two single qubit gates. Some 2-qubit gates, known as entangling gates, cannot be decomposed into single qubit gates. The CNOT gate is an example of an entangling gate. These gates are important for creating entanglement between qubits and enabling complex quantum computations.
+\begin{center}
+\Large
+$CNOT(|0\rangle\otimes|0\rangle) &=\begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{bmatrix} \begin{bmatrix} 1 \\ 0 \\ 0 \\ 0 \end{bmatrix}
+&= \begin{bmatrix} 1 \\ 0 \\ 0 \\ 0 \end{bmatrix} = |00\rangle$
+\end{center}
+\normalsize
+Lets apply the CNOT gate on \Large $|10\rangle$: \\
+\begin{center}
+\Large
+$CNOT(|1\rangle\otimes|0\rangle)) = \begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0 \\
+\end{bmatrix}
+\begin{bmatrix}
+0 \\
+0 \\
+1 \\
+0 \\
+\end{bmatrix}
+= \begin{bmatrix}
+0 \\
+0 \\
+0 \\
+1 \\
+\end{bmatrix}
+= |11\rangle$
+\end{center}
+\normalsize
+As we can see, now that the control qubit is $|1\rangle$ the target qubit becomes from $|0\rangle$, $|1\rangle$.
+\\
+Another example of a 2-qubit gate is the Toffoli gate, which is a reversible gate that performs a NOT operation on the target qubit if both control qubits are in the state $|1\rangle$. Similar to single qubit gates, 2-qubit gates can be physically implemented using techniques such as entanglement and controlled interactions between qubits.
+\begin{itemize}
+\item Toffoli gate:
+    \begin{center}
+    \Large
+    \begin{bmatrix}
+        1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+    \end{bmatrix}
+    \normalsize
+    \end{center}
+    \item Fredkin gate(controlled-swap):
+    \begin{center}
+    \Large
+    \begin{bmatrix}
+        1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+    \end{bmatrix}
+\normalsize
+\end{center}
+\end{itemize}
 
 In the context of quantum computing, gates can be combined in series or in parallel to create more complex operations and circuits. Series combinations of gates involve applying one gate after another, while parallel combinations involve applying gates simultaneously to different qubits. The order of gates in a circuit diagram is reversed when multiplying them together mathematically.
 
-To achieve universality in quantum computing, a gate set is considered universal if any 4x4 unitary matrix can be approximated by a product of gates from that set. For example, a universal gate set may consist of the Hadamard gate, the T gate, and the CNOT gate. By combining these gates, any unitary matrix on two qubits can be approximated.
-
-In summary, single qubit gates and 2 qubit gates are fundamental components in quantum computing. They are used to manipulate and transform the quantum states of qubits, enabling the implementation of various quantum algorithms and protocols. Single qubit gates act on individual qubits, while 2 qubit gates allow for interactions between pairs of qubits. These gates can be combined to create more complex operations and circuits. Understanding the properties and capabilities of these gates is essential for designing and programming quantum circuits.
+To sum it up, single qubit gates and 2 qubit gates are fundamental components in quantum computing. They are used to manipulate and transform the quantum states of qubits, enabling the implementation of various quantum algorithms and protocols. Single qubit gates act on individual qubits, while 2 qubit gates allow for interactions between pairs of qubits. These gates can be combined to create more complex operations and circuits, as we will 
 
 \section{Measurements}
 
@@ -261,7 +442,7 @@ It's important to mention, that the QFT is closely related to the quantum Hadama
 
 \section{Variational Quantum Circuits (VQCs)}
 
-Variational quantum circuits are a type of quantum circuit that are used in various applications, such as supervised learning, reinforcement learning, and functional regression. They are designed to harness the potential advantages of quantum computing for solving complex problems. Variational quantum circuits involve the use of parameterized gates and measurements to encode and manipulate quantum information.
+Variational quantum circuits, also known as "parametrized quantum circuits" or "adaptable quantum circuits", are a type of quantum circuit that are used in various applications, such as supervised learning, reinforcement learning, and functional regression. They are designed to harness the potential advantages of quantum computing for solving complex problems. Variational quantum circuits involve the use of parameterized gates and measurements to encode and manipulate quantum information.
 
 One of the main motivations behind using variational quantum circuits is to take advantage of the expressive power of quantum computing to solve problems that are difficult for classical computers. These circuits are designed to be trainable, meaning that the parameters of the gates can be adjusted to optimize the circuit's performance for a specific task. The optimization process typically involves finding the set of parameters that minimizes a cost or loss function, which is defined based on the specific problem being solved.
 
@@ -402,12 +583,17 @@ I also implemented gradient descent, as well as stochastic gradient descent by h
 \bibliographystyle{plain}
 \bibliography{references}
 
-
 \begin{thebibliography}{99}                                                                     
-\bibitem{niel}Nielsen, M. \& Chuang, I. Quantum computation and quantum information. {\em Phys. Today}. \textbf{54}, 60 (2001)
+\bibitem{niel}Nielsen, M. \& Chuang, I. Quantum computation and quantum information. (Cambridge university press,2010)
+\bibitem{qubit}https://www.quantum-inspire.com/kbase/what-is-a-qubit/
+\bibitem{polarized}https://arstechnica.com/science/2010/01/a-tale-of-two-qubits-how-quantum-computers-work/
+\bibitem{nielgates}Nielsen, M. \& Chuang, I. Quantum computation and quantum information. (Cambridge university press,2010)
+\bibitem{electron}https://www.techtarget.com/whatis/definition/qubit
+\bibitem{qudit}Wang, Y., Hu, Z., Sanders, B. \& Kais, S. Qudits and high-dimensional quantum computing. {\em Frontiers In Physics}. \textbf{8} pp. 589504 (2020)
+\bibitem{microwave}Gaebler, J., Tan, T., Lin, Y., Wan, Y., Bowler, R., Keith, A., Glancy, S., Coakley, K., Knill, E., Leibfried, D. \& Others High-fidelity universal gate set for be 9+ ion qubits. {\em Physical Review Letters}. \textbf{117}, 060505 (2016)
+
 
 \end{thebibliography}
-
 
 
 \end{document}
