@@ -97,7 +97,7 @@
     range of possible applications for these promising structures. In this thesis, we develop the idea of tuning  a variational quantum circuit
     to simulate the important for quantum computing, operation of Quantum Fourier Transform.
     I use algebraic arguments, so called an ansatz, for reducing the depth of the variational quantum circuit 
-    and I use different classical algorithms to optimize the parameters. The results of this thesis concerning $3$-qubit circuits can be possibly extended to 
+    and I use different classical algorithms to optimize the parameters. The results of this thesis concerning 3-qubit circuits can be possibly extended to 
     a higher number of qubits.
 }
 \abstractGr{
@@ -187,7 +187,7 @@ Quantum circuits are a fundamental concept in quantum computation, similar to cl
 The first thing we need to define, is the basic quantum computational unit, the qubit that is the the short for quantum bit. 
  While classical bits can only have two possible states (0 or 1), qubits can exist in a superposition of both states simultaneously. This means that a qubit can be in a linear combination of the 0 and 1 states. A qubit is a two-level quantum system, with the two basis qubit states usually represented as $\vert0\rangle$ and $\vert1\rangle$. A qubit can be in state $\vert0\rangle$, $\vert1\rangle$, or in a superposition of both states. The superposition property allows a quantum computer to be in multiple states at once, which leads to the exponential growth of possible states as the number of qubits increases.\cite{qubit}
  
- \\Qubit states can also be represented as vectors
+ Qubit states can also be represented as vectors
  \begin{center}
  \Large
  $\vert0\rangle = 
@@ -228,41 +228,41 @@ The representation of Pauli gates as matrices is the following.\cite{nielgates}
     \item Pauli-X gate (NOT gate):
     \begin{center}
     \Large
-        $X = \sigma_x = \sigma_1 = $
+        $X = \sigma_x = \sigma_1 = 
         \begin{bmatrix}
             0 & 1 \\
             1 & 0 \\
-        \end{bmatrix}
+        \end{bmatrix}$
     \end{center}
     \normalsize
     \item Pauli-Y gate:
     \begin{center}
     \Large
-        $Y = \sigma_y = \sigma_2 = $
+        $Y = \sigma_y = \sigma_2 = 
         \begin{bmatrix}
             0 & -i \\
             i & 0 \\
-        \end{bmatrix}
+        \end{bmatrix}$
     \end{center}
     \normalsize
     \item Pauli-Z gate:
     \begin{center}
     \Large
-        $Z = \sigma_z = \sigma_3 = $
+        $Z = \sigma_z = \sigma_3 = 
         \begin{bmatrix}
             1 & 0 \\
             0 & -1 \\
-        \end{bmatrix}
+        \end{bmatrix}$
     \end{center}
     \normalsize
     \item Pauli-I gate (identity gate):
     \begin{center}
     \Large
-        $I =  \sigma_4 = $
+        $I =  \sigma_4 = 
         \begin{bmatrix}
             1 & 0 \\
             0 & 1 \\
-        \end{bmatrix}
+        \end{bmatrix}$
     \end{center}
     \item Hadamard gate:
     \begin{center}
@@ -274,8 +274,8 @@ The representation of Pauli gates as matrices is the following.\cite{nielgates}
     \end{center}
     
 \end{itemize}
-We will be mentioning these gates very much as we move on in this project.
-Lets see an example of the X-gate matrix applied to a qubit in state $|0\rangle$:
+We will be mentioning these gates a lot as we move on in this project.
+Lets study an example of the X-gate matrix applied to a qubit in state $|0\rangle$:
 \Large
 \begin{center}
 $X|0\rangle = \begin{bmatrix}
@@ -296,7 +296,7 @@ $X|0\rangle = \begin{bmatrix}
 
 Unlike classical logic gates, quantum gates are reversible. This means that the input state can be recovered from the output state by applying the same gate in reverse. Reversibility is a fundamental property of quantum gates and is a consequence of the unitary nature of quantum operations. Reversibility allows for the efficient simulation of classical computation using quantum circuits.
 
-To prove it, we will apply the X-gate on the previous result.
+To prove it, we will apply the X-gate on the previous result, and we will notice that the initial input is the new result.
 
 \Large
 \begin{center}
@@ -316,12 +316,13 @@ $X|1\rangle = \begin{bmatrix}
 \end{center}
 \normalsize
 
-\subsection{Single Qubit Gates and 2-Qubit Gates}
+\subsection{Single Qubit Gates}
 
 In the field of quantum computing, single qubit gates and 2-qubit gates play a crucial role in manipulating and transforming the quantum states of qubits. These gates are used to perform operations on individual qubits and multiple qubits, respectively.
 
 Starting with single qubit gates, they act on individual qubits and can be used to change their state or perform specific operations. Some commonly used single qubit gates, are the ones we mentioned before, the Pauli-X gate (bit-flip), Pauli-Y gate (bit and phase flip), Pauli-Z gate (phase flip), Hadamard gate (superposition), and the identity gate. Each of these gates is represented by a unitary matrix and operates on the state vector of a single qubit. We showed their application above. Single qubit gates can be physically realized using techniques such as laser pulses or microwave pulses to manipulate the state of individual qubits\cite{microwave}.
 
+\subsection{2-Qubit Gates}
 Moving on to 2-qubit gates, they act on two qubits simultaneously and allow for interactions between them. The controlled-NOT (CNOT) gate is a commonly used 2-qubit gate. It performs a controlled operation where the second qubit (target qubit) is flipped if and only if the first qubit (control qubit) is in the state $|1\rangle$.
     \begin{center}
     \Large
@@ -403,40 +404,97 @@ Another example of a 2-qubit gate is the Toffoli gate, which is a reversible gat
 
 In the context of quantum computing, gates can be combined in series or in parallel to create more complex operations and circuits. Series combinations of gates involve applying one gate after another, while parallel combinations involve applying gates simultaneously to different qubits. The order of gates in a circuit diagram is reversed when multiplying them together mathematically.
 
-To sum it up, single qubit gates and 2 qubit gates are fundamental components in quantum computing. They are used to manipulate and transform the quantum states of qubits, enabling the implementation of various quantum algorithms and protocols. Single qubit gates act on individual qubits, while 2 qubit gates allow for interactions between pairs of qubits. These gates can be combined to create more complex operations and circuits, as we will 
+To sum it up, single qubit gates and 2 qubit gates are fundamental components in quantum computing. They are used to manipulate and transform the quantum states of qubits, enabling the implementation of various quantum algorithms and protocols. Single qubit gates act on individual qubits, while 2 qubit gates allow for interactions between pairs of qubits. These gates can be combined to create more complex operations and circuits, as we will see later. 
 
 \section{Measurements}
 
 Measurement is another important aspect of quantum circuits. Measurements are used to extract information from qubits. They collapse the quantum state of a qubit to one of its basis states, and the measurement result is a classical value that can be used in classical computations. It's important to note that measurement in quantum mechanics is probabilistic, and the outcome of a measurement cannot be predicted with certainty.
 
-Quantum circuits can be used to synthesize or approximate any unitary transformation by combining the available primitive gates in a circuit. The Solovay-Kitaev theorem states that given a sufficient set of primitive gates, there exists an efficient approximation for any gate. However, for a large number of qubits, direct circuit synthesis becomes intractable.
-
-They can also be used to perform computations, simulate classical logic gates, and approximate any unitary transformation. Gates are reversible operations that manipulate the quantum state of qubits, and measurements are used to extract classical information from quantum states.
-
-
 \section{Quantum circuits}
 
-Here give an example of a circuit and explain it..
+Now using a combination of the gates mentioned before, we will create a circuit. Specifically, we will provide the a circuit, that entangles 3 qubits. As we can see, the circuit is composed of a Hadamard gate($H$), followed by two $CNOT$ gates, and lastly the measurements of the 3 qubits. \cite{ibm}
+\begin{figure}[ht]
+    \includegraphics[width=1\textwidth]{ghz.png}
+    \caption{GHZ states circuit}
+    \label{fig:enter-label}
+\end{figure}
+
+GHZ states are named after Greenberger, Horne, and Zeilinger, who were the first to study them in 1989. GHZ states are also known as “Schrödinger cat states” or just “cat states.” \cite{ghz_ibm}
 
 \chapter{QUANTUM FOURIER TRANSFORM (QFT)}
 
-The Quantum Fourier Transform (QFT) is a crucial component of various quantum algorithms, including Shor's algorithm for factoring and the quantum phase estimation algorithm. It is the quantum analogue of the classical discrete Fourier transform (DFT).
+One of the most useful ways of solving a problem in mathematics or computer science is to transform it into some other problem for which a solution is known.  A great discovery of quantum computation has been that some such transformations can be computed much faster on a quantum computer than on a classical computer, a discovery which has enabled the construction of fast algorithms for quantum computers.
 
-The QFT is a reversible transformation that operates on quantum bits (qubits) and is used to convert a quantum state from the computational basis to the Fourier basis . It is implemented using a series of unitary gates, such as the Hadamard gate and the controlled phase shift gate . The QFT is particularly powerful when combined with other algorithms, as it can be used to measure the period of a function, which is essential for cracking the RSA algorithm.
+The Quantum Fourier Transform is a reversible transformation that operates on quantum bits (qubits) and is used to convert a quantum state from the computational basis to the Fourier basis. It is implemented using a series of unitary gates, such as the Hadamard gate and the controlled phase shift gate [1]. The QFT is particularly powerful when combined with other algorithms, as it can be used to measure the period of a function, which is essential for cracking the RSA algorithm.
 
-To understand the QFT, it is helpful to first understand the classical Fourier transform. The classical Fourier transform is a mathematical technique that decomposes a function into its constituent frequencies. It takes a function defined in the time domain and converts it into its frequency representation. The Fourier transform is reversible, meaning that the original function can be reconstructed from its frequency representation [7].
 
-In quantum mechanics, the QFT is used to convert a quantum state from the position basis to the momentum basis, or vice versa. In this context, the QFT acts as a bridge between position and momentum space. The QFT can be expressed as a unitary matrix (or quantum gate) that operates on quantum state vectors. The unitary property of the QFT ensures that it is reversible, and its inverse can be efficiently performed on a quantum computer.
-
-The QFT can be implemented efficiently on a quantum computer using a decomposition into simpler unitary matrices [1]. The number of gates required to implement the QFT scales quadratically with the number of qubits, which is in contrast to the classical DFT that requires an exponential number of gates . This exponential speedup is one of the advantages of using the QFT in quantum algorithms.
-
-In summary, the Quantum Fourier Transform is a reversible transformation that operates on qubits and is used to convert a quantum state from the computational basis to the Fourier basis. It is implemented using a series of unitary gates and is a crucial component of many quantum algorithms. The QFT has applications in factoring, computing the discrete logarithm, estimating eigenvalues, and solving the hidden subgroup problem. It offers an exponential speedup compared to classical Fourier transforms and can be efficiently implemented on a quantum computer.
 
 \section{QFT on 3 qubits}
 
 In terms of the circuit implementation, the QFT with 3 qubits differs from the QFT with 2 qubits in the number of gates used. The QFT with 3 qubits requires 6 gates, while the QFT with 2 qubits requires 3 gates. This means that the circuit for the QFT with 3 qubits is more complex and requires more operations compared to the circuit for the QFT with 2 qubits.
 
-It's important to mention, that the QFT is closely related to the quantum Hadamard transform. There are two natural ways to define a quantum Fourier transform on an n-qubit quantum register. The QFT as defined above is equivalent to the discrete Fourier transform, which considers the qubits as indexed by the cyclic group $Z/2^nZ$. However, it also makes sense to consider the qubits as indexed by the Boolean group $(Z/2Z)^n$, and in this case, the Fourier transform is the Hadamard transform. The Hadamard transform is achieved by applying a Hadamard gate to each of the n qubits in parallel.
+\begin{figure}[ht]
+\begin{center}
+    \includegraphics[width=0.75\textwidth]{qft.png}
+    \caption{Quantum Fourier Transform Circuit} 
+    \label{fig:enter-label}
+    \end{center}
+\end{figure}
+\\Recall that $S$ and $T$ are the phase and π/8 gates, and $H$ is the Hadamard gate we mentioned at the beginning.\cite{niel}
+
+\begin{itemize}
+    \item S gate(phase gate):
+    \begin{center}
+    \Large
+        \begin{bmatrix}
+            1 & 0 \\
+            0 & i
+        \end{bmatrix}
+    \end{center}
+    \normalsize
+    \item T gate(π/8 gate):
+    \begin{center}
+    \Large
+    \begin{bmatrix}
+    \Large
+    1 & 0 \\
+    0 & e^{i\pi/4}
+    \end{bmatrix}
+    \end{center}
+\end{itemize}
+\normalsize
+
+As a matrix the quantum Fourier transform in this instance may be written out explicitly, using the following  \Large$\omega= e^{\frac{2\pi i}{8}} = \sqrt{i}$ \normalsize \cite{niel}
+
+\Large
+
+\[
+\frac{1}{\sqrt{8}}
+\begin{bmatrix}
+1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+1 & \omega & \omega^2 & \omega^3 & \omega^4 & \omega^5 & \omega^6 & \omega^7 \\
+1 & \omega^2 & \omega^4 & \omega^6 & 1 & \omega^2 & \omega^4 & \omega^6 \\
+1 & \omega^3 & \omega^6 & \omega^1 & \omega^4 & \omega^7 & \omega^2 & \omega^5 \\
+1 & \omega^4 & 1 & \omega^4 & 1 & \omega^4 & 1 & \omega^4 \\
+1 & \omega^5 & \omega^2 & \omega^7 & \omega^4 & \omega^1 & \omega^6 & \omega^3 \\
+1 & \omega^6 & \omega^4 & \omega^2 & 1 & \omega^6 & \omega^4 & \omega^2 \\
+1 & \omega^7 & \omega^6 & \omega^5 & \omega^4 & \omega^3 & \omega^2 & \omega^1 \\
+\end{bmatrix}
+\]
+$=$\[
+\frac{1}{\sqrt{8}} \begin{bmatrix}
+1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+1 & e^{i\frac{\pi}{4}} & e^{i\frac{\pi}{2}} & e^{i\frac{3\pi}{4}} & e^{i\pi} & e^{i\frac{5\pi}{4}} & e^{i\frac{3\pi}{2}} & e^{i\frac{7\pi}{4}} \\
+1 & e^{i\frac{\pi}{2}} & e^{i\pi} & e^{i\frac{3\pi}{2}} & 1 & e^{i\frac{\pi}{2}} & e^{i\pi} & e^{i\frac{3\pi}{2}} \\
+1 & e^{i\frac{3\pi}{4}} & e^{i\frac{3\pi}{2}} & e^{i\frac{9\pi}{4}} & e^{i\pi} & e^{i\frac{5\pi}{4}} & e^{i\frac{7\pi}{2}} & e^{i\frac{15\pi}{4}} \\
+1 & e^{i\pi} & 1 & e^{i\pi} & 1 & e^{i\pi} & 1 & e^{i\pi} \\
+1 & e^{i\frac{5\pi}{4}} & e^{i\frac{\pi}{2}} & e^{i\frac{7\pi}{4}} & e^{i\pi} & e^{i\frac{\pi}{4}} & e^{i\frac{\pi}{2}} & e^{i\frac{3\pi}{4}} \\
+1 & e^{i\frac{3\pi}{2}} & e^{i\pi} & e^{i\frac{7\pi}{2}} & 1 & e^{i\frac{\pi}{2}} & e^{i\pi} & e^{i\frac{3\pi}{2}} \\
+1 & e^{i\frac{7\pi}{4}} & e^{i\frac{3\pi}{2}} & e^{i\frac{15\pi}{4}} & e^{i\pi} & e^{i\frac{3\pi}{4}} & e^{i\frac{7\pi}{2}} & e^{i\frac{15\pi}{4}}
+\end{bmatrix}
+\]
+\normalsize 
+\\This representation of the Quantum Fourier Tranform, is going to be very useful to us, when we get to the code implementation.
 
 \chapter{VARIATIONAL QUANTUM CIRCUITS (VQCs) AND ALGORITHMS}
 
@@ -549,8 +607,6 @@ The choice of which variation of gradient descent to use depends on the specific
 
 In summary, gradient descent is an iterative optimization algorithm used in machine learning to minimize the cost or loss function. It updates the parameters of a model by taking steps in the opposite direction of the gradient of the cost function. Different variations of gradient descent, such as batch gradient descent, stochastic gradient descent, and mini-batch gradient descent, offer trade-offs between computational efficiency and convergence speed. The choice of which variation to use depends on the specific problem and available computational resources [2][8][9].
 
-
-
 \chapter{RESULTS}
 Multiple tests were run. Some plots with results are provided bellow.
 
@@ -558,8 +614,236 @@ You need to provide a circuit structure.
 
 \section{Gradient Descent Results}
 
-\section{Stochastic Gradient Descent Results}
+Firstly I tested the program with \textbf{18 parameters}.\\
 
+\begin{figure}[ht]
+\begin{center}
+    \includegraphics[width=0.9\textwidth]{plots/18.png}
+    \caption{Cost progression plot, with 18 learnable parameters, using Gradient Descent optimizer} 
+    \label{fig:enter-label}
+    \end{center}
+\end{figure}
+
+It is obvious, that in this particular snapshot, the final cost is not the optimal result.
+\\Here are the initial and the final parameters, as well as the initial and final costs. 
+\\\\\textbf{X INITIAL} is:
+ tensor([1.7658, 3.4312, 4.1421, 5.3068, 0.1327, 5.7904, 4.1582, 1.2668, 5.6374,
+        6.0970, 2.9710, 1.6479, 0.6261, 2.5107, 3.8973, 3.1691, 0.1296, 4.8192])
+\\
+\textbf{initial cost}: tensor(0.9279)
+\\\\\textbf{X FINAL} is:
+ tensor([1.4667, 4.2022, 4.2278, 5.2510, 0.1786, 6.2554, 3.9019, 1.3128, 5.7231,
+        6.0693, 3.4226, 1.6939, 0.3527, 2.5964, 4.2336, 2.5559, 0.2154, 4.8651]),
+
+\textbf{final cost}: tensor(0.5432)
+
+learning rate =  0.05\\ 
+delta =  0.005 \\
+epsilon =  1e-08 \\
+threshold =  1e-05 \\
+step size =  0.1 \\
+\\More information about how the code is implemented, are in the appendix.
+
+Some other implementations with 18 parameters gave similar results.
+\begin{itemize}
+    \item \textbf{18 parameters, b } :
+    
+learning rate =  0.05 \\
+delta =  0.005 \\
+epsilon =  1e-06 \\
+threshold =  0.001 \\
+step size =  0.1 \\
+
+\textbf{X INITIAL} is:
+ tensor([5.1366, 3.9022, 2.4849, 1.1003, 4.8399, 0.5321, 3.2011, 1.7677, 2.4073,
+        0.9287, 4.7974, 4.5628, 4.7718, 6.1509, 5.1577, 5.5043, 0.7340, 4.3147])
+
+\textbf{initial cost}: tensor(0.9331)
+
+\textbf{X FINAL} is:
+ tensor([5.3453, 3.5565, 2.4805, 1.2529, 4.8025, 0.6241, 3.3325, 1.7303, 2.4029,
+        1.2196, 4.7847, 4.5254, 4.7614, 6.1465, 4.9526, 5.4006, 0.7295, 4.2773])
+
+\textbf{final cost}: tensor(0.7963)
+
+\item \textbf{18 parameters, c }:
+
+\textbf{X INITIAL} is:
+ tensor([4.5020, 3.6611, 4.0598, 2.9111, 2.0045, 5.8821, 0.1404, 0.9037, 5.4573,
+        1.2292, 1.0254, 4.8697, 4.4681, 4.1592, 4.2880, 4.0359, 1.9999, 2.4546])
+
+\textbf{initial cost}: tensor(0.9809)
+
+\textbf{X FINAL is}:
+ tensor([4.5905, 4.2028, 4.1168, 2.4467, 2.2443, 6.2634, 0.7550, 1.1436, 5.5143,
+        1.0207, 1.2979, 5.1095, 5.0702, 4.2162, 4.2512, 4.1232, 2.0569, 2.6944])
+
+\textbf{final cost}: tensor(0.5431)
+
+\end{itemize}
+
+After multiple executions with 18 parameters, I realized that the final cost would not get lower than 0.5. As a result, more parameters are needed to train this circuit and minimize the cost. 
+
+Lets test the program with \textbf{20 parameters}: 
+
+\begin{figure}[ht]
+\begin{center}
+    \includegraphics[width=0.9\textwidth]{20.png}
+    \caption{Cost progression plot, with 20 learnable parameters, using Gradient Descent optimizer} 
+    \label{fig:enter-label}
+    \end{center}
+\end{figure}
+
+\textbf{X INITIAL} is: tensor([3.1948, 5.3759, 4.9216, 0.6639, 0.7274, 1.3457, 4.1867, 3.4602, 3.4542,
+        3.5626, 2.9046, 5.0324, 1.6932, 1.5336, 2.8378, 5.3266, 2.7702, 1.1606,
+        1.8269, 0.3608])
+
+\textbf{initial cost}: tensor(0.9716)
+
+\textbf{X FINAL} is: tensor([2.8576, 5.6991, 5.1387, 0.9144, 0.7338, 1.1805, 3.8612, 3.4666, 3.6713, 3.6662, 3.3033, 5.0389, 2.3572, 1.7507, 3.0914, 4.9087, 2.9874, 1.1671, 1.9527, 1.1274])
+
+\textbf{final cost}: tensor(0.6147)
+
+
+After multiple executions, I concluded that I need to increase the parameters a little more, since 20 parameters are not enough.
+
+\begin{itemize}
+    \item \textbf{22 parameters}:
+
+\begin{figure}[ht]
+\begin{center}
+    \includegraphics[width=0.9\textwidth]{plots/22.png}
+    \caption{Cost progression plot, with 22 learnable parameters, using Gradient Descent optimizer} 
+    \label{fig:enter-label}
+    \end{center}
+\end{figure}
+
+\textbf{X INITIAL} is: tensor([4.9691, 4.7639, 2.1722, 2.4414, 4.4904, 4.0520, 3.8530, 5.6306, 1.7001,
+        4.0501, 0.9469, 3.2963, 1.8443, 1.3293, 3.3896, 2.9523, 2.7749, 4.9275,
+        1.4383, 4.3189, 4.7543, 2.8610])
+        
+\textbf{initial cost}  = tensor(0.9359)
+
+\textbf{X FINAL} is: tensor([5.6587, 3.9270, 2.1907, 1.9635, 4.5680, 3.5704, 3.9270, 5.7082, 1.7185,
+        4.7124, 0.6390, 3.3739, 2.0138, 1.3477, 3.4034, 2.5525, 2.7933, 5.0051,
+        1.5708, 4.2347, 4.9088, 1.9635])
+
+\textbf{final cost} = tensor(0.5000)
+
+\item \textbf{26 parameters, a}:
+
+\begin{figure}[ht]
+\begin{center}
+    \includegraphics[width=0.9\textwidth]{26.png}
+    \caption{Cost progression plot, with 26 learnable parameters, using Gradient Descent optimizer} 
+    \label{fig:enter-label}
+    \end{center}
+\end{figure}
+
+\textbf{X INITIAL} is:
+ tensor([3.2022, 5.6416, 4.8515, 3.3115, 3.6187, 5.0852, 2.9730, 5.0537, 1.5072,
+        4.7531, 0.5125, 5.5763, 5.8622, 1.1606, 0.6496, 2.2168, 3.9991, 5.3104,
+        4.2755, 3.8328, 1.0954, 1.9451, 4.8207, 4.8218, 4.6000, 1.4309])
+
+\textbf{initial cost}: tensor(0.9451)
+
+\textbf{X FINAL} is: 
+ tensor([2.3827, 5.2529, 4.6696, 3.5108, 3.6095, 5.0535, 3.9956, 5.2220, 1.1325,
+        4.1914, 0.7261, 5.7447, 5.8750, 0.7859, 0.9014, 2.5525, 3.6244, 5.4788,
+        3.8632, 4.2661, 0.9771, 2.2849, 5.1514, 4.4313, 4.2616, 1.4216])
+
+\textbf{final cost} : tensor(0.0836)
+
+learning rate =  0.05 \\
+delta =  0.005 \\
+epsilon =  1e-08 \\
+threshold =  0.0001\\ 
+step size =  0.1 \\
+
+After testing the circuit for 18, 20 and 22 parameters, on 26 parameters the result is optimal. The cost is minimized and is equal to 0.0836.
+
+\item \textbf{26 parameters, b}:
+
+\textbf{X INITIAL} is:
+ tensor([6.1234, 5.7969, 2.5003, 0.5580, 5.0908, 4.7843, 2.4722, 1.7875, 5.8223,
+        2.4807, 4.6223, 1.6604, 4.6718, 4.6132, 0.8379, 0.9381, 1.7933, 5.8322,
+        5.2766, 4.0728, 3.6663, 1.7227, 1.2303, 3.9384, 4.3709, 4.5244])
+        
+\textbf{initial cost}: tensor(0.9262)
+
+\textbf{X FINAL} is:
+
+ tensor([5.9466, 5.8995, 2.5525, 0.6608, 4.7011, 5.4972, 2.5109, 2.6193, 5.6731,
+        2.4827, 4.0413, 2.4922, 4.4677, 4.4639, 0.3543, 0.9818, 1.6441, 6.6640,
+        5.4211, 4.3279, 3.1420, 1.3268, 1.5708, 3.8691, 4.0381, 4.1347])
+
+\textbf{final cost}: tensor(0.0575)
+
+learning rate =  0.05 \\
+delta =  0.005 \\
+epsilon =  1e-08 \\
+threshold =  0.0001\\ 
+step size =  0.1 \\
+
+\item \textbf{28 parameters,  a}: 
+
+\begin{figure}[h]
+\begin{center}
+    \includegraphics[width=0.9\textwidth]{28.png}
+    \caption{Cost progression plot, with 28 learnable parameters, using Gradient Descent optimizer} 
+    \label{fig:enter-label}
+    \end{center}
+\end{figure}
+
+\textbf{X INITIAL} is:
+ tensor([3.6285, 0.5717, 1.3463, 0.2393, 3.4633, 1.5723, 6.1080, 5.0117, 4.5497,
+        1.1938, 5.7585, 1.8747, 2.4548, 3.4901, 4.9434, 3.3576, 0.2792, 4.1673,
+        3.8621, 2.6452, 4.2201, 5.2078, 4.3327, 5.5728, 5.9729, 0.1138, 2.8426,
+        4.2832])
+        
+\textbf{initial cost}: tensor(0.9368)
+
+\textbf{X FINAL} is:
+tensor([ 2.7217,  0.4280,  0.1943,  0.3745,  3.3493,  1.4766,  6.7955,  5.2375,
+         4.6558,  0.7024,  5.9003,  2.1004,  2.4367,  3.5962,  3.9115,  3.3380,
+         0.3853,  4.3931,  3.5211,  2.5860,  3.9345,  5.3438,  3.9282,  5.4054,
+         5.5653, -0.0083,  3.1441,  4.0902])
+
+\textbf{final cost}: tensor(0.0491)
+
+learning rate =  0.05 \\
+delta =  0.005 \\
+epsilon =  1e-08 \\
+threshold =  0.0001\\ 
+step size =  0.1 \\
+
+\item \textbf{28 parameters,  b}: 
+
+\textbf{X INITIAL}  is:
+ tensor([5.4860, 0.9125, 4.8773, 2.8955, 2.7465, 3.9753, 4.7699, 0.2627, 6.0902,
+        4.7684, 5.9787, 3.1965, 1.6134, 5.1578, 5.2677, 1.9755, 1.4814, 1.6307,
+        5.5425, 5.2327, 1.3015, 4.7017, 4.4076, 0.9839, 1.0343, 4.2678, 5.6086,
+        0.2922])
+        
+\textbf{initial cost}: tensor(0.9718)
+
+\textbf{X FINAL} is:
+ tensor([5.4056, 1.1386, 5.2554, 3.3732, 3.0859, 3.8198, 5.5777, 0.0136, 5.9092,
+        4.4720, 5.4650, 2.9474, 1.6145, 4.9768, 5.3171, 2.5533, 1.3004, 1.3816,
+        5.6967, 5.1791, 1.6984, 4.7156, 4.8104, 0.9674, 0.6554, 4.1619, 5.3412,
+        0.1582])
+
+\textbf{final cost}: tensor(0.1112)
+
+learning rate =  0.05 \\
+delta =  0.005 \\
+epsilon =  1e-08 \\
+threshold =  0.0001\\ 
+step size =  0.1 \\
+
+\end{itemize}
+
+\section{Stochastic Gradient Descent Results}
 
 \chapter{CONCLUSIONS AND FUTURE WORK}
 
@@ -567,7 +851,8 @@ You need to provide a circuit structure.
 
 
 \chapter{APPENDIX}
-\section{Code implementation}
+\section{Mathematica implementation}
+\section{Python implementation}
 
 This project is implemented in python, using mostly the \textbf{PyTorch} library. 
 
@@ -591,6 +876,9 @@ I also implemented gradient descent, as well as stochastic gradient descent by h
 \bibitem{electron}https://www.techtarget.com/whatis/definition/qubit
 \bibitem{qudit}Wang, Y., Hu, Z., Sanders, B. \& Kais, S. Qudits and high-dimensional quantum computing. {\em Frontiers In Physics}. \textbf{8} pp. 589504 (2020)
 \bibitem{microwave}Gaebler, J., Tan, T., Lin, Y., Wan, Y., Bowler, R., Keith, A., Glancy, S., Coakley, K., Knill, E., Leibfried, D. \& Others High-fidelity universal gate set for be 9+ ion qubits. {\em Physical Review Letters}. \textbf{117}, 060505 (2016)
+\bibitem{ghz}Mermin, N. What's wrong with these elements of reality?. {\em Physics Today}. \textbf{43}, 9-11 (1990)
+\bibitem{ibm}https://quantum-computing.ibm.com/composer/files/7485fbf8fdd965ddc4a57e69ae67655d60d8b46d5e25f74650d993176f36b35c
+\bibitem{ghz_ibm}https://quantum-computing.ibm.com/composer/docs/iqx/guide/entanglement
 
 
 \end{thebibliography}

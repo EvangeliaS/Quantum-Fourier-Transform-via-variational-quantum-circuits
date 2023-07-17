@@ -326,7 +326,7 @@ import time
 
 import pandas as pd
 
-num_parameters = [28]#, 38, 40,  42, 44, 46]
+num_parameters = [26]#, 38, 40,  42, 44, 46]
 iterations = [700, 800, 850, 900, 950] #300, 320, 400, 500, 550, 580,
 #add 50 to each of the above
 ##iterations = [i + 50 for i in iterations]
