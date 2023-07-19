@@ -1583,4 +1583,138 @@ ITERATION =
  174
 x initial is: 
 
- 
+ tensor([4.2848, 5.6741, 4.1546, 4.3601, 4.0639, 4.0450, 0.7790, 0.2278, 3.2980,
+        1.4864, 5.8344, 2.6863, 1.9683, 1.5511, 5.0433, 2.5564, 2.1883, 4.3386,
+        0.0519, 3.7607, 0.7231, 3.4076], grad_fn=<CloneBackward0>)
+cost initial =  tensor(0.5089, grad_fn=<RsubBackward1>)
+new cost =  tensor(0.5088, grad_fn=<RsubBackward1>)
+ITERATION = 
+ 175
+x initial is: 
+
+ tensor([4.2834, 5.6730, 4.1546, 4.3597, 4.0639, 4.0449, 0.7792, 0.2278, 3.2980,
+        1.4872, 5.8344, 2.6863, 1.9686, 1.5511, 5.0427, 2.5562, 2.1883, 4.3386,
+        0.0515, 3.7612, 0.7231, 3.4083], grad_fn=<CloneBackward0>)
+cost initial =  tensor(0.5088, grad_fn=<RsubBackward1>)
+new cost =  tensor(0.5087, grad_fn=<RsubBackward1>)
+ITERATION = 
+ 176
+x initial is: 
+
+ tensor([4.2820, 5.6720, 4.1546, 4.3593, 4.0639, 4.0449, 0.7795, 0.2278, 3.2980,
+        1.4881, 5.8344, 2.6863, 1.9690, 1.5511, 5.0422, 2.5560, 2.1883, 4.3386,
+        0.0511, 3.7617, 0.7231, 3.4090], grad_fn=<CloneBackward0>)
+cost initial =  tensor(0.5087, grad_fn=<RsubBackward1>)
+new cost =  tensor(0.5086, grad_fn=<RsubBackward1>)
+ITERATION = 
+ 177
+x initial is: 
+
+ tensor([4.2807, 5.6709, 4.1546, 4.3589, 4.0639, 4.0448, 0.7797, 0.2278, 3.2980,
+        1.4889, 5.8344, 2.6863, 1.9693, 1.5511, 5.0416, 2.5558, 2.1883, 4.3386,
+        0.0507, 3.7622, 0.7231, 3.4098], grad_fn=<CloneBackward0>)
+cost initial =  tensor(0.5086, grad_fn=<RsubBackward1>)
+new cost =  tensor(0.5085, grad_fn=<RsubBackward1>)
+ITERATION = 
+ 178
+x initial is: 
+
+ tensor([4.2793, 5.6699, 4.1546, 4.3586, 4.0639, 4.0448, 0.7799, 0.2278, 3.2980,
+        1.4897, 5.8345, 2.6863, 1.9696, 1.5511, 5.0411, 2.5557, 2.1883, 4.3386,
+        0.0504, 3.7626, 0.7231, 3.4105], grad_fn=<CloneBackward0>)
+cost initial =  tensor(0.5085, grad_fn=<RsubBackward1>)
+new cost =  tensor(0.5084, grad_fn=<RsubBackward1>)
+ITERATION = 
+ 179
+x initial is: 
+
+ tensor([4.2779, 5.6688, 4.1546, 4.3582, 4.0639, 4.0447, 0.7801, 0.2278, 3.2980,
+        1.4905, 5.8345, 2.6863, 1.9700, 1.5511, 5.0405, 2.5555, 2.1883, 4.3386,
+        0.0500, 3.7631, 0.7231, 3.4112], grad_fn=<CloneBackward0>)
+cost initial =  tensor(0.5084, grad_fn=<RsubBackward1>)
+new cost =  tensor(0.5083, grad_fn=<RsubBackward1>)
+ITERATION = 
+ 180
+x initial is: 
+
+ tensor([4.2765, 5.6678, 4.1546, 4.3578, 4.0639, 4.0447, 0.7803, 0.2278, 3.2980,
+        1.4913, 5.8345, 2.6863, 1.9703, 1.5511, 5.0400, 2.5554, 2.1883, 4.3386,
+        0.0496, 3.7636, 0.7231, 3.4119], grad_fn=<CloneBackward0>)
+cost initial =  tensor(0.5083, grad_fn=<RsubBackward1>)
+new cost =  tensor(0.5082, grad_fn=<RsubBackward1>)
+ITERATION = 
+ 181
+x initial is: 
+
+ tensor([4.2752, 5.6667, 4.1546, 4.3574, 4.0639, 4.0447, 0.7805, 0.2278, 3.2980,
+        1.4921, 5.8345, 2.6863, 1.9706, 1.5511, 5.0395, 2.5552, 2.1883, 4.3386,
+        0.0492, 3.7640, 0.7231, 3.4127], grad_fn=<CloneBackward0>)
+cost initial =  tensor(0.5082, grad_fn=<RsubBackward1>)
+new cost =  tensor(0.5081, grad_fn=<RsubBackward1>)
+ITERATION = 
+ 182
+x initial is: 
+
+ tensor([4.2738, 5.6657, 4.1546, 4.3570, 4.0639, 4.0446, 0.7807, 0.2278, 3.2980,
+        1.4929, 5.8345, 2.6863, 1.9710, 1.5511, 5.0389, 2.5551, 2.1883, 4.3386,
+        0.0489, 3.7645, 0.7231, 3.4134], grad_fn=<CloneBackward0>)
+cost initial =  tensor(0.5081, grad_fn=<RsubBackward1>)
+new cost =  tensor(0.5080, grad_fn=<RsubBackward1>)
+ITERATION =  182     LEARNING RATE =  0.005000000000000001 
+
+ITERATION = 
+ 183
+x initial is: 
+
+ tensor([4.2725, 5.6646, 4.1546, 4.3567, 4.0639, 4.0446, 0.7808, 0.2278, 3.2980,
+        1.4937, 5.8345, 2.6863, 1.9713, 1.5511, 5.0384, 2.5550, 2.1883, 4.3386,
+        0.0485, 3.7650, 0.7231, 3.4141], grad_fn=<CloneBackward0>)
+cost initial =  tensor(0.5080, grad_fn=<RsubBackward1>)
+new cost =  tensor(0.5080, grad_fn=<RsubBackward1>)
+ITERATION =  183     LEARNING RATE =  0.0005000000000000001 
+
+ITERATION = 
+ 184
+x initial is: 
+
+ tensor([4.2723, 5.6645, 4.1546, 4.3566, 4.0639, 4.0446, 0.7809, 0.2278, 3.2980,
+        1.4938, 5.8345, 2.6863, 1.9714, 1.5511, 5.0384, 2.5550, 2.1883, 4.3386,
+        0.0484, 3.7650, 0.7231, 3.4142], grad_fn=<CloneBackward0>)
+cost initial =  tensor(0.5080, grad_fn=<RsubBackward1>)
+new cost =  tensor(0.5080, grad_fn=<RsubBackward1>)
+ITERATION =  184     LEARNING RATE =  5.0000000000000016e-05 
+
+ITERATION = 
+ 185
+x initial is: 
+
+ tensor([4.2723, 5.6645, 4.1546, 4.3566, 4.0639, 4.0446, 0.7809, 0.2278, 3.2980,
+        1.4938, 5.8345, 2.6863, 1.9714, 1.5511, 5.0384, 2.5550, 2.1883, 4.3386,
+        0.0484, 3.7650, 0.7231, 3.4142], grad_fn=<CloneBackward0>)
+cost initial =  tensor(0.5080, grad_fn=<RsubBackward1>)
+new cost =  tensor(0.5080, grad_fn=<RsubBackward1>)
+Parameters are: 
+ 22  X INITIAL is:
+ tensor([4.6657, 5.5689, 4.0349, 4.4969, 4.1381, 3.9435, 0.4706, 0.3020, 3.1783,
+        1.0825, 5.8324, 2.7605, 2.8706, 1.4315, 4.8029, 3.1302, 2.0686, 4.4128,
+        0.4425, 3.9601, 0.8715, 3.1972])
+cost initial = tensor(0.9921, grad_fn=<RsubBackward1>)
+    X FINAL is:
+
+ tensor([4.2723, 5.6645, 4.1546, 4.3566, 4.0639, 4.0446, 0.7809, 0.2278, 3.2980,
+        1.4938, 5.8345, 2.6863, 1.9714, 1.5511, 5.0384, 2.5550, 2.1883, 4.3386,
+        0.0484, 3.7650, 0.7231, 3.4142], grad_fn=<CopySlices>)
+iterations = 185 FINAL COST: tensor(0.5080, grad_fn=<RsubBackward1>)
+time taken = 46827.21271276474 
+
+
+learning_rate =  0.05 
+
+delta =  0.005 
+
+epsilon =  1e-08 
+
+threshold =  0.0001 
+
+step_size =  0.1 
+
