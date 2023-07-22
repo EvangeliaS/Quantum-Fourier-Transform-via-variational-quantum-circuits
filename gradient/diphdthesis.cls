@@ -127,6 +127,8 @@ National and Kapodistrian University of Athens (by Charalampos Nikolaou
 
 \LoadClass[12pt,twoside,openright]{book}
 
+% το footnote size σε συνδυασμο με το 12pt ειναι μεγεθος αριαλ 10: 
+ % \LoadClass[12pt,oneside,openleft]{book}
 %
 % Required packages and configuration
 %
@@ -155,6 +157,9 @@ includehead,includefoot]{geometry} % add option showframe=true for debugging
 \usepackage{fontspec}
 \usepackage{xunicode}
 \usepackage{xltxtra}
+
+% για τις λεζαντες
+\usepackage[labelfont=bf,font=footnotesize,justification=centering]{caption}
 
 %
 % Set font mamily Aria
@@ -198,7 +203,7 @@ includehead,includefoot]{geometry} % add option showframe=true for debugging
 
 
 %
-% Commands for advisor 1
+% Commands for advisor
 %
 \providecommand{\advisorGr}[1]{\gdef\@advisorGr{#1}}
 \providecommand{\advisorRankGr}[1]{\gdef\@advisorRankGr{#1}}
@@ -206,16 +211,6 @@ includehead,includefoot]{geometry} % add option showframe=true for debugging
 \providecommand{\advisorEn}[1]{\gdef\@advisorEn{#1}}
 \providecommand{\advisorRankEn}[1]{\gdef\@advisorRankEn{#1}}
 \providecommand{\advisorOrgEn}[1]{\gdef\@advisorOrgEn{#1}}
-
-%
-% Commands for advisor 2
-%
-% \providecommand{\advisorTwoGr}[1]{\gdef\@advisorTwoGr{#1}}
-% \providecommand{\advisorTwoRankGr}[1]{\gdef\@advisorTwoRankGr{#1}}
-% \providecommand{\advisorTwoOrgGr}[1]{\gdef\@advisorTwoOrgGr{#1}}
-% \providecommand{\advisorTwoEn}[1]{\gdef\@advisorTwoEn{#1}}
-% \providecommand{\advisorTwoRankEn}[1]{\gdef\@advisorTwoRankEn{#1}}
-% \providecommand{\advisorTwoOrgEn}[1]{\gdef\@advisorTwoOrgEn{#1}}
 
 %
 % Commands for the 1st member of the advisory board
@@ -366,12 +361,46 @@ publications}\gdef\@lopfileinternal{#1}}
   \addcontentsline{toc}{chapter}{ABBREVIATIONS - ACRONYMS}
 }
 
+\patchcmd{\section}{\bfseries}{\bfseries }{}{}
+\patchcmd{\subsection}{\bfseries}{\bfseries }{}{}
+\usepackage{titlesec}
+\usepackage[dotinlabels]{titletoc}
+
+% \renewcommand{\thechapter}{\arabic{chapter}.}
+% \renewcommand{\thesection}{\thechapter\arabic{section}}
+\usepackage{titletoc}
+\titlecontents{subsection}
+ [1.5em] %
+ {\smallskip}
+ {\thecontentslabel\hspace{1.02em}}%\thecontentslabel
+{\hspace*{2.32em}}
+ {\,\,\titlerule*[0.77pc]{.}\contentspage}
+\titleformat*{\section}{\boldmath\bfseries}
+\titleformat*{\subsection}{\boldmath\bfseries}
+\contentsmargin{2.55em}
+% \dottedcontents{section}[2.3em]{\boldmath\bfseries}{2.3em}{1pc}
+
+\titlecontents{section}
+  [0]{\boldmath\bfseries} {\thecontentslabel\hspace{1.02em}}{2.3em}{\,\,\titlerule*[0.77pc]{.}\contentspage}
+
+
+\titlecontents{subsubsection}
+ [3em] %
+ {\smallskip}
+ {\thecontentslabel\hspace{1.02em}}%\thecontentslabel
+{\hspace*{2.32em}}
+ {\,\,\titlerule*[0.77pc]{.}\contentspage}
+\titleformat*{\section}{\boldmath\bfseries}
+\titleformat*{\subsection}{\boldmath\bfseries}
+\contentsmargin{2.55em}
+  
+
 %
 % Front page (greek and english versions)
 % 
 \def\@frontpage{
 \begin{center}
-\includegraphics{emblems/athena-black}
+\includegraphics{emblems/athena-blue.pdf}
 \end{center}
 \begin{minipage}[t]{\textwidth}
     \begin{center}
@@ -379,7 +408,7 @@ publications}\gdef\@lopfileinternal{#1}}
       \ifenglishfrontpage
       	NATIONAL AND KAPODISTRIAN UNIVERSITY OF ATHENS
       \else
-      	ΕΘΝΙΚΟ ΚΑΙ ΚΑΠΟΔΙΣΤΡΙΑΚΟ ΠΑΝΕΠΙΣΤΗΜΙΟ ΑΘΗΝΩΝ
+      	 ΕΘΝΙΚΟ ΚΑΙ ΚΑΠΟΔΙΣΤΡΙΑΚΟ ΠΑΝΕΠΙΣΤΗΜΙΟ ΑΘΗΝΩΝ
       \fi
       }
       \linebreak
@@ -388,23 +417,16 @@ publications}\gdef\@lopfileinternal{#1}}
       \ifenglishfrontpage
       	SCHOOL OF SCIENCES \\ DEPARTMENT OF INFORMATICS AND TELECOMMUNICATIONS
       \else
-      	ΣΧΟΛΗ ΘΕΤΙΚΩΝ ΕΠΙΣΤΗΜΩΝ \\ ΤΜΗΜΑ  ΠΛΗΡΟΦΟΡΙΚΗΣ ΚΑΙ ΤΗΛΕΠΙΚΟΙΝΩΝΙΩΝ
+      	 ΣΧΟΛΗ ΘΕΤΙΚΩΝ ΕΠΙΣΤΗΜΩΝ \\  ΤΜΗΜΑ  ΠΛΗΡΟΦΟΡΙΚΗΣ ΚΑΙ ΤΗΛΕΠΙΚΟΙΝΩΝΙΩΝ
       \fi
       }
-      \linebreak
-      
-      {\bfseries 
-      \ifenglishfrontpage
-      	PROGRAM OF UNDERGRADUATE STUDIES
-      \else
-      	ΠΡΟΓΡΑΜΜΑ  ΠΡΟΠΤΥΧΙΑΚΩΝ ΣΠΟΥΔΩΝ
-      \fi}
       \linebreak\linebreak\linebreak
       \linebreak\linebreak\linebreak      
-
+        
+\vfill
       {\bfseries 
       \ifenglishfrontpage
-      	BSc Thesis
+      	BSc THESIS
       \else
       	ΠΤΥΧΙΑΚΗ ΕΡΓΑΣΙΑ
       \fi}
@@ -428,6 +450,23 @@ publications}\gdef\@lopfileinternal{#1}}
 \end{minipage}
     \vfill
     \begin{center}
+
+
+
+     \ifenglishfrontpage
+     % \noindent
+         \begin{tabular}{@{} >{\bfseries}l l @{}}
+    SUPERVISORS: & {\bfseries Dimitris Syvridis}, Professor \\
+      & {\bfseries Aikaterini Mandilara}, Doctor
+\end{tabular}  
+     \else
+	 	\begin{tabular}{@{} >{\bfseries}l l @{}}
+    ΕΠΙΒΛΕΠΟΝΤΕΣ: & {\bfseries Δημήτριος Συβρίδης}, Καθηγητής \\
+      & {\bfseries Αικατερίνη Μανδηλαρά}, Δόκτωρ 
+\end{tabular}   
+     \fi
+    \linebreak
+
     {\bfseries 
      \ifenglishfrontpage
      	ATHENS
@@ -446,174 +485,162 @@ publications}\gdef\@lopfileinternal{#1}}
      }
     \end{center}
     \clearpage
-
-   % \newpage\null\newpage
+    \newpage\null\newpage
 }
 
 %
 % Committee page (greek and english versions)
 %
 \def\@committeepage{
-    \begin{center}
-    {\bfseries
-    \ifenglishcommitteepage
-    	BSc Thesis
-    \else
-    	Πτυχιακή Εργασία
-    \fi
-    }
-    \linebreak
-    
-    {
-    \ifenglishcommitteepage
-    	\@titleEn
-    \else
-    	\@titleGr
-    \fi
-    }
-    \linebreak
-    
-    {\bfseries
-    \ifenglishcommitteepage
-    	\@authorFirstEn{} \@authorMiddleEn{} \@authorLastEn 
-    \else
-    	\@authorFirstGr{} \@authorMiddleGr{} \@authorLastGr
-    \fi
-    }
-    \linebreak
-    {
-    \ifenglishcommitteepage
-    	\textbf{S.N:} 1115201800186
-    \else
-        \textbf{Α.Μ:} 1115201800186
-    \fi
-    }
-    \linebreak\linebreak
-\end{center}
-
-% {
-% \ifenglishcommitteepage%
-%     {\bfseries SUPERVISOR: \@advisorEn{}}, \@advisorRankEn{} \@advisorOrgEn{}\\
-%     %\@advisorTwoEn{}}, \@advisorTwoRankEn{} \@advisorTwoOrgEn{}\\
-    
-% \else
-%     {\bfseries ΕΠΙΒΛΕΠΩΝ ΚΑΘΗΓΗΤΗΣ: \@advisorGr{}}, \@advisorRankGr{} 
-% 	\@advisorOrgGr{}\\
-% 	%\@advisorTwoGr{}}, \@advisorTwoRankGr{}	\@advisorTwoOrgGr{}\\
-% \fi
-% }
-
-
- % {
- % \ifenglishcommitteepage
- % 	{\bfseries THREE-MEMBER ADVISORY COMMITTEE:}
- % \else
- % 	{\bfseries ΤΡΙΜΕΛΗΣ ΕΠΙΤΡΟΠΗ ΠΑΡΑΚΟΛΟΥΘΗΣΗΣ:}
- % \fi
- % }
-
- % {
- % \ifenglishcommitteepage
- % \hspace{2cm}{\bfseries \@advisorEn{}}, \@advisorRankEn{} \@advisorOrgEn{}
-
- % \hspace{2cm}{\bfseries \@boardTwoEn{}}, \@boardTwoRankEn{} \@boardTwoOrgEn{}
-
- % \hspace{2cm}{\bfseries \@boardThreeEn{}}, \@boardThreeRankEn{} 
- % \@boardThreeOrgEn{}\\
- % \else
- % \hspace{2cm}{\bfseries \@advisorGr{}}, \@advisorRankGr{} \@advisorOrgGr{}
-
- % \hspace{2cm}{\bfseries \@boardTwoGr{}}, \@boardTwoRankGr{} \@boardTwoOrgGr{}
-
- % \hspace{2cm}{\bfseries \@boardThreeGr{}}, \@boardThreeRankGr{}
- % \@boardThreeOrgGr{}\\
- % \fi
- % }
-
- %\begin{center}
- % {\bfseries
- % \ifenglishcommitteepage
- % 	SEVEN-MEMBER EXAMINATION COMMITTEE
- % \else
- % 	ΕΠΤΑΜΕΛΗΣ ΕΞΕΤΑΣΤΙΚΗ ΕΠΙΤΡΟΠΗ
- % \fi
- % }
- %\end{center}
-
-\vspace*{\fill}
- \begin{center}
- {
-\ifenglishcommitteepage%
-    {\bfseries SUPERVISOR: \@advisorEn{}}, \@advisorRankEn{}, \\ \@advisorOrgEn{} \\
-    {\bfseries COADVISOR: Dr. Aikaterini Mandilara} \\
-    %\@advisorTwoEn{}}, \@advisorTwoRankEn{} \@advisorTwoOrgEn{}\\
-    
+\begin{center}
+{\bfseries
+\ifenglishcommitteepage
+	BSc THESIS
 \else
-    {\bfseries ΕΠΙΒΛΕΠΩΝ ΚΑΘΗΓΗΤΗΣ: \@advisorGr{}}, \@advisorRankGr{}, \\
-	\@advisorOrgGr{}\\
-    {\bfseries ΣΥΝΕΠΙΒΛΕΠΩΝ ΚΑΘΗΓΗΤΗΣ: Δρ. Αικατερίνη Μανδηλαρά} \\
-	%\@advisorTwoGr{}}, \@advisorTwoRankGr{}	\@advisorTwoOrgGr{}\\
+	ΠΤΥΧΙΑΚΗ ΕΡΓΑΣΙΑ
+\fi
+}
+\linebreak
+
+{
+\ifenglishcommitteepage
+	\@titleEn
+\else
+	\@titleGr
+\fi
+}
+\linebreak
+
+{\bfseries
+\ifenglishcommitteepage
+	\@authorFirstEn{} \@authorMiddleEn{} \@authorLastEn
+\else
+	\@authorFirstGr{} \@authorMiddleGr{} \@authorLastGr
 \fi
 }
 \end{center}
 
- % {\bfseries
- % \centering
- % \begin{tabular*}{\textwidth}{p{0.5\textwidth} p{1.5cm} m{0.35\textwidth}}
- %                                     & &                    \\[1cm]
- % \ifenglishcommitteepage
- % \@advisorEn{},                      & & \@boardTwoEn{},    \\
- % \@advisorRankEn{} \@advisorOrgEn{}  & & \@boardTwoRankEn{} \@boardTwoOrgEn{}\\
-
- %                                          & &                \\[1cm]
- % \@boardThreeEn{},                        & & \@examFourEn{},\\
- % \@boardThreeRankEn{} \@boardThreeOrgEn{} & &\@examFourRankEn{} 
- % \@examFourOrgEn{}\\
-
- %                                      & &                    \\[1cm]
- % \@examFiveEn{},                      & &\@examSixEn{},      \\
- % \@examFiveRankEn{} \@examFiveOrgEn{} & &\@examSixRankEn{} \@examSixOrgEn{} \\
-
- %                                       & &                  \\[1cm]
- % \@examSevenEn{},                       & &                  \\
- % \@examSevenRankEn{} \@examSevenOrgEn{} & &                  \\
- % \else
- % \@advisorGr{},                      & & \@boardTwoGr{},    \\
- % \@advisorRankGr{} \@advisorOrgGr{}  & & \@boardTwoRankGr{} \@boardTwoOrgGr{}\\
-
- %                                          & &                \\[1cm]
- % \@boardThreeGr{},                        & & \@examFourGr{},\\
- % \@boardThreeRankGr{} \@boardThreeOrgGr{} & &\@examFourRankGr{} 
- % \@examFourOrgGr{}\\
-
- %                                      & &                    \\[1cm]
- % \@examFiveGr{},                      & &\@examSixGr{},      \\
- % \@examFiveRankGr{} \@examFiveOrgGr{} & &\@examSixRankGr{} \@examSixOrgGr{} \\
-
- %                                       & &                  \\[1cm]
- % \@examSevenGr{},                       & &                  \\
- % \@examSevenRankGr{} \@examSevenOrgGr{} & &                  \\
- % \fi
- % \end{tabular*}}
-
-
- \vfill
- \begin{center}
- % {\bfseries
- % \ifenglishcommitteepage
- % 	Examination Date: \@examinationDateEn
- % \else
- % 	Ημερομηνία Εξέτασης: \@examinationDateGr
- % \fi
- % }
- \end{center}
- \clearpage
- % \newpage\null\newpage
+\begin{center}
+{\bfseries
+\ifenglishcommitteepage
+	S.N.: \normalfont{1115201800186}
+\else
+	Α.Μ.: \normalfont{1115201800186}
+\fi
 }
 
+\linebreak\linebreak
 
+\end{center}
+
+\vfill
+{
+\ifenglishcommitteepage%
+\noindent
+    \begin{tabular}{@{} >{\bfseries}l l @{}}
+    SUPERVISORS: & {\bfseries Dimitris Syvridis}, Professor \\
+      & {\bfseries Aikaterini Mandilara}, Doctor
+\end{tabular}   
+\else
+\noindent
+    \begin{tabular}{@{} >{\bfseries}l l @{}}
+    ΕΠΙΒΛΕΠΟΝΤΕΣ: & {\bfseries Δημήτριος Συβρίδης}, Καθηγητής \\
+      & {\bfseries Αικατερίνη Μανδηλαρά}, Δόκτωρ 
+\end{tabular}   
+\fi
+}
+
+\vfill
+
+
+%\linebreak\linebreak
+%\linebreak
+
+% {
+% \ifenglishcommitteepage
+% 	{\bfseries THREE-MEMBER ADVISORY COMMITTEE:}
+% \else
+% 	{\bfseries ΤΡΙΜΕΛΗΣ ΕΠΙΤΡΟΠΗ ΠΑΡΑΚΟΛΟΥΘΗΣΗΣ:}
+% \fi
+% }
+
+% {
+% \ifenglishcommitteepage
+% \hspace{2cm}{\bfseries \@advisorEn{}}, \@advisorRankEn{} \@advisorOrgEn{}
+
+% \hspace{2cm}{\bfseries \@boardTwoEn{}}, \@boardTwoRankEn{} \@boardTwoOrgEn{}
+
+% \hspace{2cm}{\bfseries \@boardThreeEn{}}, \@boardThreeRankEn{} 
+% \@boardThreeOrgEn{}\\
+% \else
+% \hspace{2cm}{\bfseries \@advisorGr{}}, \@advisorRankGr{} \@advisorOrgGr{}
+
+% \hspace{2cm}{\bfseries \@boardTwoGr{}}, \@boardTwoRankGr{} \@boardTwoOrgGr{}
+
+% \hspace{2cm}{\bfseries \@boardThreeGr{}}, \@boardThreeRankGr{}
+% \@boardThreeOrgGr{}\\
+% \fi
+% }
+
+
+
+% {\bfseries
+% \centering
+% \begin{tabular*}{\textwidth}{p{0.5\textwidth} p{1.5cm} m{0.35\textwidth}}
+%                                     & &                    \\[1cm]
+% \ifenglishcommitteepage
+% \@advisorEn{},                      & & \@boardTwoEn{},    \\
+% \@advisorRankEn{} \@advisorOrgEn{}  & & \@boardTwoRankEn{} \@boardTwoOrgEn{}\\
+
+%                                          & &                \\[1cm]
+% \@boardThreeEn{},                        & & \@examFourEn{},\\
+% \@boardThreeRankEn{} \@boardThreeOrgEn{} & &\@examFourRankEn{} 
+% \@examFourOrgEn{}\\
+
+%                                      & &                    \\[1cm]
+% \@examFiveEn{},                      & &\@examSixEn{},      \\
+% \@examFiveRankEn{} \@examFiveOrgEn{} & &\@examSixRankEn{} \@examSixOrgEn{} \\
+
+%                                        & &                  \\[1cm]
+% \@examSevenEn{},                       & &                  \\
+% \@examSevenRankEn{} \@examSevenOrgEn{} & &                  \\
+% \else
+% \@advisorGr{},                      & & \@boardTwoGr{},    \\
+% \@advisorRankGr{} \@advisorOrgGr{}  & & \@boardTwoRankGr{} \@boardTwoOrgGr{}\\
+
+%                                          & &                \\[1cm]
+% \@boardThreeGr{},                        & & \@examFourGr{},\\
+% \@boardThreeRankGr{} \@boardThreeOrgGr{} & &\@examFourRankGr{} 
+% \@examFourOrgGr{}\\
+
+%                                      & &                    \\[1cm]
+% \@examFiveGr{},                      & &\@examSixGr{},      \\
+% \@examFiveRankGr{} \@examFiveOrgGr{} & &\@examSixRankGr{} \@examSixOrgGr{} \\
+
+%                                        & &                  \\[1cm]
+% \@examSevenGr{},                       & &                  \\
+% \@examSevenRankGr{} \@examSevenOrgGr{} & &                  \\
+% \fi
+% \end{tabular*}}
+
+
+
+% \begin{center}
+% {\bfseries
+% \ifenglishcommitteepage
+% 	Examination Date: \@examinationDateEn
+% \else
+% 	Ημερομηνία Εξέτασης: \@examinationDateGr
+% \fi
+% }
+% \end{center}
+\clearpage
+\newpage\null\newpage
+}
+
+%
 % Abstract (english version)
-
+%
 \def\@absEn{
   \chapter*{Abstract}
   \thispagestyle{empty}
@@ -637,44 +664,42 @@ publications}\gdef\@lopfileinternal{#1}}
   {\bfseries ΘΕΜΑΤΙΚΗ ΠΕΡΙΟΧΗ}: \@subjectAreaGr\\
   
   {\bfseries ΛΕΞΕΙΣ ΚΛΕΙΔΙΑ}: \@keywordsGr
-
+    
   \clearpage
 }
 
 %
 % Greek synopsis of the thesis
 %
-
-\def\@synopsis{
-  \chapter*{ΣΥΝΟΠΤΙΚΗ ΠΑΡΟΥΣΙΑΣΗ ΤΗΣ ΠΤΥΧΙΑΚΗΣ ΕΡΓΑΣΙΑΣ}
-  \thispagestyle{empty}  
-  \@synopsisGr{}
- \clearpage
-}
+% \def\@synopsis{
+%   \chapter*{ΣΥΝΟΠΤΙΚΗ ΠΑΡΟΥΣΙΑΣΗ ΤΗΣ ΔΙΔΑΚΤΟΡΙΚΗΣ ΔΙΑΤΡΙΒΗΣ}
+%   \thispagestyle{empty}  
+%   \@synopsisGr{}
+%   \clearpage
+% }
 
 %
 % Inscription page (optional)
 %
 % Enable it by passing option ``inscr'' to the document class.
 %
-\def\@inscr{
-  \cleardoublepage
-  \@inscriptionEn{}
-  \clearpage
-}
+% \def\@inscr{
+%   \cleardoublepage
+%   \@inscriptionEn{}
+%   \clearpage
+% }
 
 %
 % Acknowledgements (optional)
 %
 % Enable it by passing option ``ack'' to the document class.
 %
-
-\def\@acks{
-  \chapter*{Acknowledgements}
-  \thispagestyle{empty}  
-  \@acksEn{}
-  \clearpage  
-}
+% \def\@acks{
+%   \chapter*{Acknowledgements}
+%   \thispagestyle{empty}  
+%   \@acksEn{}
+%   \clearpage  
+% }
 
 %
 % Preface page (optional)
@@ -685,54 +710,56 @@ publications}\gdef\@lopfileinternal{#1}}
 % Foreword, and Preface: 
 %http://iankingsleyauthor.blogspot.de/2013/03/defined-prologue-epilogue-foreword.html.
 %
-
-\def\@preface{
-   \chapter*{Preface}
-   \thispagestyle{empty}
-   \@prefaceEn{}
-   \clearpage
-}
+% \def\@preface{
+%   \chapter*{Preface}
+%   \thispagestyle{empty}
+%   \@prefaceEn{}
+%   \clearpage
+% }
 
 %
 % List of publications (optional)
 %
 % Enable it by passing option ``lop'' to the document class.
 %
-\def\@listofpubs{
-  \bibliographystylelop{unsrt}
-  \bibliographylop{\@lopfileinternal}
-  \thispagestyle{empty}  
-  \clearpage
-}
+% \def\@listofpubs{
+%   \bibliographystylelop{unsrt}
+%   \bibliographylop{\@lopfileinternal}
+%   \thispagestyle{empty}  
+%   \clearpage
+% }
 
 %
 % Configure the frontmatter page
 %
 \renewcommand{\frontmatter}{
     \pagestyle{empty}
-    % frontpage - greek version
-    \@frontpage
     
     % frontpage - english version
     \englishfrontpagetrue
     \@frontpage
 
-    % examination committe page - greek version
-    \@committeepage
-    
+    % frontpage - greek version
+    \englishfrontpagefalse
+    \@frontpage
+
     % examination committe page - greek version
     \englishcommitteepagetrue
     \@committeepage
 
+    % examination committe page - greek version
+    \englishcommitteepagefalse
+    \@committeepage
+        
     % abstract (greek and english version)
-    \@absGr
     \@absEn
+    \@absGr
 
     % thesis synopsis (greek version only, OPTIONAL)
-    %\@synopsis
-    %\ifinscriptionpage
-    %\@inscr
-    %\fi
+    % \@synopsis
+    % \ifinscriptionpage
+    %    	\@inscr
+    % \fi
     
     % acknowledgements (english version only, OPTIONAL)
     \ifackpage
@@ -740,9 +767,9 @@ publications}\gdef\@lopfileinternal{#1}}
     \fi
     
     % list of publications (english version only, OPTIONAL)
-    \ifloppage
-       	\@listofpubs
-    \fi
+    % \ifloppage
+    %    	\@listofpubs
+    % \fi
     
     % table of contents
     % add TOC as bookmark
@@ -795,6 +822,8 @@ publications}\gdef\@lopfileinternal{#1}}
     %\patchcmd{\chapter}{plain}{empty}{}{}
 }
 
+
+
 %
 % Configure chapter printing and alignment (centered)
 %
@@ -829,8 +858,49 @@ publications}\gdef\@lopfileinternal{#1}}
 %
 % Set ToC depth
 %
+
+% ORIGINAL
+% \setcounter{tocdepth}{4}
+% \setcounter{secnumdepth}{3}
+
+% VASSILIKI
+% \renewcommand{\cftsecfont}{\footnotesize\sffamily\bfseries}
+\patchcmd{\section}{\bfseries}{\bfseries }{}{}
+\patchcmd{\subsection}{\bfseries}{\bfseries }{}{}
+\usepackage{titlesec}
+\usepackage[dotinlabels]{titletoc}
+% \renewcommand{\thechapter}{\arabic{chapter}.}
+% \renewcommand{\thesection}{\thechapter\arabic{section}}
+\titlecontents{subsection}
+ [1.5em] %
+ % {\smallskip}
+  {\addvspace{0.1pc}\filright\footnotesize}
+ {\thecontentslabel\hspace{1.02em}}%\thecontentslabel
+ {\hspace*{2.32em}}
+ {\,\,\titlerule*[0.77pc]{.}\normalsize\contentspage}
+ % {\smallskip}
+\titleformat*{\section}{\boldmath\bfseries}
+\titleformat*{\subsection}{\boldmath\bfseries}
+\contentsmargin{2.55em}
+\titlecontents{section}
+  [0] 
+  {\addvspace{0.1pc}\filright\footnotesize\boldmath\bfseries} 
+  % {\boldmath\bfseries} 
+  {\thecontentslabel\hspace{1.02em}}{2.3em}{\,\,\titlerule*[0.77pc]{.}\normalsize\normalfont\contentspage}
+  \titlecontents{subsubsection}
+  [4em] %
+ % {\smallskip} 
+ {\addvspace{0.1pc}\filright\footnotesize}
+ {\thecontentslabel\hspace{1.02em}}%\thecontentslabel
+ {\hspace*{2.55em}}
+ {\,\,\titlerule*[0.77pc]{.}\normalsize\contentspage}
+% \renewcommand{\thechapter}{\arabic{chapter}}
 \setcounter{tocdepth}{4}
-\setcounter{secnumdepth}{3}
+\setcounter{secnumdepth}{4}
+
+
+
+
 
 %
 % No indentation for paragraphs
@@ -851,19 +921,38 @@ publications}\gdef\@lopfileinternal{#1}}
 % Configure header and footer
 %
 %\pagestyle{fancy}
+
+% ORIGINAL
+% \fancyhf{}
+% \fancyhead[LEO]{{\footnotesize \@titleEn{}}}
+% \fancyfoot[C]{{\footnotesize \thepage}}
+% \fancyfoot[LE,RO]{{\footnotesize \@authorFirstAbrEn{} \@authorLastEn{}}}
+
+% % needed redefinition, because commands like \chapter call 
+% % \thispagestyle{plain} automatically
+% \fancypagestyle{plain} {
+%   \fancyhf{}
+%   \fancyhead[LO]{{\footnotesize \@titleEn{}}}
+%   \fancyfoot[C]{{\footnotesize \thepage}}   
+%   \fancyfoot[LE,RO]{{\footnotesize \@authorFirstAbrEn{} \@authorLastEn{}}}
+% }
+
+% VASILIKI
 \fancyhf{}
-\fancyhead[LEO]{{\footnotesize \@titleEn{}}}
-\fancyfoot[C]{{\footnotesize \thepage}}
-\fancyfoot[LE,RO]{{\footnotesize \@authorFirstAbrEn{} \@authorLastEn{}}}
+\fancyhead[LEO]{{\fontsize{8}{8} \selectfont \@titleEn{}}}
+\fancyfoot[R]{{\fontsize{8}{8} \selectfont \thepage}}
+\fancyfoot[L]{{\fontsize{8}{8} \selectfont \@authorFirstAbrEn{} \@authorLastEn{}}}
 
 % needed redefinition, because commands like \chapter call 
 % \thispagestyle{plain} automatically
 \fancypagestyle{plain} {
   \fancyhf{}
-  \fancyhead[LO]{{\footnotesize \@titleEn{}}}
-  \fancyfoot[C]{{\footnotesize \thepage}}   
-  \fancyfoot[LE,RO]{{\footnotesize \@authorFirstAbrEn{} \@authorLastEn{}}}
+  \fancyhead[L]{{\fontsize{8}{8} \selectfont \@titleEn{}}}
+  \fancyfoot[R]{{\fontsize{8}{8} \selectfont \thepage}}   
+  \fancyfoot[L]{{\fontsize{8}{8} \selectfont \@authorFirstAbrEn{} \@authorLastEn{}}}
 }
+
+
 \renewcommand{\headrulewidth}{0pt}
 
 %
