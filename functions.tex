@@ -403,7 +403,6 @@ circuits}\label{quantum-fourier-transform-via-variational-quantum-circuits}}
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{linalg}
 \PY{k+kn}{import} \PY{n+nn}{sys}
-\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
 \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 \PY{k+kn}{import} \PY{n+nn}{time}
@@ -421,7 +420,6 @@ circuits}\label{quantum-fourier-transform-via-variational-quantum-circuits}}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{ss1} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}
 \PY{n}{ss1} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{tensor}\PY{p}{(}\PY{n}{ss1}\PY{p}{)}
-\PY{c+c1}{\PYZsh{}print(ss1)}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -431,10 +429,8 @@ circuits}\label{quantum-fourier-transform-via-variational-quantum-circuits}}
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{}complex matrix with real and imaginary parts}
 \PY{n}{ss2} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{n}{j}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{1}\PY{n}{j}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}
 \PY{n}{ss2} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{tensor}\PY{p}{(}\PY{n}{ss2}\PY{p}{)}
-\PY{c+c1}{\PYZsh{}print(ss2)}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -446,7 +442,6 @@ circuits}\label{quantum-fourier-transform-via-variational-quantum-circuits}}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{ss3} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}
 \PY{n}{ss3} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{tensor}\PY{p}{(}\PY{n}{ss3}\PY{p}{)}
-\PY{c+c1}{\PYZsh{}print(ss3)}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -457,7 +452,6 @@ circuits}\label{quantum-fourier-transform-via-variational-quantum-circuits}}
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{ss4} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
-\PY{c+c1}{\PYZsh{}print(ss4)}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -552,7 +546,8 @@ circuits}\label{quantum-fourier-transform-via-variational-quantum-circuits}}
 \subsection{Generators:}\label{generators}}
 
     Here we create the generators, the quantum gates that are goint to be
-used in the circuit.
+used in the circuit. The generators, are combinations of Kronecker
+products of the gates we mentioned above.
 
     \hypertarget{single-qubit-gates}{%
 \subsubsection{Single qubit gates:}\label{single-qubit-gates}}
@@ -563,7 +558,6 @@ used in the circuit.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{}find kronecker products}
 \PY{n}{c1} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{kron}\PY{p}{(}\PY{n}{ss1}\PY{p}{,} \PY{n}{ss4}\PY{p}{)}
 \PY{n}{c1} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{kron}\PY{p}{(}\PY{n}{c1}\PY{p}{,} \PY{n}{ss4}\PY{p}{)}
 \end{Verbatim}
@@ -682,9 +676,6 @@ used in the circuit.
 \end{Verbatim}
 \end{tcolorbox}
 
-    \hypertarget{variational-gates}{%
-\subsection{Variational Gates:}\label{variational-gates}}
-
     In vv3 we will add all the generators, for later use.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -694,6 +685,9 @@ used in the circuit.
 \PY{n}{vv3} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{p}{(}\PY{n}{c1}\PY{p}{,} \PY{n}{c2}\PY{p}{,} \PY{n}{c3}\PY{p}{,} \PY{n}{c4}\PY{p}{,} \PY{n}{c5}\PY{p}{,} \PY{n}{c6}\PY{p}{,} \PY{n}{c7}\PY{p}{,} \PY{n}{c8}\PY{p}{,} \PY{n}{c9}\PY{p}{,} \PY{n}{c10}\PY{p}{,} \PY{n}{c11}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
+
+    \hypertarget{variational-gates}{%
+\subsection{Variational Gates:}\label{variational-gates}}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
@@ -719,7 +713,7 @@ used in the circuit.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{}find conjugate transpose of QF3}
+\PY{c+c1}{\PYZsh{}find conjugate transpose of QF}
 \PY{n}{B} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{conj}\PY{p}{(}\PY{n}{torch}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{QF}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
 \PY{n}{B}\PY{o}{.}\PY{n}{requires\PYZus{}grad} \PY{o}{=} \PY{k+kc}{True}
 \end{Verbatim}
@@ -727,6 +721,9 @@ used in the circuit.
 
     \hypertarget{circuit-generator}{%
 \subsection{Circuit generator:}\label{circuit-generator}}
+
+    The circuit created below, was firstly designed by hand, in order to
+combine both single and 2-qubit variational gates.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
@@ -763,6 +760,11 @@ used in the circuit.
 
     \PY{n}{G\PYZus{}final} \PY{o}{=} \PY{n}{G1}\PY{n+nd}{@G2}\PY{n+nd}{@G3}\PY{n+nd}{@G4}\PY{n+nd}{@G5}\PY{n+nd}{@G6}\PY{n+nd}{@G7}\PY{n+nd}{@G8}\PY{n+nd}{@G9}\PY{n+nd}{@G10}\PY{n+nd}{@G11}\PY{n+nd}{@G12}\PY{n+nd}{@G13}\PY{n+nd}{@G14}\PY{n+nd}{@G15}\PY{n+nd}{@G16}\PY{n+nd}{@G17}\PY{n+nd}{@G18}
 
+    \PY{c+c1}{\PYZsh{}In order to expand the initial 18\PYZhy{}parameter circuit to a n\PYZhy{}parameter circuit, we need to add more gates at the end of the circuit.}
+    \PY{c+c1}{\PYZsh{}As additional gates we will use those in the initial 18\PYZhy{}parameter circuit. For example if the desired circuit has 20 parameters, }
+    \PY{c+c1}{\PYZsh{}we need to add 2 additional gates to the initial 18\PYZhy{}parameter circuit. In order to do that, we will add the first 2 gates of the initial circuit }
+    \PY{c+c1}{\PYZsh{}at the end of the circuit. If we want a 28\PYZhy{}parameter circuit, we will add the first 10 gates of the initial circuit, at the end etc.}
+
     \PY{c+c1}{\PYZsh{}Initial gate indices}
     \PY{n}{gate\PYZus{}indices} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}  \PY{c+c1}{\PYZsh{} Example gate indices}
     \PY{c+c1}{\PYZsh{} Additional gates}
@@ -784,7 +786,6 @@ used in the circuit.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} Define your cost function}
 \PY{k}{def} \PY{n+nf}{cost\PYZus{}function}\PY{p}{(}\PY{n}{x\PYZus{}var}\PY{p}{)}\PY{p}{:}
     \PY{n}{G\PYZus{}final} \PY{o}{=} \PY{n}{create\PYZus{}circuit}\PY{p}{(}\PY{n}{x\PYZus{}var}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x\PYZus{}var}\PY{p}{)}\PY{p}{)}
     \PY{n}{cost} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{64} \PY{o}{*} \PY{p}{(}\PY{p}{(}\PY{n}{torch}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{torch}\PY{o}{.}\PY{n}{trace}\PY{p}{(}\PY{n}{G\PYZus{}final} \PY{o}{@} \PY{n}{B}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
@@ -810,28 +811,23 @@ optimizer:}\label{gradient-descent-optimizer}}
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{}the function performs gradient descent of cost to find the optimal x values}
+\PY{c+c1}{\PYZsh{}function performs gradient descent of cost to find the optimal x values}
 \PY{c+c1}{\PYZsh{}x\PYZus{}var is the initial x values, gamma is the learning rate, delta is the perturbation value}
 \PY{k}{def} \PY{n+nf}{optimize\PYZus{}parameters}\PY{p}{(}\PY{n}{x\PYZus{}var}\PY{p}{,} \PY{n}{gamma}\PY{p}{,} \PY{n}{delta}\PY{p}{)}\PY{p}{:}   
-    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x initial is: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x\PYZus{}var}\PY{p}{)}         
-    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cost initial = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cost\PYZus{}function}\PY{p}{(}\PY{n}{x\PYZus{}var}\PY{p}{)}\PY{p}{)}
+    \PY{c+c1}{\PYZsh{}print(\PYZdq{}x initial is: \PYZbs{}n\PYZbs{}n\PYZdq{}, x\PYZus{}var)         }
+    \PY{c+c1}{\PYZsh{}print(\PYZdq{}cost initial = \PYZdq{}, cost\PYZus{}function(x\PYZus{}var))}
     \PY{n}{x\PYZus{}new} \PY{o}{=} \PY{n}{x\PYZus{}var}\PY{o}{.}\PY{n}{clone}\PY{p}{(}\PY{p}{)}
 
     \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x\PYZus{}var}\PY{p}{)}\PY{p}{)}\PY{p}{:}
         \PY{n}{x\PYZus{}var\PYZus{}sum} \PY{o}{=} \PY{n}{x\PYZus{}var}\PY{o}{.}\PY{n}{clone}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}create a copy of the x\PYZus{}var tensor}
         \PY{n}{x\PYZus{}var\PYZus{}sum}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{x\PYZus{}var}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{delta}
-        \PY{c+c1}{\PYZsh{}print(\PYZdq{}x sum is: \PYZbs{}n\PYZbs{}n\PYZdq{}, x\PYZus{}var\PYZus{}sum)}
         \PY{n}{cost\PYZus{}sum} \PY{o}{=} \PY{n}{cost\PYZus{}function}\PY{p}{(}\PY{n}{x\PYZus{}var\PYZus{}sum}\PY{p}{)}
-        \PY{c+c1}{\PYZsh{}print(\PYZdq{}cost sum = \PYZdq{}, cost\PYZus{}sum)}
 
         \PY{n}{x\PYZus{}var\PYZus{}diff} \PY{o}{=} \PY{n}{x\PYZus{}var}\PY{o}{.}\PY{n}{clone}\PY{p}{(}\PY{p}{)}
         \PY{n}{x\PYZus{}var\PYZus{}diff}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{x\PYZus{}var}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{delta}
-        \PY{c+c1}{\PYZsh{}print(\PYZdq{}x diff is: \PYZbs{}n\PYZbs{}n\PYZdq{}, x\PYZus{}var\PYZus{}diff)}
         \PY{n}{cost\PYZus{}diff} \PY{o}{=} \PY{n}{cost\PYZus{}function}\PY{p}{(}\PY{n}{x\PYZus{}var\PYZus{}diff}\PY{p}{)}
-        \PY{c+c1}{\PYZsh{}print(\PYZdq{}cost diff = \PYZdq{}, cost\PYZus{}diff)}
         \PY{n}{x\PYZus{}new}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{x\PYZus{}var}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{gamma} \PY{o}{*} \PY{p}{(}\PY{p}{(}\PY{n}{cost\PYZus{}sum} \PY{o}{\PYZhy{}} \PY{n}{cost\PYZus{}diff}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*} \PY{n}{delta}\PY{p}{)}\PY{p}{)}
 
-    \PY{c+c1}{\PYZsh{}print(\PYZdq{}x new is: \PYZbs{}n\PYZbs{}n\PYZdq{}, x\PYZus{}new)}
     \PY{k}{return} \PY{n}{x\PYZus{}new}\PY{p}{,} \PY{n}{cost\PYZus{}function}\PY{p}{(}\PY{n}{x\PYZus{}new}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
@@ -839,27 +835,24 @@ optimizer:}\label{gradient-descent-optimizer}}
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{}create a function that calls the optimize\PYZus{}parameters function until the cost stops changing more than a certain value(epsilon)}
-\PY{k}{def} \PY{n+nf}{gradient\PYZus{}descent\PYZus{}cost\PYZus{}optimizer}\PY{p}{(}\PY{n}{x\PYZus{}var}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{p}{,} \PY{n}{delta}\PY{p}{,} \PY{n}{epsilon}\PY{p}{,} \PY{n}{threshold}\PY{p}{,} \PY{n}{step\PYZus{}size}\PY{p}{,} \PY{n}{epochs}\PY{p}{)}\PY{p}{:}
+\PY{c+c1}{\PYZsh{}function that calls the optimize\PYZus{}parameters function until the cost stops changing more than a certain value(epsilon)}
+\PY{k}{def} \PY{n+nf}{gradient\PYZus{}descent\PYZus{}cost\PYZus{}optimizer}\PY{p}{(}\PY{n}{x\PYZus{}var}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{p}{,} \PY{n}{delta}\PY{p}{,} \PY{n}{epsilon}\PY{p}{,} \PY{n}{threshold}\PY{p}{,} \PY{n}{step\PYZus{}size}\PY{p}{)}\PY{p}{:}
     \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{0}
     \PY{n}{x\PYZus{}init}\PY{p}{,} \PY{n}{cost\PYZus{}init} \PY{o}{=} \PY{n}{optimize\PYZus{}parameters}\PY{p}{(}\PY{n}{x\PYZus{}var}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{p}{,} \PY{n}{delta}\PY{p}{)} \PY{c+c1}{\PYZsh{}get the initial cost after the first optimization}
     \PY{n}{x\PYZus{}old} \PY{o}{=} \PY{n}{x\PYZus{}init}\PY{o}{.}\PY{n}{clone}\PY{p}{(}\PY{p}{)}
     \PY{n}{cost\PYZus{}old} \PY{o}{=} \PY{n}{cost\PYZus{}init}\PY{o}{.}\PY{n}{clone}\PY{p}{(}\PY{p}{)}
-    \PY{c+c1}{\PYZsh{}cost\PYZus{}difference = torch.abs(cost\PYZus{}old \PYZhy{} cost\PYZus{}init)}
     \PY{n}{cost\PYZus{}history} \PY{o}{=} \PY{p}{[}\PY{n}{cost\PYZus{}init}\PY{p}{]}  \PY{c+c1}{\PYZsh{} List to store the cost at each iteration}
 
     \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
-        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ITERATION = }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{iterations}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}print(\PYZdq{}ITERATION = \PYZbs{}n\PYZdq{}, iterations)}
         \PY{n}{x\PYZus{}new}\PY{p}{,} \PY{n}{cost\PYZus{}new} \PY{o}{=} \PY{n}{optimize\PYZus{}parameters}\PY{p}{(}\PY{n}{x\PYZus{}old}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{p}{,} \PY{n}{delta}\PY{p}{)}
-        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{new cost = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cost\PYZus{}new}\PY{p}{)}
-        \PY{c+c1}{\PYZsh{} if cost\PYZus{}difference != torch.abs(cost\PYZus{}new \PYZhy{} cost\PYZus{}old):}
-        \PY{c+c1}{\PYZsh{}     cost\PYZus{}difference = torch.abs(cost\PYZus{}new \PYZhy{} cost\PYZus{}old)}
+        \PY{c+c1}{\PYZsh{}print(\PYZdq{}new cost = \PYZdq{}, cost\PYZus{}new)}
         \PY{k}{if} \PY{n}{torch}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{cost\PYZus{}new} \PY{o}{\PYZhy{}} \PY{n}{cost\PYZus{}old}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{epsilon}\PY{p}{:}
             \PY{k}{break}
         \PY{k}{else}\PY{p}{:}
             \PY{k}{if}\PY{p}{(}\PY{n}{torch}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{cost\PYZus{}new} \PY{o}{\PYZhy{}} \PY{n}{cost\PYZus{}old}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{threshold} \PY{o+ow}{and} \PY{n}{iterations} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
                 \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{n}{learning\PYZus{}rate\PYZus{}step\PYZus{}scheduler}\PY{p}{(}\PY{n}{learning\PYZus{}rate}\PY{p}{,} \PY{n}{step\PYZus{}size}\PY{p}{)}
-                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ITERATION = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{iterations}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{    LEARNING RATE = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{}print(\PYZdq{}ITERATION = \PYZdq{}, iterations, \PYZdq{}    LEARNING RATE = \PYZdq{}, learning\PYZus{}rate, \PYZdq{}\PYZbs{}n\PYZdq{})}
             \PY{n}{x\PYZus{}old} \PY{o}{=} \PY{n}{x\PYZus{}new}\PY{o}{.}\PY{n}{clone}\PY{p}{(}\PY{p}{)}
             \PY{n}{cost\PYZus{}old} \PY{o}{=} \PY{n}{cost\PYZus{}new}\PY{o}{.}\PY{n}{clone}\PY{p}{(}\PY{p}{)}
             \PY{n}{iterations} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
@@ -906,22 +899,22 @@ descent:}\label{stochastic-gradient-descent}}
     \PY{n}{cost\PYZus{}history} \PY{o}{=} \PY{p}{[}\PY{n}{cost\PYZus{}init}\PY{p}{]}  \PY{c+c1}{\PYZsh{} List to store the cost at each iteration}
 
     \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
-        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ITERATION =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{iterations}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}print(\PYZdq{}ITERATION =\PYZdq{}, iterations)}
         \PY{n}{data\PYZus{}point} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{n}{num\PYZus{}data\PYZus{}points}\PY{p}{)}
         \PY{n}{x\PYZus{}new}\PY{p}{,} \PY{n}{cost\PYZus{}new} \PY{o}{=} \PY{n}{optimize\PYZus{}stochastic\PYZus{}parameters}\PY{p}{(}\PY{n}{x\PYZus{}old}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{p}{,} \PY{n}{delta}\PY{p}{,} \PY{n}{data\PYZus{}point}\PY{p}{)}
-        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x new =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x\PYZus{}new}\PY{p}{)}
-        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{new cost =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cost\PYZus{}new}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}print(\PYZdq{}x new =\PYZdq{}, x\PYZus{}new)}
+        \PY{c+c1}{\PYZsh{}print(\PYZdq{}new cost =\PYZdq{}, cost\PYZus{}new)}
 
         \PY{k}{if} \PY{n}{torch}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{cost\PYZus{}new} \PY{o}{\PYZhy{}} \PY{n}{cost\PYZus{}old}\PY{p}{)} \PY{o}{!=} \PY{n}{cost\PYZus{}difference}\PY{p}{:}
             \PY{n}{cost\PYZus{}difference} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{cost\PYZus{}new} \PY{o}{\PYZhy{}} \PY{n}{cost\PYZus{}old}\PY{p}{)}
-            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cost difference =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cost\PYZus{}difference}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}print(\PYZdq{}cost difference =\PYZdq{}, cost\PYZus{}difference)}
         \PY{k}{if} \PY{n}{iterations} \PY{o}{\PYZgt{}} \PY{n}{num\PYZus{}epochs} \PY{o+ow}{and} \PY{n}{cost\PYZus{}difference} \PY{o}{\PYZlt{}} \PY{n}{epsilon}\PY{p}{:}
             \PY{k}{break}
         \PY{k}{else}\PY{p}{:}
             \PY{k}{if} \PY{n}{cost\PYZus{}difference} \PY{o}{\PYZlt{}} \PY{n}{threshold} \PY{o+ow}{and} \PY{n}{iterations} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
-                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Scheduler called}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{scheduler}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{}print(\PYZdq{}Scheduler called\PYZdq{}, scheduler)}
                 \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{n}{scheduler}\PY{p}{(}\PY{n}{learning\PYZus{}rate}\PY{p}{,} \PY{n}{step\PYZus{}size}\PY{p}{)}
-                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ITERATION =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{iterations}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ LEARNING RATE =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{}print(\PYZdq{}ITERATION =\PYZdq{}, iterations, \PYZdq{} LEARNING RATE =\PYZdq{}, learning\PYZus{}rate, \PYZdq{}\PYZbs{}n\PYZdq{})}
 
             \PY{n}{x\PYZus{}old} \PY{o}{=} \PY{n}{x\PYZus{}new}\PY{o}{.}\PY{n}{clone}\PY{p}{(}\PY{p}{)}
             \PY{n}{cost\PYZus{}old} \PY{o}{=} \PY{n}{cost\PYZus{}new}\PY{o}{.}\PY{n}{clone}\PY{p}{(}\PY{p}{)}
@@ -937,16 +930,18 @@ descent:}\label{stochastic-gradient-descent}}
 optimization}\label{execution-of-the-program-and-cost-optimization}}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{ }{\boxspacing}
+\prompt{In}{incolor}{297}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{num\PYZus{}parameters} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{18}\PY{p}{,} \PY{l+m+mi}{22}\PY{p}{,} \PY{l+m+mi}{26}\PY{p}{,} \PY{l+m+mi}{28}\PY{p}{]}
+\PY{n}{iterations} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{150}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{300}\PY{p}{]} \PY{c+c1}{\PYZsh{} Number of iterations for each num of parameters. Used only in stochastic gradient descent. }
+\PY{c+c1}{\PYZsh{}In this implementation, we perform only the gradient descent algorithm}
 
 \PY{n}{counter} \PY{o}{=} \PY{l+m+mi}{1}  \PY{c+c1}{\PYZsh{} Initialize the counter}
 
 \PY{c+c1}{\PYZsh{} Create an empty list to store the results}
 \PY{n}{results} \PY{o}{=} \PY{p}{[}\PY{p}{]}
 \PY{k}{for} \PY{n}{algorithm} \PY{o+ow}{in} \PY{p}{[}\PY{n}{gradient\PYZus{}descent\PYZus{}cost\PYZus{}optimizer}\PY{p}{]}\PY{p}{:}
-    \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{num\PYZus{}parameters}\PY{p}{)}\PY{p}{:}
+    \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{num\PYZus{}parameters}\PY{p}{,} \PY{n}{iterations}\PY{p}{)}\PY{p}{:}
 
         \PY{c+c1}{\PYZsh{} Create an empty list to store the results}
         \PY{n}{results\PYZus{}algorithm} \PY{o}{=} \PY{p}{[}\PY{p}{]}
@@ -961,7 +956,7 @@ optimization}\label{execution-of-the-program-and-cost-optimization}}
         \PY{k}{if} \PY{n}{algorithm} \PY{o}{==} \PY{n}{stochastic\PYZus{}gradient\PYZus{}descent}\PY{p}{:}
             \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.05}
             \PY{n}{delta} \PY{o}{=} \PY{l+m+mf}{0.0005}
-            \PY{n}{epsilon} \PY{o}{=} \PY{l+m+mf}{0.1}
+            \PY{n}{epsilon} \PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}08}
             \PY{n}{threshold} \PY{o}{=} \PY{l+m+mf}{0.00001}
             \PY{n}{step\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.1}
             \PY{n}{x}\PY{p}{,} \PY{n}{cost}\PY{p}{,} \PY{n}{iters}\PY{p}{,} \PY{n}{cost\PYZus{}history} \PY{o}{=} \PY{n}{stochastic\PYZus{}gradient\PYZus{}descent}\PY{p}{(}\PY{n}{x\PYZus{}var}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{p}{,} \PY{n}{delta}\PY{p}{,} \PY{n}{epsilon}\PY{p}{,} \PY{n}{threshold}\PY{p}{,} \PY{n}{step\PYZus{}size}\PY{p}{,} \PY{n}{learning\PYZus{}rate\PYZus{}step\PYZus{}scheduler}\PY{p}{,}\PY{n}{j}\PY{p}{)}
@@ -971,14 +966,14 @@ optimization}\label{execution-of-the-program-and-cost-optimization}}
             \PY{n}{epsilon} \PY{o}{=}  \PY{l+m+mf}{1e\PYZhy{}08} 
             \PY{n}{threshold} \PY{o}{=}  \PY{l+m+mf}{0.0001} 
             \PY{n}{step\PYZus{}size} \PY{o}{=}   \PY{l+m+mf}{0.1} 
-            \PY{n}{x}\PY{p}{,} \PY{n}{cost}\PY{p}{,} \PY{n}{iters}\PY{p}{,} \PY{n}{cost\PYZus{}history} \PY{o}{=} \PY{n}{gradient\PYZus{}descent\PYZus{}cost\PYZus{}optimizer}\PY{p}{(}\PY{n}{x\PYZus{}var}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{p}{,} \PY{n}{delta}\PY{p}{,} \PY{n}{epsilon}\PY{p}{,} \PY{n}{threshold}\PY{p}{,} \PY{n}{step\PYZus{}size}\PY{p}{,} \PY{n}{j}\PY{p}{)}
+            \PY{n}{x}\PY{p}{,} \PY{n}{cost}\PY{p}{,} \PY{n}{iters}\PY{p}{,} \PY{n}{cost\PYZus{}history} \PY{o}{=} \PY{n}{gradient\PYZus{}descent\PYZus{}cost\PYZus{}optimizer}\PY{p}{(}\PY{n}{x\PYZus{}var}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{p}{,} \PY{n}{delta}\PY{p}{,} \PY{n}{epsilon}\PY{p}{,} \PY{n}{threshold}\PY{p}{,} \PY{n}{step\PYZus{}size}\PY{p}{)}
 
         \PY{n}{results\PYZus{}algorithm}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{x\PYZus{}var}\PY{p}{,} \PY{n}{cost\PYZus{}function}\PY{p}{(}\PY{n}{x\PYZus{}var}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{iters}\PY{p}{,} \PY{n}{cost}\PY{p}{)}\PY{p}{)}
         \PY{n}{end} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
 
         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Parameters are: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,} \PY{n}{i}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ X INITIAL is:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x\PYZus{}var}\PY{p}{)}
         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{initial cost: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cost\PYZus{}function}\PY{p}{(}\PY{n}{x\PYZus{}var}\PY{p}{)}\PY{p}{)}
-        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{    X FINAL is:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X FINAL is:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x}\PY{p}{)}
         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{iterations =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{iters}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{final cost: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cost}\PY{p}{)}
         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time taken =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{end} \PY{o}{\PYZhy{}} \PY{n}{start}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{learning\PYZus{}rate = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
@@ -1002,7 +997,6 @@ optimization}\label{execution-of-the-program-and-cost-optimization}}
         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{n}{block}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
 
         \PY{c+c1}{\PYZsh{} Save the figure as a PNG file}
-
         \PY{n}{filename} \PY{o}{=} \PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cost\PYZus{}progression\PYZus{}}\PY{l+s+si}{\PYZob{}}\PY{n}{i}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+si}{\PYZob{}}\PY{n}{algorithm}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+si}{\PYZob{}}\PY{n}{counter}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{.png}\PY{l+s+s1}{\PYZsq{}}
         \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{n}{filename}\PY{p}{)}
 
@@ -1018,15 +1012,24 @@ optimization}\label{execution-of-the-program-and-cost-optimization}}
                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final Values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{result}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{detach}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{numpy}\PY{p}{(}\PY{p}{)}\PY{p}{,}
                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iterations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{result}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}
                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Initial Cost}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{result}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}\PY{p}{,}
-                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final Cost}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{result}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final Cost}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{result}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Execution Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{end} \PY{o}{\PYZhy{}} \PY{n}{start}
             \PY{p}{\PYZcb{}}\PY{p}{)}
 
-    \PY{c+c1}{\PYZsh{} Open the file in write mode}
-    \PY{n}{output} \PY{o}{=} \PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}}\PY{n}{i}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+si}{\PYZob{}}\PY{n}{algorithm}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+si}{\PYZob{}}\PY{n}{counter}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{.txt}\PY{l+s+s1}{\PYZsq{}}
-    \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{output}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{file}\PY{p}{:}
-        \PY{c+c1}{\PYZsh{} Iterate over the list and write each element to the file}
-        \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{results\PYZus{}algorithm}\PY{p}{:}
-            \PY{n}{file}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{item}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Add a newline character after each item}
+        \PY{c+c1}{\PYZsh{} Open the file in write mode}
+            \PY{n}{output\PYZus{}file} \PY{o}{=} \PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}}\PY{n}{i}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+si}{\PYZob{}}\PY{n}{algorithm}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+si}{\PYZob{}}\PY{n}{counter}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{.txt}\PY{l+s+s1}{\PYZsq{}}
+            \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{output\PYZus{}file}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{file}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} Iterate over the \PYZsq{}results\PYZsq{} list and write each element to the file}
+                \PY{k}{for} \PY{n}{result} \PY{o+ow}{in} \PY{n}{results}\PY{p}{:}
+                    \PY{n}{file}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Algorithm: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Algorithm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{file}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Parameters: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Parameters}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{file}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Initial Values: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Initial Values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{file}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Final Values: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final Values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{file}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Initial Cost: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Initial Cost}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{file}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Final Cost: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final Cost}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{file}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Iterations: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iterations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{file}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Execution Time: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Execution Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                
 \end{Verbatim}
 \end{tcolorbox}
 
