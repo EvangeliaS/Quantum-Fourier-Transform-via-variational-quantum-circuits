@@ -661,9 +661,9 @@ publications}\gdef\@lopfileinternal{#1}}
   \@abstractGr{}
   \vfill
   
-  {\bfseries ΘΕΜΑΤΙΚΗ ΠΕΡΙΟΧΗ}: \@subjectAreaGr\\
+  %{\bfseries ΘΕΜΑΤΙΚΗ ΠΕΡΙΟΧΗ}: \@subjectAreaGr\\
   
-  {\bfseries ΛΕΞΕΙΣ ΚΛΕΙΔΙΑ}: \@keywordsGr
+  %{\bfseries ΛΕΞΕΙΣ ΚΛΕΙΔΙΑ}: \@keywordsGr
     
   \clearpage
 }
@@ -683,23 +683,30 @@ publications}\gdef\@lopfileinternal{#1}}
 %
 % Enable it by passing option ``inscr'' to the document class.
 %
-% \def\@inscr{
-%   \cleardoublepage
-%   \@inscriptionEn{}
-%   \clearpage
-% }
+\def\@inscr{
+  \cleardoublepage
+  \@inscriptionEn{Στην οικογένειά μου}
+  \clearpage
+}
 
 %
 % Acknowledgements (optional)
 %
 % Enable it by passing option ``ack'' to the document class.
 %
-% \def\@acks{
-%   \chapter*{Acknowledgements}
-%   \thispagestyle{empty}  
-%   \@acksEn{}
-%   \clearpage  
-% }
+\def\@acks{
+  \chapter*{ΕΥΧΑΡΙΣΤΙΕΣ}
+  \thispagestyle{empty}  
+  \@acksEn{Η ολοκλήρωση της πτυχιακής αυτής εργασίας θα ήταν αδύνατη χωρίς την πολύτιμη
+υποστήριξη της καθηγήτριάς μου, Κατερίνας Μανδηλαρά, χάρη στην οποία επέλεξα να στραφώ προς το συγκεκριμένο θέμα, αλλά και να καταφέρω να μάθω τόσα πολλά αυτό το ακαδημαϊκό έτος. Της εκφράζω ένα βαθύ ευχαριστώ για όλη τη βοήθεια, και το κίνητρο που μου προσέφερε, αλλά και τον πολύτιμο χρόνο που μου διέθεσε.
+
+\\Θα ήθελα ακόμη να ευχαριστήσω τους φίλους μου Σταυρούλα και Νικηφόρο, που έκαναν αισθητά πιο ευχάριστη αυτή την διαδικασία, και με στήριξαν καθ'όλη τη διάρκεια.
+
+\\Δεν θα μπορούσα να παραλείψω τον Αλέξανδρο, και τον Θέμη, καθώς στις εβδομαδιαίες μας συναντήσεις, αλλά και σε τυχαίες στιγμές, με βοηθούσαν με ό,τι τρόπο μπορούσαν σε οποιαδήποτε δυσκολία προέκυπτε.
+\\
+\\Τέλος, θα ήθελα να ευχαριστήσω τον Κωνσταντίνο, γιατί από την πρώτη στιγμή πίστεψε σε μένα, αλλά και για όλη την κατανόηση, και την συμπαράσταση που μου προσέφερε.}
+  \clearpage  
+}
 
 %
 % Preface page (optional)
