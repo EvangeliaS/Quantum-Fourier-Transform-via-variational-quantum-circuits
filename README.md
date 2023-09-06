@@ -1,5 +1,5 @@
-Variational quantum circuits are quantum circuits which contain gates with adjustable pa-
-rameters. Such circuits are already physically realizable in small scale and there is a wide
+Variational quantum circuits are quantum circuits which contain gates with adjustable parameters. 
+Such circuits are already physically realizable in small scale and there is a wide
 range of possible applications for these promising structures. In this thesis, I develop the
 idea of tuning a variational quantum circuit to simulate the important for quantum com-
 puting, operation of Quantum Fourier Transform. I use algebraic arguments, so called an
