@@ -5,3 +5,61 @@ idea of tuning a variational quantum circuit to simulate the important for quant
 puting, operation of Quantum Fourier Transform. I use algebraic arguments, so called an
 ansatz, for reducing the depth of the variational quantum circuit and use different classical algorithms to optimize the parameters. The results of this thesis concerning 3-qubit
 circuits can be possibly extended to a higher number of qubits.
+
+# Variational Quantum Circuits for Quantum Fourier Transform Simulation
+
+This repository contains the code and documentation for my thesis work on using variational quantum circuits (VQC) to simulate the Quantum Fourier Transform (QFT). The aim of this research is to develop a VQC-based approach to efficiently perform QFT, a crucial operation in quantum computing.
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Key Findings](#key-findings)
+- [Getting Started](#getting-started)
+- [Ansatz and Circuit Structure](#ansatz-and-circuit-structure)
+- [Cost Function](#cost-function)
+- [Results](#results)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Introduction
+
+In this thesis, I explore the use of variational quantum circuits (VQC) with adjustable parameters to simulate the Quantum Fourier Transform (QFT). The primary objectives of this research are to reduce the depth of the quantum circuit required for QFT simulation and optimize the circuit parameters using classical algorithms.
+
+## Key Findings
+
+- Increasing the number of trainable parameters generally improves the optimization process, resulting in lower cost values.
+- Initial parameter values have a significant impact on convergence rates and final cost values.
+- Epsilon values used in optimization algorithms affect execution time and convergence, depending on initialization values.
+- Efficient training of the quantum circuit with 26 parameters is possible, and adding more parameters may not significantly improve results.
+- An ansatz based on algebraic properties of QFT reduced the number of parameters and circuit depth effectively.
+
+## Getting Started
+
+To replicate the experiments and results presented in this thesis, follow the steps outlined in the [Getting Started Guide](getting_started.md).
+
+## Ansatz and Circuit Structure
+
+The VQC ansatz is built based on the algebraic properties of the QFT. We decompose the QFT into a set of generators and construct a parametrized circuit using 11 single-qubit and two-qubit Hamiltonians. This parametrized circuit aims to minimize the cost function by adjusting its parameters.
+
+For detailed information on the ansatz and circuit structure, refer to [Chapter: Building an Ansatz](#building-an-ansatz) in the thesis.
+
+## Cost Function
+
+The cost function measures the distance between the parametrized circuit and the target QFT operation. It is designed to be minimized during the optimization process. More information about the cost function can be found in [Chapter: Cost Function](#cost-function) in the thesis.
+
+## Results
+
+The results of the experiments are presented in [Chapter: Results](#results) in the thesis. These results showcase the impact of various factors such as the number of parameters, initial values, and epsilon values on the optimization process and final cost values.
+
+## Usage
+
+To run the code and reproduce the experiments, follow the instructions in the [Usage Guide](usage.md). This guide provides details on setting up the environment, running experiments, and visualizing the results.
+
+## Contributing
+
+If you wish to contribute to this project, please follow the guidelines outlined in [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
