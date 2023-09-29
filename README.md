@@ -34,9 +34,6 @@ In this thesis, I explore the use of variational quantum circuits (VQC) with adj
 - Efficient training of the quantum circuit with 26 parameters is possible, and adding more parameters may not significantly improve results.
 - An ansatz based on algebraic properties of QFT reduced the number of parameters and circuit depth effectively.
 
-## Getting Started
-
-To replicate the experiments and results presented in this thesis, follow the steps outlined in the [Getting Started Guide](getting_started.md).
 
 ## Ansatz and Circuit Structure
 
@@ -51,15 +48,3 @@ The cost function measures the distance between the parametrized circuit and the
 ## Results
 
 The results of the experiments are presented in [Chapter: Results](#results) in the thesis. These results showcase the impact of various factors such as the number of parameters, initial values, and epsilon values on the optimization process and final cost values.
-
-## Usage
-
-To run the code and reproduce the experiments, follow the instructions in the [Usage Guide](usage.md). This guide provides details on setting up the environment, running experiments, and visualizing the results.
-
-## Contributing
-
-If you wish to contribute to this project, please follow the guidelines outlined in [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
