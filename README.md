@@ -1,4 +1,4 @@
-# Variational Quantum Circuits for Quantum Fourier Transform Simulation
+# Quantum Fourier Transform via variational quantum circuits
 
 This repository contains the code and documentation for my thesis work on using variational quantum circuits (VQC) to simulate the Quantum Fourier Transform (QFT). The aim of this research is to develop a VQC-based approach to efficiently perform QFT, a crucial operation in quantum computing.
 
