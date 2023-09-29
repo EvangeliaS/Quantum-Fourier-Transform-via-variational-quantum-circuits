@@ -37,7 +37,7 @@ In this thesis, I explore the use of variational quantum circuits (VQC) with adj
 
 ## Ansatz and Circuit Structure
 
-The VQC ansatz is built based on the algebraic properties of the QFT. We decompose the QFT into a set of generators and construct a parametrized circuit using 11 single-qubit and two-qubit Hamiltonians. This parametrized circuit aims to minimize the cost function by adjusting its parameters.
+The VQC ansatz is built based on the algebraic properties of the QFT. We decompose the QFT into a set of 11 generators and construct a parametrized circuit using single-qubit and two-qubit gates. This parametrized circuit aims to minimize the cost function by adjusting its parameters.
 
 For detailed information on the ansatz and circuit structure, refer to [Chapter: Building an Ansatz](#building-an-ansatz) in the thesis.
 
