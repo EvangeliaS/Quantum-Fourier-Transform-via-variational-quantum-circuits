@@ -35,8 +35,8 @@ For detailed information on the ansatz and circuit structure, refer to [Chapter:
 
 ## Cost Function
 
-The cost function measures the distance between the parametrized circuit and the target QFT operation. It is designed to be minimized during the optimization process. More information about the cost function can be found in [Chapter: Cost Function] in the [thesis](https://github.com/EvangeliaS/Quantum-Fourier-Transform-via-variational-quantum-circuits/blob/3e2a6da4b577a2c1c4828fc98ed88ab024080860/Implementing_Quantum_Fourier_Transform_via_variational_quantum_circuits.pdf).
+The cost function measures the distance between the parametrized circuit and the target QFT operation. It is designed to be minimized during the optimization process. More information about the cost function can be found in [Chapter: Cost Function] in the thesis.
 
 ## Results
 
-The results of the experiments are presented in [Chapter: Results] in the [thesis](https://github.com/EvangeliaS/Quantum-Fourier-Transform-via-variational-quantum-circuits/blob/3e2a6da4b577a2c1c4828fc98ed88ab024080860/Implementing_Quantum_Fourier_Transform_via_variational_quantum_circuits.pdf). These results showcase the impact of various factors such as the number of parameters, initial values, and epsilon values on the optimization process and final cost values.
+The results of the experiments are presented in [Chapter: Results] in the thesis. These results showcase the impact of various factors such as the number of parameters, initial values, and epsilon values on the optimization process and final cost values.
