@@ -31,12 +31,12 @@ In this thesis, I explore the use of variational quantum circuits (VQC) with adj
 
 The VQC ansatz is built based on the algebraic properties of the QFT. We decompose the QFT into a set of 11 generators and construct a parametrized circuit using single-qubit and two-qubit gates. This parametrized circuit aims to minimize the cost function by adjusting its parameters.
 
-For detailed information on the ansatz and circuit structure, refer to [Chapter: Building an Ansatz](#building-an-ansatz) in the thesis.
+For detailed information on the ansatz and circuit structure, refer to [Chapter: Building an Ansatz] in the [thesis](https://github.com/EvangeliaS/Quantum-Fourier-Transform-via-variational-quantum-circuits/blob/3e2a6da4b577a2c1c4828fc98ed88ab024080860/Implementing_Quantum_Fourier_Transform_via_variational_quantum_circuits.pdf).
 
 ## Cost Function
 
-The cost function measures the distance between the parametrized circuit and the target QFT operation. It is designed to be minimized during the optimization process. More information about the cost function can be found in [Chapter: Cost Function](#cost-function) in the thesis.
+The cost function measures the distance between the parametrized circuit and the target QFT operation. It is designed to be minimized during the optimization process. More information about the cost function can be found in [Chapter: Cost Function] in the [thesis](https://github.com/EvangeliaS/Quantum-Fourier-Transform-via-variational-quantum-circuits/blob/3e2a6da4b577a2c1c4828fc98ed88ab024080860/Implementing_Quantum_Fourier_Transform_via_variational_quantum_circuits.pdf).
 
 ## Results
 
-The results of the experiments are presented in [Chapter: Results](#results) in the thesis. These results showcase the impact of various factors such as the number of parameters, initial values, and epsilon values on the optimization process and final cost values.
+The results of the experiments are presented in [Chapter: Results] in the [thesis](https://github.com/EvangeliaS/Quantum-Fourier-Transform-via-variational-quantum-circuits/blob/3e2a6da4b577a2c1c4828fc98ed88ab024080860/Implementing_Quantum_Fourier_Transform_via_variational_quantum_circuits.pdf). These results showcase the impact of various factors such as the number of parameters, initial values, and epsilon values on the optimization process and final cost values.
