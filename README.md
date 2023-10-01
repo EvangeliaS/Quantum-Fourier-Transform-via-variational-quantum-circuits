@@ -16,7 +16,7 @@ This repository contains the code and documentation for my thesis work on using 
 
 ## Introduction
 
-In this thesis, I explore the use of variational quantum circuits (VQC) with adjustable parameters to simulate the Quantum Fourier Transform (QFT). The primary objectives of this research are to reduce the depth of the quantum circuit required for QFT simulation and optimize the circuit parameters using classical algorithms.
+In this [thesis](https://github.com/EvangeliaS/Quantum-Fourier-Transform-via-variational-quantum-circuits/blob/3e2a6da4b577a2c1c4828fc98ed88ab024080860/Implementing_Quantum_Fourier_Transform_via_variational_quantum_circuits.pdf) , I explore the use of variational quantum circuits (VQC) with adjustable parameters to simulate the Quantum Fourier Transform (QFT). The primary objectives of this research are to reduce the depth of the quantum circuit required for QFT simulation and optimize the circuit parameters using classical algorithms.
 
 ## Key Findings
 
