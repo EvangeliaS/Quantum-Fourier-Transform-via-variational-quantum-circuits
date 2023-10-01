@@ -10,9 +10,6 @@ This repository contains the code and documentation for my thesis work on using 
 - [Ansatz and Circuit Structure](#ansatz-and-circuit-structure)
 - [Cost Function](#cost-function)
 - [Results](#results)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
